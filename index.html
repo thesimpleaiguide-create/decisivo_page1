@@ -45,7 +45,6 @@
             position: relative;
         }
 
-        /* Subtle radial ambient background */
         .ambient-glow {
             position: absolute;
             top: 0;
@@ -230,7 +229,7 @@
             border-color: var(--text-dim);
         }
 
-        /* Metric Grid / The Evidence */
+        /* Metric Grid */
         .metric-band {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -279,7 +278,7 @@
             line-height: 1.4;
         }
 
-        /* Section Boilerplate */
+        /* Section Headings */
         .section-tag {
             font-family: var(--font-mono);
             font-size: 0.78rem;
@@ -304,7 +303,7 @@
             margin-bottom: 36px;
         }
 
-        /* LIVE INTERACTIVE SIMULATOR CARD */
+        /* Interactive Simulator Card */
         .interactive-container {
             background: var(--bg-surface);
             border: 1px solid var(--border);
@@ -397,7 +396,6 @@
             min-width: 24px;
         }
 
-        /* Outcome Box */
         .sim-outcome {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -447,7 +445,7 @@
             line-height: 1.45;
         }
 
-        /* BENTO ARCHITECTURE: 3 PILLARS */
+        /* Bento Grid */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -537,11 +535,6 @@
             color: var(--text-dim);
             font-size: 0.85rem;
         }
-
-        footer a {
-            color: var(--text-med);
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
@@ -589,7 +582,7 @@
         </div>
     </header>
 
-    <!-- Metric Band / Hard Commercial Evidence -->
+    <!-- Metric Band -->
     <section class="container">
         <div class="metric-band">
             <div class="metric-card">
@@ -615,7 +608,7 @@
         </div>
     </section>
 
-    <!-- LIVE INTERACTIVE ENGINE -->
+    <!-- Interactive Proof Engine -->
     <section class="container" id="interactive-demo">
         <span class="section-tag">Interactive Proof Engine</span>
         <h2 class="section-title">Experience the 5-Tier Decision Matrix</h2>
@@ -668,7 +661,7 @@
         </div>
     </section>
 
-    <!-- BENTO GRID: THE 3 CORE PILLARS -->
+    <!-- Bento Grid -->
     <section class="container">
         <span class="section-tag">System Architecture</span>
         <h2 class="section-title">Engineered to Withstand Scrutiny</h2>
@@ -677,7 +670,6 @@
         </p>
 
         <div class="bento-grid">
-            <!-- Card 1 -->
             <div class="bento-card">
                 <div>
                     <span class="bento-tag">Pillar 01 • Legal Defensibility</span>
@@ -689,7 +681,6 @@
                 <div class="bento-footer">xAPI Statement: Actor → Decided → Boundary</div>
             </div>
 
-            <!-- Card 2 -->
             <div class="bento-card">
                 <div>
                     <span class="bento-tag">Pillar 02 • Air-Gapped Audio</span>
@@ -701,7 +692,6 @@
                 <div class="bento-footer">GDPR &amp; UK Data Sovereign Compliant</div>
             </div>
 
-            <!-- Card 3 -->
             <div class="bento-card">
                 <div>
                     <span class="bento-tag">Pillar 03 • Commercial Clarity</span>
@@ -773,7 +763,6 @@
         };
 
         function showOutcome(index, btnElement) {
-            // Remove active style from all buttons
             document.querySelectorAll('.sim-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
 
