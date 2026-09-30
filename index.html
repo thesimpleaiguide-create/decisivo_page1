@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decisivo | Defensible High-Fidelity Training Simulations</title>
+    <meta name="description" content="Replace tick-box compliance training with 5-option interactive behavioural simulations. Build, Own, Transfer for NHS, primary care, and high-liability enterprises.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #0B0F19;
+            --bg-card: #111827;
+            --bg-card-subtle: #1F2937;
+            --border-color: #2D3748;
+            --border-focus: #3B82F6;
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --accent-blue: #2563EB;
+            --accent-blue-light: #60A5FA;
+            --accent-red: #EF4444;
+            --accent-emerald: #10B981;
+            --accent-amber: #F59E0B;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.03em;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-blue-light);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .badge-dbs {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-emerald);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .tagline {
+            color: var(--accent-blue-light);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            margin: 0 auto 24px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 760px;
+            margin: 0 auto 36px;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 13px 26px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #FFFFFF;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+            border-color: #1D4ED8;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-card-subtle);
+            border-color: var(--text-muted);
+        }
+
+        /* Reality Banner / Data Strip */
+        .data-strip {
+            margin: 40px 0 70px;
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(17, 24, 39, 0.4) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+            text-align: center;
+        }
+
+        .data-item h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 6px;
+            font-family: var(--font-mono);
+        }
+
+        .data-item.red h3 { color: var(--accent-red); }
+        .data-item.amber h3 { color: var(--accent-amber); }
+        .data-item.emerald h3 { color: var(--accent-emerald); }
+
+        .data-item p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .section-header span {
+            color: var(--accent-blue-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-top: 6px;
+        }
+
+        /* The 5-Option vs 2-Option Comparison */
+        .comparison-section {
+            padding: 50px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 800px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 2.1rem; }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 32px;
+        }
+
+        .card-danger {
+            border-top: 4px solid var(--accent-red);
+        }
+
+        .card-success {
+            border-top: 4px solid var(--accent-emerald);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .prob-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .prob-table th, .prob-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .prob-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .prob-table td.highlight-bad {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .prob-table td.highlight-good {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* 5-Tier Spectrum Block */
+        .spectrum-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .spectrum-item {
+            padding: 12px 16px;
+            background-color: var(--bg-card-subtle);
+            border-radius: 6px;
+            font-size: 0.86rem;
+            border-left: 3px solid var(--border-color);
+        }
+
+        .spectrum-item strong {
+            display: block;
+            margin-bottom: 2px;
+            color: #FFFFFF;
+        }
+
+        .spectrum-item.target { border-left-color: var(--accent-emerald); }
+        .spectrum-item.trap { border-left-color: var(--accent-amber); }
+        .spectrum-item.escalate { border-left-color: var(--accent-red); }
+
+        /* The Commercial Model (Build Own Transfer) */
+        .model-section {
+            padding: 60px 0;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .pillar-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 28px;
+        }
+
+        .pillar-icon {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .pillar-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pillar-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Credibility & DBS Strip */
+        .credibility-section {
+            margin: 40px 0 80px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .cred-content {
+            max-width: 680px;
+        }
+
+        .cred-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .cred-content p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav>
+        <div class="container nav-inner">
+            <div class="brand-logo">
+                <span class="brand-dot"></span>
+                DECISIVO
+            </div>
+            <div>
+                <span class="badge-dbs">Enhanced DBS Verified</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="tagline">High-Fidelity Behavioural Simulations</div>
+            <h1>Compliance is not proven by clicking 'Next'.</h1>
+            <p>
+                Decisivo replaces superficial two-option quizzes with 5-option branching conversational simulations. Built to defend NHS primary care networks and enterprises during audits, tribunals, and regulatory inspections.
+            </p>
+            <div class="cta-group">
+                <a href="#matrix" class="btn btn-primary">Review the 5-Option Matrix</a>
+                <a href="#commercial" class="btn btn-outline">Build, Own, Transfer Model</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hard Evidence Data Strip -->
+    <section class="container">
+        <div class="data-strip">
+            <div class="data-grid">
+                <div class="data-item red">
+                    <h3>£61.4M</h3>
+                    <p>Total cost of NHS workplace violence claims (NHS Resolution national review)</p>
+                </div>
+                <div class="data-item amber">
+                    <h3>Allay v Gehlen</h3>
+                    <p>Landmark tribunal ruling: tick-box e-learning rejected as statutory defence</p>
+                </div>
+                <div class="data-item">
+                    <h3>&lt; 0.8%</h3>
+                    <p>Mathematical probability of guessing a 3-stage Decisivo behavioural scenario</p>
+                </div>
+                <div class="data-item emerald">
+                    <h3>£0</h3>
+                    <p>Ongoing SaaS per-seat licensing fees. You own the runtime package outright.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison: The Guessing Trap vs Decisivo -->
+    <section class="container comparison-section" id="matrix">
+        <div class="section-header">
+            <span>Pedagogical & Legal Architecture</span>
+            <h2>Eliminating the 50/50 Guessing Game</h2>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- Bad Model -->
+            <div class="card card-danger">
+                <h3>Traditional E-Learning <span style="color: var(--accent-red); font-size: 0.9rem;">High Liability</span></h3>
+                <div class="card-subtitle">Binary 2-Option Multiple Choice (Un-failable on mute)</div>
+                
+                <table class="prob-table">
+                    <thead>
+                        <tr>
+                            <th>Decision Point</th>
+                            <th>Guessing Probability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stage 1 (Opening Dilemma)</td>
+                            <td class="highlight-bad">50.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Stage 2 (Escalation)</td>
+                            <td class="highlight-bad">25.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Stage 3 (Resolution)</td>
+                            <td class="highlight-bad">12.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                    Easily bypassed in under three minutes using background LLMs or split-screen prompts. In tribunals, judges dismiss completion certificates as superficial tick-box exercises that fail to prove competence.
+                </p>
+            </div>
+
+            <!-- Decisivo Model -->
+            <div class="card card-success">
+                <h3>Decisivo 5-Option Matrix <span style="color: var(--accent-emerald); font-size: 0.9rem;">Audit Defensible</span></h3>
+                <div class="card-subtitle">5 Nuanced Behavioural Reflexes at Every Node</div>
+
+                <table class="prob-table">
+                    <thead>
+                        <tr>
+                            <th>Decision Point</th>
+                            <th>Guessing Probability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stage 1 (Opening Dilemma)</td>
+                            <td class="highlight-good">20.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Stage 2 (Escalation)</td>
+                            <td class="highlight-good">4.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Stage 3 (Resolution)</td>
+                            <td class="highlight-good">0.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <ul class="spectrum-list">
+                    <li class="spectrum-item target">
+                        <strong>1. The Compliant De-escalator (Target)</strong>
+                        Preserves statutory boundaries while acknowledging human emotional state.
+                    </li>
+                    <li class="spectrum-item trap">
+                        <strong>2. The Bureaucratic Stone-Waller</strong>
+                        Technically 100% compliant, but inflames volatile hostility through rigid tone.
+                    </li>
+                    <li class="spectrum-item trap">
+                        <strong>3. The Path of Least Resistance (Appeaser)</strong>
+                        Calms conflict by waiving mandatory statutory checks, creating acute legal liability.
+                    </li>
+                    <li class="spectrum-item escalate">
+                        <strong>4. The Defensive Ego Trap</strong>
+                        Instinctive human confrontation that triggers formal ombudsman complaints.
+                    </li>
+                    <li class="spectrum-item escalate">
+                        <strong>5. Premature Panic Escalation</strong>
+                        Calling security or locking down before required de-escalation steps are attempted.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commercial Model -->
+    <section class="container model-section" id="commercial">
+        <div class="section-header">
+            <span>Commercial Transparency</span>
+            <h2>Build, Own, Transfer: No SaaS Hostage Fees</h2>
+        </div>
+
+        <div class="pillar-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">📦</div>
+                <h4>Zero Per-User Seat Taxes</h4>
+                <p>
+                    Whether 50 receptionists or 5,000 healthcare professionals run the simulation, your cost never increases. We export directly to your existing LMS (SCORM / xAPI).
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">🔒</div>
+                <h4>Private Local Audio Synthesis</h4>
+                <p>
+                    Scenario audio is generated on isolated local neural workstations via Voicebox. No sensitive patient protocols, internal policies, or scripts ever leave the UK or touch third-party cloud APIs.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">⚖️</div>
+                <h4>Optional Advisory Retainer</h4>
+                <p>
+                    No lock-in contracts. If you cancel your advisory retainer, your simulations remain fully operational on your LMS forever. You retain what you paid to build.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credibility & Contact -->
+    <section class="container">
+        <div class="credibility-section">
+            <div class="cred-content">
+                <h3>Vetted Founder Credibility & Direct Access</h3>
+                <p>
+                    Decisivo is led by a vetted developer holding an active <strong>Enhanced DBS on the Update Service</strong>. We access clinical, primary care, and safeguarding environments directly to conduct scenario discovery without procurement delays.
+                </p>
+            </div>
+            <div>
+                <a href="mailto:contact@decisivo.co.uk" class="btn btn-primary">Request a Pilot Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Decisivo. All rights reserved. Built for UK primary care, healthcare networks, and high-liability enterprises.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
