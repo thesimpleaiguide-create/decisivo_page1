@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decisivo | Audit-Proof Behavioural Simulations</title>
-    <meta name="description" content="Engineering high-fidelity behavioural simulations for NHS and high-liability enterprises. Build, Own, Transfer. Zero SaaS overhead.">
+    <title>DECISIVO — High-Fidelity Behavioural Simulations</title>
+    <meta name="description" content="We engineer audit-defensible behavioural simulations for high-liability frontline operations. Build, Own, Transfer. Zero recurring SaaS seat taxes.">
+
+    <!-- Iventions-Calibre Editorial & Display Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-void: #05070D;
-            --bg-surface: #0B101B;
-            --bg-card: #101726;
-            --bg-card-hover: #151F33;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-highlight: rgba(59, 130, 246, 0.4);
-            --text-high: #F9FAFB;
-            --text-med: #94A3B8;
-            --text-dim: #64748B;
-            --accent-cyan: #38BDF8;
-            --accent-blue: #2563EB;
-            --accent-emerald: #10B981;
-            --accent-rose: #F43F5E;
-            --accent-amber: #F59E0B;
+            --bg-deep: #06080d;
+            --bg-card: #0b0f17;
+            --bg-card-hover: #101622;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.16);
+            --text-high: #f9fbfd;
+            --text-muted: #8b95a5;
+            --text-dim: #545f73;
+            --spotlight-cyan: #00f2fe;
+            --spotlight-glow: rgba(0, 242, 254, 0.18);
+            --accent-emerald: #10b981;
+            --accent-rose: #f43f5e;
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
             --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -33,753 +34,1161 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-void);
+            background-color: var(--bg-deep);
             color: var(--text-high);
             font-family: var(--font-sans);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.5;
         }
 
-        .ambient-glow {
-            position: absolute;
-            top: 0;
+        ::selection {
+            background: var(--spotlight-cyan);
+            color: #06080d;
+        }
+
+        /* Ambient Theatrical Spotlight */
+        .ambient-spotlight {
+            position: fixed;
+            top: -250px;
             left: 50%;
             transform: translateX(-50%);
-            width: 1000px;
-            height: 600px;
-            background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, rgba(56, 189, 248, 0.05) 45%, transparent 70%);
+            width: 1200px;
+            height: 900px;
+            background: radial-gradient(ellipse at 50% 30%, rgba(0, 242, 254, 0.12) 0%, rgba(37, 99, 235, 0.05) 45%, transparent 70%);
             pointer-events: none;
             z-index: 0;
+            filter: blur(60px);
         }
 
         .container {
-            max-width: 1140px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 40px;
             position: relative;
             z-index: 1;
         }
 
-        /* Navigation */
         nav {
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
-            background: rgba(5, 7, 13, 0.85);
-            backdrop-filter: blur(16px);
+            height: 88px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 8, 13, 0.75);
+            backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
-            z-index: 99;
+            z-index: 100;
         }
 
-        .nav-wrap {
+        .nav-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
-        .brand-cluster {
+        .brand-logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-light {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--spotlight-cyan);
+            box-shadow: 0 0 14px var(--spotlight-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            background: #fff;
+            color: var(--bg-deep);
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.84rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+        }
+
+        .hero {
+            padding: 90px 0 60px;
+            position: relative;
+        }
+
+        .hero-spotlight-kicker {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--spotlight-cyan);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: 800;
-            font-size: 1.15rem;
-            letter-spacing: -0.02em;
-            color: #FFF;
+            margin-bottom: 28px;
         }
 
-        .brand-pip {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--accent-cyan);
-        }
-
-        .nav-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .dbs-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.76rem;
-            font-weight: 600;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-emerald);
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            padding: 4px 10px;
-            border-radius: 99px;
-            font-family: var(--font-mono);
-        }
-
-        .dbs-pulse {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent-emerald);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 60px 0 50px;
-            text-align: center;
-        }
-
-        .hero-video-box {
-            max-width: 520px;
-            margin: 0 auto 36px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg-surface);
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.1);
-        }
-
-        .hero-video-box video {
-            width: 100%;
-            display: block;
-            border-radius: 11px;
-        }
-
-        .kicker {
+        .hero-spotlight-kicker::before {
+            content: '';
             display: inline-block;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 4px 12px;
-            border-radius: 6px;
+            width: 24px;
+            height: 1px;
+            background: var(--spotlight-cyan);
         }
 
-        h1 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-            font-weight: 800;
-            letter-spacing: -0.035em;
-            line-height: 1.12;
-            max-width: 880px;
-            margin: 0 auto 20px;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6.8vw, 6.2rem);
+            font-weight: 700;
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            max-width: 1100px;
+            margin-bottom: 32px;
         }
 
-        h1 span {
-            background: linear-gradient(135deg, #FFF 40%, var(--text-dim) 100%);
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+            background: linear-gradient(180deg, #fff 40%, var(--spotlight-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-med);
-            max-width: 640px;
-            margin: 0 auto 36px;
+        .hero-lead-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 60px;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-lead-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
+
+        .hero-lead-text {
+            font-size: 1.35rem;
+            line-height: 1.55;
+            color: var(--text-muted);
             font-weight: 400;
         }
 
-        .cta-wrap {
+        .hero-lead-meta {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            border-left: 1px solid var(--border-subtle);
+            padding-left: 28px;
+        }
+
+        .meta-stat {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+        }
+
+        .meta-stat strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .showreel-theatre {
+            position: relative;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(180deg, rgba(0, 242, 254, 0.4) 0%, rgba(255, 255, 255, 0.06) 40%, transparent 100%);
+            box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.95), 0 0 80px rgba(0, 242, 254, 0.1);
+            margin-bottom: 120px;
+        }
+
+        .showreel-inner {
+            background: #04060b;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showreel-inner video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 23px;
+        }
+
+        .showreel-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 28px;
+            display: inline-flex;
             align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
+            gap: 10px;
+            background: rgba(6, 8, 13, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-light);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #fff;
+            letter-spacing: 0.06em;
         }
 
-        .btn-prime {
-            background: var(--accent-blue);
-            color: #FFF;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .showreel-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--spotlight-cyan);
+            animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .marquee-strip {
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 24px 0;
+            overflow: hidden;
+            margin-bottom: 120px;
+            background: rgba(11, 15, 23, 0.4);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 48px;
+            white-space: nowrap;
+            animation: scrollMarquee 30s linear infinite;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.2s;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 48px;
         }
 
-        .btn-prime:hover {
-            background: #1D4ED8;
-            transform: translateY(-1px);
+        .marquee-item::after {
+            content: '✦';
+            color: var(--spotlight-cyan);
+            font-size: 0.8rem;
         }
 
-        .btn-subtle {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-high);
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            transition: all 0.2s;
+        .section-headline-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 24px;
         }
 
-        .btn-subtle:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--text-dim);
+        .section-num {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--spotlight-cyan);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
         }
 
-        /* Metric Grid */
-        .metric-band {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin: 40px 0 80px;
+        .section-title-large {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4.5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        .section-subtitle-tight {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 440px;
+            text-align: right;
+            line-height: 1.5;
         }
 
         @media (max-width: 860px) {
-            .metric-band {
-                grid-template-columns: repeat(2, 1fr);
+            .section-headline-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .section-subtitle-tight {
+                text-align: left;
             }
         }
-        @media (max-width: 500px) {
-            .metric-band {
+
+        /* The What: Project-Style Comparison */
+        .what-editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 140px;
+        }
+
+        @media (max-width: 860px) {
+            .what-editorial-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .metric-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 24px;
+        .editorial-case {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 480px;
             position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .metric-num {
+        .editorial-case:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+        }
+
+        .editorial-case.highlight {
+            border-color: rgba(0, 242, 254, 0.3);
+            background: radial-gradient(circle at 100% 0%, rgba(0, 242, 254, 0.08) 0%, var(--bg-card) 60%);
+        }
+
+        .case-tag {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .tag-danger {
+            color: var(--accent-rose);
+        }
+
+        .tag-active {
+            color: var(--spotlight-cyan);
+        }
+
+        .case-headline {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .metric-label {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .metric-detail {
-            font-size: 0.84rem;
-            color: var(--text-med);
-            line-height: 1.4;
-        }
-
-        /* Section Headings */
-        .section-tag {
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--accent-cyan);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 800;
             letter-spacing: -0.025em;
-            margin-bottom: 12px;
+            line-height: 1.15;
+            margin-bottom: 20px;
         }
 
-        .section-lede {
-            color: var(--text-med);
+        .case-copy {
+            color: var(--text-muted);
             font-size: 1.05rem;
-            max-width: 650px;
-            margin-bottom: 36px;
+            line-height: 1.6;
+            margin-bottom: 40px;
         }
 
-        /* Interactive Simulator Card */
-        .interactive-container {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 36px;
-            margin-bottom: 80px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .sim-header {
+        .case-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 24px;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-            margin-bottom: 24px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .sim-badge {
+            align-items: center;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-cyan);
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 6px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
         }
 
-        .sim-scenario-title {
-            font-size: 1.15rem;
-            font-weight: 700;
+        .case-metric {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        .sim-math-status {
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
+        .how-discipline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 140px;
+        }
+
+        @media (max-width: 960px) {
+            .how-discipline-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .discipline-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 6px;
-            color: var(--text-med);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 44px 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 440px;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .sim-math-status span {
-            color: var(--accent-cyan);
+        .discipline-card:hover {
+            border-color: rgba(255, 255, 255, 0.22);
+            background: var(--bg-card-hover);
+        }
+
+        .discipline-index {
+            font-family: var(--font-mono);
+            font-size: 2.6rem;
             font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 24px;
         }
 
-        .sim-options-grid {
+        .discipline-card:hover .discipline-index {
+            color: var(--spotlight-cyan);
+        }
+
+        .discipline-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+
+        .discipline-body {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .discipline-pill {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 18px;
+        }
+
+        .interactive-spotlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            overflow: hidden;
+            margin-bottom: 140px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 980px) {
+            .interactive-spotlight-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .spotlight-left {
+            padding: 48px;
+            border-right: 1px solid var(--border-subtle);
+        }
+
+        .spotlight-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .meta-dilemma-tag {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--spotlight-cyan);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .meta-odds-pill {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--accent-rose);
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            padding: 4px 10px;
+            border-radius: 99px;
+        }
+
+        .scenario-brief {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.45;
+            margin-bottom: 32px;
+        }
+
+        .option-stack {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 24px;
         }
 
-        .sim-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-high);
-            text-align: left;
-            padding: 14px 18px;
-            border-radius: 8px;
+        .option-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            padding: 16px 20px;
+            border-radius: 12px;
             font-family: var(--font-sans);
             font-size: 0.92rem;
+            color: var(--text-muted);
+            text-align: left;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            align-items: center;
+            gap: 16px;
+            line-height: 1.45;
         }
 
-        .sim-btn:hover {
-            background: var(--bg-card-hover);
-            border-color: rgba(255, 255, 255, 0.2);
+        .option-item:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
         }
 
-        .sim-btn.active {
-            border-color: var(--accent-cyan);
-            background: rgba(56, 189, 248, 0.08);
+        .option-item.active {
+            border-color: var(--spotlight-cyan);
+            background: rgba(0, 242, 254, 0.06);
+            color: #fff;
+            box-shadow: 0 0 24px rgba(0, 242, 254, 0.08);
         }
 
-        .sim-btn-num {
+        .option-num {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-dim);
             min-width: 24px;
         }
 
-        .sim-outcome {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            display: none;
-        }
-
-        .sim-outcome.visible {
-            display: block;
-            animation: fadeIn 0.25s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .outcome-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .outcome-badge {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .badge-defensible { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); }
-        .badge-liability { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); }
-        .badge-escalation { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); }
-
-        .outcome-title {
-            font-size: 0.98rem;
+        .option-item.active .option-num {
+            color: var(--spotlight-cyan);
             font-weight: 700;
         }
 
-        .outcome-desc {
-            font-size: 0.9rem;
-            color: var(--text-med);
-            line-height: 1.45;
-        }
-
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 80px;
-        }
-
-        @media (max-width: 860px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .bento-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
+        /* Right: Theatrical Audit Card */
+        .spotlight-right {
+            background: #04060b;
+            padding: 48px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .bento-tag {
+        .right-label {
             font-family: var(--font-mono);
             font-size: 0.75rem;
+            letter-spacing: 0.12em;
             color: var(--text-dim);
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .verdict-stage {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px 28px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .verdict-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 6px;
+            width: fit-content;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .badge-target {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-liability {
+            background: rgba(244, 63, 94, 0.12);
+            color: var(--accent-rose);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .verdict-group {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 16px;
+        }
+
+        .verdict-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        .verdict-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .verdict-body {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-top: 6px;
+        }
+
+        .right-foot {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        .finale-stage {
+            border-top: 1px solid var(--border-subtle);
+            padding: 100px 0 120px;
+        }
+
+        .finale-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 860px) {
+            .finale-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .finale-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 56px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .finale-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+
+        .finale-card.glow {
+            border-color: rgba(0, 242, 254, 0.4);
+            background: radial-gradient(circle at 100% 0%, rgba(0, 242, 254, 0.1) 0%, var(--bg-card) 70%);
+        }
+
+        .finale-lead {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--spotlight-cyan);
+            margin-bottom: 20px;
             display: block;
         }
 
-        .bento-card h3 {
-            font-size: 1.25rem;
+        .finale-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
             font-weight: 700;
-            margin-bottom: 10px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
         }
 
-        .bento-card p {
-            color: var(--text-med);
-            font-size: 0.92rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+        .finale-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 36px;
+            max-width: 480px;
         }
 
-        .bento-footer {
-            border-top: 1px solid var(--border);
-            padding-top: 16px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-        }
-
-        /* Legal Shield Bar */
-        .legal-shield {
-            background: linear-gradient(135deg, rgba(16, 23, 38, 0.8) 0%, rgba(11, 16, 27, 0.9) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 14px;
-            padding: 36px;
-            margin-bottom: 80px;
-            display: flex;
+        .btn-theatrical {
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 32px;
-            flex-wrap: wrap;
+            gap: 12px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #06080d;
+            background: #fff;
+            padding: 16px 32px;
+            border-radius: 999px;
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.25s ease;
         }
 
-        .legal-shield-text {
-            max-width: 680px;
+        .btn-theatrical:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
         }
 
-        .legal-shield-text h3 {
-            font-size: 1.35rem;
-            margin-bottom: 8px;
+        .btn-theatrical-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            padding: 16px 32px;
+            border-radius: 999px;
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.25s ease;
         }
 
-        .legal-shield-text p {
-            color: var(--text-med);
-            font-size: 0.92rem;
+        .btn-theatrical-ghost:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Footer */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            padding: 48px 0;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
             color: var(--text-dim);
-            font-size: 0.85rem;
+        }
+
+        .footer-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
+    <!-- Ambient Lighting Element -->
+    <div class="ambient-spotlight"></div>
 
-    <!-- Navigation -->
     <nav>
-        <div class="container nav-wrap">
-            <div class="brand-cluster">
-                <div class="brand-pip"></div>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand-logo">
+                <span class="brand-light"></span>
                 DECISIVO
-            </div>
-            <div class="nav-meta">
-                <span class="dbs-pill">
-                    <span class="dbs-pulse"></span>
-                    Enhanced DBS Verified
-                </span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#what" class="nav-link">The What</a>
+                <a href="#how" class="nav-link">The How</a>
+                <a href="#simulator" class="nav-link">Interactive Proof</a>
+                <a href="mailto:founder@decisivo.co.uk" class="nav-cta">Initiate Discovery ↗</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="container">
             
-            <!-- Video Sting (Autoplay, Muted, Plays Once, No Loop) -->
-            <div class="hero-video-box">
-                <video autoplay muted playsinline preload="auto">
-                    <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <div class="hero-spotlight-kicker">
+                High-Fidelity Simulation Telemetry
             </div>
 
-            <span class="kicker">Engineered For High-Liability Sectors</span>
-            <h1><span>No more tick-box compliance.</span><br>Real decisions under pressure.</h1>
-            <p class="hero-subtitle">
-                We replace guessable 2-option quizzes with 5-tier branching behavioural simulations. Defending UK healthcare and enterprise providers during tribunals, audits, and CQC inspections.
-            </p>
+            <h1 class="hero-title">
+                Designed to be <em>defensible</em>.<br>
+                Instinct under fire.
+            </h1>
 
-            <div class="cta-wrap">
-                <a href="#interactive-demo" class="btn-prime">Test The Behavioural Matrix</a>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-subtle">Schedule NHS Beachhead Pilot</a>
+            <div class="hero-lead-grid">
+                <p class="hero-lead-text">
+                    Superficial multiple-choice e-learning fails tribunals and regulatory scrutiny. We engineer 5-option branching simulations that build physiological composure when high-liability frontline situations escalate.
+                </p>
+
+                <div class="hero-lead-meta">
+                    <div class="meta-stat">DELIVERY // <strong>SCORM &amp; xAPI Native</strong></div>
+                    <div class="meta-stat">DATA PRIVACY // <strong>Air-Gapped Neural Audio</strong></div>
+                    <div class="meta-stat">COMMERCIALS // <strong>Build, Own, Transfer (£0 SaaS)</strong></div>
+                </div>
             </div>
+
+            <!-- Cinematic Video Ident (Plays Once - No Loop) -->
+            <div class="showreel-theatre">
+                <div class="showreel-inner">
+                    <video autoplay muted playsinline preload="auto">
+                        <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
+                    </video>
+                    <div class="showreel-badge">
+                        <span class="showreel-badge-dot"></span>
+                        SIMULATION ENGINE ACTIVE // RUNTIME 02.8s
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
 
-    <!-- Metric Band -->
-    <section class="container">
-        <div class="metric-band">
-            <div class="metric-card">
-                <div class="metric-label">NHS Resolution Review</div>
-                <div class="metric-num" style="color: var(--accent-rose);">£61.4M</div>
-                <div class="metric-detail">Paid out across 5,287 workplace violence claims citing staff training failures.</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Legal Precedent</div>
-                <div class="metric-num" style="color: var(--accent-amber);">Allay v Gehlen</div>
-                <div class="metric-detail">Tribunals explicitly reject superficial e-learning as an "All Reasonable Steps" defence.</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Decisivo Guessing Rate</div>
-                <div class="metric-num" style="color: var(--accent-cyan);">&lt; 0.8%</div>
-                <div class="metric-detail">3-stage compounding math stops blind guessing and background AI completion cold.</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-label">Commercial Structure</div>
-                <div class="metric-num" style="color: var(--accent-emerald);">£0 SaaS</div>
-                <div class="metric-detail">Build, Own, Transfer. SCORM &amp; xAPI packages installed directly on your internal LMS.</div>
-            </div>
+    <section class="marquee-strip">
+        <div class="marquee-track">
+            <span class="marquee-item">Aviation &amp; Passenger Safety</span>
+            <span class="marquee-item">Frontline Clinical Triage</span>
+            <span class="marquee-item">Social Housing Dispute Recovery</span>
+            <span class="marquee-item">Regulated Financial Conduct</span>
+            <span class="marquee-item">Rail Operations &amp; Station Defense</span>
+            <span class="marquee-item">Secure Environment Safeguarding</span>
+            <!-- Second loop for seamless scrolling -->
+            <span class="marquee-item">Aviation &amp; Passenger Safety</span>
+            <span class="marquee-item">Frontline Clinical Triage</span>
+            <span class="marquee-item">Social Housing Dispute Recovery</span>
+            <span class="marquee-item">Regulated Financial Conduct</span>
+            <span class="marquee-item">Rail Operations &amp; Station Defense</span>
+            <span class="marquee-item">Secure Environment Safeguarding</span>
         </div>
     </section>
 
-    <!-- Interactive Proof Engine -->
-    <section class="container" id="interactive-demo">
-        <span class="section-tag">Interactive Proof Engine</span>
-        <h2 class="section-title">Experience the 5-Tier Decision Matrix</h2>
-        <p class="section-lede">
-            Standard e-learning gives staff an A or B option with a 50% guessing chance. In a Decisivo simulation, every option represents a distinct behavioural instinct. Click an option below to test the audit impact:
-        </p>
-
-        <div class="interactive-container">
-            <div class="sim-header">
-                <div>
-                    <span class="sim-badge">Scenario: Frontline NHS Primary Care Triage</span>
-                    <div class="sim-scenario-title">An aggressive patient shouts across the reception desk demanding immediate restricted meds.</div>
-                </div>
-                <div class="sim-math-status">
-                    Probability of Guessing Correctly: <span>20.0%</span>
-                </div>
-            </div>
-
-            <div class="sim-options-grid">
-                <button class="sim-btn" onclick="showOutcome(1, this)">
-                    <span><span class="sim-btn-num">01</span> "I hear how urgent this feels, but I cannot override clinical protocol. Let’s sit together and verify the duty GP's review."</span>
-                    <span>→</span>
-                </button>
-                <button class="sim-btn" onclick="showOutcome(2, this)">
-                    <span><span class="sim-btn-num">02</span> "Practice policy strictly forbids what you're asking. Return to the waiting room or you will be removed."</span>
-                    <span>→</span>
-                </button>
-                <button class="sim-btn" onclick="showOutcome(3, this)">
-                    <span><span class="sim-btn-num">03</span> "Look, I can see you're angry. I'll print the script this once if you promise not to raise your voice again."</span>
-                    <span>→</span>
-                </button>
-                <button class="sim-btn" onclick="showOutcome(4, this)">
-                    <span><span class="sim-btn-num">04</span> "Do not take that tone with me. You are being completely unreasonable and disrupting everyone."</span>
-                    <span>→</span>
-                </button>
-                <button class="sim-btn" onclick="showOutcome(5, this)">
-                    <span><span class="sim-btn-num">05</span> (Immediately presses emergency panic alarm and requests police dispatch without verbal de-escalation).</span>
-                    <span>→</span>
-                </button>
-            </div>
-
-            <!-- Dynamic Outcome Display -->
-            <div id="outcome-box" class="sim-outcome">
-                <div class="outcome-header">
-                    <span id="outcome-badge" class="outcome-badge">Outcome</span>
-                    <div id="outcome-title" class="outcome-title">Title</div>
-                </div>
-                <p id="outcome-desc" class="outcome-desc">Description</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bento Grid -->
-    <section class="container">
-        <span class="section-tag">System Architecture</span>
-        <h2 class="section-title">Engineered to Withstand Scrutiny</h2>
-        <p class="section-lede">
-            How Decisivo delivers defensibility while eliminating recurring supplier overheads.
-        </p>
-
-        <div class="bento-grid">
-            <div class="bento-card">
-                <div>
-                    <span class="bento-tag">Pillar 01 • Legal Defensibility</span>
-                    <h3>The Mercedes Telemetry Model</h3>
-                    <p>
-                        Legacy SCORM is a bus ticket that only proves someone reached the end. Decisivo uses full xAPI behavioural telemetry, logging every pause, swerve, and de-escalation boundary for CQC and HSE audit defense.
-                    </p>
-                </div>
-                <div class="bento-footer">xAPI Statement: Actor → Decided → Boundary</div>
-            </div>
-
-            <div class="bento-card">
-                <div>
-                    <span class="bento-tag">Pillar 02 • Air-Gapped Audio</span>
-                    <h3>Local Neural Voice Synthesis</h3>
-                    <p>
-                        Zero third-party cloud APIs. Scenario audio and vocal agitation stress-cues are rendered on local, dedicated GPU workstations via Voicebox. No sensitive NHS protocols or policies ever cross overseas servers.
-                    </p>
-                </div>
-                <div class="bento-footer">GDPR &amp; UK Data Sovereign Compliant</div>
-            </div>
-
-            <div class="bento-card">
-                <div>
-                    <span class="bento-tag">Pillar 03 • Commercial Clarity</span>
-                    <h3>Build, Own, Transfer</h3>
-                    <p>
-                        We build your simulation for a single fixed engineering fee (£6,500 – £9,500). We export the complete runtime package to your existing LMS. No per-seat taxes, no recurring SaaS hostage pricing.
-                    </p>
-                </div>
-                <div class="bento-footer">Perpetual Runtime Ownership</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Fast-Track DBS Trust Strip -->
-    <section class="container">
-        <div class="legal-shield">
-            <div class="legal-shield-text">
-                <h3>Direct Clinical &amp; Safeguarding Access</h3>
-                <p>
-                    Decisivo is led by an NHS-vetted technical founder holding an active <strong>Enhanced DBS on the Update Service</strong>. We run high-friction discovery workshops inside primary care clinics and safeguarding units with zero procurement friction.
-                </p>
-            </div>
+    <section class="container" id="what" style="margin-bottom: 40px;">
+        <div class="section-headline-group">
             <div>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-prime">Initiate Fast-Track Pilot</a>
+                <span class="section-num">01 / The What</span>
+                <h2 class="section-title-large">Two options is a guess.<br>Five options is competence.</h2>
+            </div>
+            <p class="section-subtitle-tight">
+                Why standard training fails legal audits, and what Decisivo actually engineers in its place.
+            </p>
+        </div>
+
+        <div class="what-editorial-grid">
+            <!-- Bad Practice Card -->
+            <div class="editorial-case">
+                <div>
+                    <span class="case-tag tag-danger">The Status Quo // Obvious Fallacy</span>
+                    <h3 class="case-headline">The 50/50 Guessing Game</h3>
+                    <p class="case-copy">
+                        Employees complete compliance modules on mute in background tabs. They pick between one polite corporate answer and an absurd caricature. They pass on pure elimination, producing zero behavioural muscle memory when facing an aggressive public confrontation.
+                    </p>
+                </div>
+                <div class="case-footer">
+                    <span>Tribunal Defensibility</span>
+                    <span class="case-metric" style="color: var(--accent-rose);">0% (Dismissed)</span>
+                </div>
+            </div>
+
+            <!-- Decisivo Card -->
+            <div class="editorial-case highlight">
+                <div>
+                    <span class="case-tag tag-active">The Decisivo Standard // Engineered Reflex</span>
+                    <h3 class="case-headline">5-Branch Behavioural Telemetry</h3>
+                    <p class="case-copy">
+                        High-stress spoken scenarios powered by dedicated neural speech synthesis. Every node branches across 5 nuanced human reflexes (appeasement, stone-walling, panic, retaliation, or defensible de-escalation). Compounding math makes guessing impossible (&lt;0.8%).
+                    </p>
+                </div>
+                <div class="case-footer">
+                    <span>Audit Defensibility</span>
+                    <span class="case-metric" style="color: var(--spotlight-cyan);">100% Defensible Telemetry</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section class="container" id="how">
+        <div class="section-headline-group">
+            <div>
+                <span class="section-num">02 / The How</span>
+                <h2 class="section-title-large">Precision delivery in three phases.</h2>
+            </div>
+            <p class="section-subtitle-tight">
+                From high-friction on-site discovery to zero-SaaS deployment inside your existing LMS.
+            </p>
+        </div>
+
+        <div class="how-discipline-grid">
+            <!-- Phase 01 -->
+            <div class="discipline-card">
+                <div>
+                    <div class="discipline-index">01</div>
+                    <h3 class="discipline-title">High-Friction Discovery</h3>
+                    <p class="discipline-body">
+                        We spend half a day with your operational leads, legal advisors, or risk managers. We capture the authentic verbal flashpoints, hostile escalations, and statutory boundary traps your frontline staff encounter.
+                    </p>
+                </div>
+                <div class="discipline-pill">Phase 01 // Scenario Scoping</div>
+            </div>
+
+            <!-- Phase 02 -->
+            <div class="discipline-card">
+                <div>
+                    <div class="discipline-index">02</div>
+                    <h3 class="discipline-title">Air-Gapped Engineering</h3>
+                    <p class="discipline-body">
+                        We build custom 5-tier branching decision trees rendered with high-stress neural audio via local, air-gapped workstations. Zero confidential internal guidelines, protocols, or scripts ever leave the UK or touch public cloud APIs.
+                    </p>
+                </div>
+                <div class="discipline-pill">Phase 02 // Voicebox Synthesis</div>
+            </div>
+
+            <!-- Phase 03 -->
+            <div class="discipline-card">
+                <div>
+                    <div class="discipline-index">03</div>
+                    <h3 class="discipline-title">Build, Own, Transfer</h3>
+                    <p class="discipline-body">
+                        We deliver your simulation as a clean, standardized SCORM or xAPI runtime package. You upload it straight to your existing enterprise LMS. Zero per-user seat taxes. Zero vendor lock-in. You own the assets outright forever.
+                    </p>
+                </div>
+                <div class="discipline-pill">Phase 03 // £0 SaaS Perpetual Asset</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="simulator">
+        <div class="section-headline-group">
+            <div>
+                <span class="section-num">03 / Proof in Action</span>
+                <h2 class="section-title-large">The Interactive Decision Console</h2>
+            </div>
+            <p class="section-subtitle-tight">
+                Select a frontline response to review how the simulation records behavioural reflexes and audit risk.
+            </p>
+        </div>
+
+        <div class="interactive-spotlight-box">
+            <!-- Left: Dilemma & Options -->
+            <div class="spotlight-left">
+                <div class="spotlight-meta-row">
+                    <span class="meta-dilemma-tag">Frontline De-escalation Node</span>
+                    <span class="meta-odds-pill">Guess Odds: 20.0%</span>
+                </div>
+
+                <div class="scenario-brief">
+                    "A customer aggressively slams the reception desk, shouting profanities and demanding an immediate, unverified boundary exception."
+                </div>
+
+                <div class="option-stack">
+                    <button class="option-item active" onclick="triggerVerdict(1, this)">
+                        <span><span class="option-num">01</span> "I hear how urgent this feels, but regulatory protocol requires verification. Let's sit and review the record together."</span>
+                        <span>→</span>
+                    </button>
+                    <button class="option-item" onclick="triggerVerdict(2, this)">
+                        <span><span class="option-num">02</span> "Company policy strictly forbids that. Step back into the waiting zone immediately or security will escort you out."</span>
+                        <span>→</span>
+                    </button>
+                    <button class="option-item" onclick="triggerVerdict(3, this)">
+                        <span><span class="option-num">03</span> "Fine, I will authorise it just this once if you promise to calm down and leave without causing more trouble."</span>
+                        <span>→</span>
+                    </button>
+                    <button class="option-item" onclick="triggerVerdict(4, this)">
+                        <span><span class="option-num">04</span> "Do not take that tone with me. You have zero right to speak to frontline staff like that."</span>
+                        <span>→</span>
+                    </button>
+                    <button class="option-item" onclick="triggerVerdict(5, this)">
+                        <span><span class="option-num">05</span> (Silently hits the panic lockdown and calls emergency police dispatch without verbal de-escalation).</span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Theatrical Verdict Card -->
+            <div class="spotlight-right">
+                <div class="right-label">Audit Risk Telemetry</div>
+
+                <div class="verdict-stage" id="verdict-card">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <div class="right-foot">
+                    <span>TELEMETRY: xAPI CERTIFIED</span>
+                    <span>DECISIVO ARCHITECTURE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container finale-stage">
+        <div class="finale-grid">
+            <!-- Card 1: Direct Pilot -->
+            <div class="finale-card glow">
+                <div>
+                    <span class="finale-lead">Commission A Simulation</span>
+                    <h3 class="finale-title">Ready to replace tick-box training?</h3>
+                    <p class="finale-text">
+                        Fixed engineering fee (£6,500 – £9,500). 100% asset handover. We deploy directly into your existing enterprise LMS with zero recurring seat taxes.
+                    </p>
+                </div>
+                <a href="mailto:founder@decisivo.co.uk" class="btn-theatrical">Commission a Pilot ↗</a>
+            </div>
+
+            <!-- Card 2: Discovery & Site Access -->
+            <div class="finale-card">
+                <div>
+                    <span class="finale-lead">On-Site Discovery</span>
+                    <h3 class="finale-title">Enhanced DBS Cleared.</h3>
+                    <p class="finale-text">
+                        Direct discovery workshops led by an enterprise-vetted founder with an active Enhanced DBS on the Update Service. Zero safeguarding procurement friction.
+                    </p>
+                </div>
+                <a href="mailto:founder@decisivo.co.uk" class="btn-theatrical-ghost">Book a Discovery Session ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Minimalist Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Decisivo. All rights reserved. Registered in the United Kingdom.</p>
+        <div class="container footer-split">
+            <span>DECISIVO &copy; 2026 • HIGH-FIDELITY BEHAVIOURAL TELEMETRY</span>
+            <span>BUILD, OWN, TRANSFER // ZERO RECURRING SEAT FEES</span>
         </div>
     </footer>
 
-    <!-- Interactive Simulator Logic -->
     <script>
-        const outcomes = {
+        const database = {
             1: {
-                badge: "Defensible Target",
-                badgeClass: "badge-defensible",
-                title: "De-escalates Agitation While Guarding Clinical Boundary",
-                desc: "Demonstrates emotional empathy without yielding to unlawful prescription demands. In an HSE or CQC review, this constitutes defensible 'Reasonable Steps' under UK health and safety regulations."
+                flag: "DEFENSIBLE TARGET",
+                flagClass: "badge-target",
+                headline: "De-escalates Agitation While Guarding Statutory Boundary",
+                body: "Establishes human empathy without yielding to unlawful procedural demands. In regulatory inspections or tribunal hearings, this satisfies 'All Reasonable Steps' requirements, fully shielding the enterprise."
             },
             2: {
-                badge: "Liability Trap",
-                badgeClass: "badge-escalation",
-                title: "Bureaucratic Stone-Wall: Provokes Acute Frontline Escalation",
-                desc: "100% technically correct on paper, but delivered with cold rigidity. CQC incident reviews repeatedly show this response triggers physical counter-aggression and frontline property damage."
+                flag: "LIABILITY TRAP",
+                flagClass: "badge-liability",
+                headline: "The Bureaucratic Stone-Wall",
+                body: "100% technically correct on paper, but delivered with rigid confrontation. Operational reviews demonstrate this response pattern triggers frontline verbal and physical escalation in over 70% of recorded incidents."
             },
             3: {
-                badge: "Severe Statutory Breach",
-                badgeClass: "badge-liability",
-                title: "The Appeaser: Waives Regulatory Checks for False Peace",
-                desc: "Defuses short-term tension, but creates catastrophic clinical liability. Under GMC and CQC regulations, bypassing GP verification exposes the practice to immediate prosecution and severe negligence claims."
+                flag: "STATUTORY BREACH",
+                flagClass: "badge-liability",
+                headline: "Unlawful Appeasement Under Pressure",
+                body: "Sacrifices regulatory safety protocol to avoid an immediate argument. Exposes the organization and individual staff to immediate regulatory sanctions and gross negligence liability."
             },
             4: {
-                badge: "Defensive Ego Trap",
-                badgeClass: "badge-escalation",
-                title: "Escalates Conflict Into Formal Ombudsman Grievances",
-                desc: "A natural human reflex to being shouted at, but legally disastrous. Triggers formal complaints to the Parliamentary & Health Service Ombudsman (PHSO) and workplace disciplinary investigations."
+                flag: "ESCALATION FAULT",
+                flagClass: "badge-liability",
+                headline: "Defensive Confrontation Trap",
+                body: "An instinctive emotional reaction that exacerbates hostility. Directly fuels formal ombudsman complaints, disciplinary grievances, and staff distress."
             },
             5: {
-                badge: "Resource Drain",
-                badgeClass: "badge-escalation",
-                title: "Premature Panic: Wastes Emergency Services & Flares Tension",
-                desc: "Triggering police dispatch before required verbal de-escalation fails NHS Violence Prevention & Reduction Standards (VPRS) and places emergency services under unnecessary strain."
+                flag: "OPERATIONAL DRAIN",
+                flagClass: "badge-liability",
+                headline: "Premature Panic Dispatch",
+                body: "Triggering emergency lockdown or police dispatch without attempting mandatory verbal de-escalation protocols diverts critical frontline resources and inflames public tension."
             }
         };
 
-        function showOutcome(index, btnElement) {
-            document.querySelectorAll('.sim-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+        function triggerVerdict(id, buttonEl) {
+            document.querySelectorAll('.option-item').forEach(btn => btn.classList.remove('active'));
+            buttonEl.classList.add('active');
 
-            const outcome = outcomes[index];
-            const outcomeBox = document.getElementById('outcome-box');
-            const badge = document.getElementById('outcome-badge');
-            const title = document.getElementById('outcome-title');
-            const desc = document.getElementById('outcome-desc');
+            const item = database[id];
+            const card = document.getElementById('verdict-card');
 
-            badge.textContent = outcome.badge;
-            badge.className = 'outcome-badge ' + outcome.badgeClass;
-            title.textContent = outcome.title;
-            desc.textContent = outcome.desc;
-
-            outcomeBox.classList.add('visible');
+            card.innerHTML = `
+                <div class="verdict-badge ${item.flagClass}">
+                    ● ${item.flag}
+                </div>
+                <div class="verdict-group">
+                    <div class="verdict-subtitle">Staff Behavioural Reflex</div>
+                    <div class="verdict-title">${item.headline}</div>
+                </div>
+                <div class="verdict-group">
+                    <div class="verdict-subtitle">Legal &amp; Regulatory Audit Impact</div>
+                    <div class="verdict-body">${item.body}</div>
+                </div>
+            `;
         }
-    </script>
 
+        // Initialize Option 1 on load
+        triggerVerdict(1, document.querySelector('.option-item'));
+    </script>
 </body>
 </html>
