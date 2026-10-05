@@ -1557,7 +1557,55 @@
 
             const firstOpt = document.querySelector('.option-button-row');
             if (firstOpt) selectDiagnosticOption(1, firstOpt);
+
+            initLusionScrollParallax();
         };
+
+        /* -------------------------------------------------------------
+           6. LUSION SCROLL-DRIVEN TILE PARALLAX & REVEAL ENGINE
+           ------------------------------------------------------------- */
+        function initLusionScrollParallax() {
+            const projectTiles = document.querySelectorAll('.lusion-project-item');
+            if (!projectTiles.length) return;
+
+            let scrollY = window.pageYOffset;
+            let targetScrollY = scrollY;
+
+            function updateTilePhysics() {
+                targetScrollY = window.pageYOffset;
+                // Soft lerp for subtle inertia
+                scrollY += (targetScrollY - scrollY) * 0.1;
+
+                const vh = window.innerHeight;
+
+                projectTiles.forEach((tile, index) => {
+                    const rect = tile.getBoundingClientRect();
+                    const tileCenter = rect.top + rect.height / 2;
+                    const normalizedOffset = (tileCenter - vh / 2) / (vh / 2); // -1 (top) to +1 (bottom)
+
+                    // 1. Reveal Animation: Fade & subtle scale when entering viewport
+                    const progressIntoView = Math.min(Math.max((vh - rect.top) / (vh * 0.75), 0), 1);
+                    const scaleVal = 0.94 + progressIntoView * 0.06;
+                    const opacityVal = 0.35 + progressIntoView * 0.65;
+                    const translateYVal = (1 - progressIntoView) * 36;
+
+                    tile.style.transform = `translateY(${translateYVal}px) scale(${scaleVal})`;
+                    tile.style.opacity = opacityVal;
+
+                    // 2. Inner Media Parallax Shift: shifts opposite to scroll direction inside overflow:hidden
+                    const innerMedia = tile.querySelector('.project-media-inner');
+                    if (innerMedia) {
+                        // Clamp shift between -24px and +24px
+                        const parallaxY = Math.max(Math.min(-normalizedOffset * 22, 28), -28);
+                        innerMedia.style.transform = `translateY(${parallaxY}px) scale(1.05)`;
+                    }
+                });
+
+                requestAnimationFrame(updateTilePhysics);
+            }
+
+            requestAnimationFrame(updateTilePhysics);
+        }
     </script>
 </body>
 </html>
