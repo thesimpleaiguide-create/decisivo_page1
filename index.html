@@ -3,44 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>decisivo — Frontline Behavioural Intelligence</title>
-    <meta name="description" content="Audit-defensible behavioural simulations for high-liability frontline operations. Air-gapped neural audio, 5-branch decision telemetry, zero SaaS seat taxes.">
+    <title>decisivo — Logical Behavioural Intelligence (Lusion Style)</title>
+    <meta name="description" content="High-fidelity 5-tier behavioural simulations for high-liability frontline operations. Air-gapped neural audio, mathematical audit telemetry, zero SaaS seat taxes.">
 
-    <!-- Fonts: Inter & JetBrains Mono for pristine Apple-grade typographic precision -->
+    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono for Lusion's signature avant-garde editorial look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Three.js for interactive WebGL fluid-neural network background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
-            /* Architectural Cast Concrete Palette matching reference */
-            --bg-concrete: #cbd2dc;
-            --bg-concrete-deep: #b8c1cd;
-            --bg-concrete-light: #dde3ec;
+            --bg-void: #05060a;
+            --bg-card: rgba(14, 17, 26, 0.65);
+            --bg-card-hover: rgba(20, 25, 40, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 229, 255, 0.4);
 
-            /* Apple-Grade Frosted Glass on Concrete */
-            --bg-glass-card: rgba(255, 255, 255, 0.72);
-            --bg-glass-card-hover: rgba(255, 255, 255, 0.88);
-            --border-glass: rgba(255, 255, 255, 0.85);
-            --border-glass-subtle: rgba(15, 23, 42, 0.08);
+            --text-lead: #f4f6fc;
+            --text-secondary: #9aa2ba;
+            --text-muted: #5e667f;
 
-            /* Typography Tokens */
-            --text-primary: #0a0d14;
-            --text-secondary: #475467;
-            --text-tertiary: #667085;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
-            --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+            /* Lusion Signature Electric Accents */
+            --electric-cyan: #00f0ff;
+            --electric-cyan-dim: rgba(0, 240, 255, 0.15);
+            --electric-purple: #9d4edd;
+            --electric-rose: #ff2a6d;
+            --electric-emerald: #00ffaa;
 
-            /* Electric Neon Accents from Decisivo Ident */
-            --glow-cyan: #0284c7;
-            --glow-cyan-bright: #00d2eb;
-            --glow-electric: rgba(0, 210, 235, 0.4);
-            --glow-purple: #7c3aed;
-            --glow-coral: #ef4444;
-            --glow-emerald: #059669;
-
-            --card-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset;
-            --card-shadow-hover: 0 30px 60px -15px rgba(15, 23, 42, 0.18), 0 0 1px 1px rgba(255, 255, 255, 1) inset;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
@@ -48,574 +43,731 @@
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background-color: var(--bg-concrete);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
+            background-color: var(--bg-void);
+            color: var(--text-lead);
+            font-family: var(--font-body);
             overflow-x: hidden;
-            line-height: 1.47;
-            letter-spacing: -0.011em;
-            position: relative;
-            min-height: 100vh;
+            line-height: 1.5;
+            cursor: default;
         }
 
-        ::selection {
-            background: rgba(0, 210, 235, 0.35);
-            color: #0a0d14;
+        /* Custom Lusion Kinetic Follower Cursor */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--electric-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px var(--electric-cyan);
+            transition: width 0.2s, height 0.2s, opacity 0.2s;
         }
 
-        /* Architectural Cast Concrete Wall Texture matching reference image */
-        .concrete-wall-layer {
+        .cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(0, 240, 255, 0.45);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+        }
+
+        body.cursor-hover .cursor-dot {
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            box-shadow: 0 0 20px #ffffff;
+        }
+
+        body.cursor-hover .cursor-trail {
+            width: 64px;
+            height: 64px;
+            border-color: rgba(0, 240, 255, 0.9);
+            background: rgba(0, 240, 255, 0.06);
+            backdrop-filter: blur(2px);
+        }
+
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* Ambient dark vignette & grid lines */
+        .ambient-grid-overlay {
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: 0;
-            background:
-                /* Ambient directional light gradient across the concrete slab */
-                radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
-                radial-gradient(circle at 10% 25%, rgba(0, 210, 235, 0.16) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
-                /* Vertical shuttering / formwork board seams matching the image */
-                linear-gradient(to right,
-                    transparent 0%,
-                    transparent calc(25% - 1.5px),
-                    rgba(60, 72, 88, 0.22) calc(25% - 1.5px),
-                    rgba(255, 255, 255, 0.55) calc(25%),
-                    transparent calc(25% + 1.5px),
-                    transparent calc(75% - 1.5px),
-                    rgba(60, 72, 88, 0.22) calc(75% - 1.5px),
-                    rgba(255, 255, 255, 0.55) calc(75%),
-                    transparent calc(75% + 1.5px)
-                ),
-                /* Base cool concrete tonal depth */
-                linear-gradient(180deg, #dce2eb 0%, #cbd2dc 50%, #b9c2ce 100%);
-        }
-
-        /* Concrete aggregate pores, micro-pits, and stone grain */
-        .concrete-grain-layer {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.42;
-            mix-blend-mode: multiply;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='concretePores'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.20 1 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23concretePores)'/%3E%3C/svg%3E");
-            background-size: 190px 190px;
+            z-index: 1;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 28px;
+            padding: 0 32px;
             position: relative;
             z-index: 2;
         }
 
-        /* Apple-Grade Global Navigation with Frosted Glass */
-        .apple-nav {
+        .lusion-nav {
             position: sticky;
-            top: 0;
-            z-index: 1000;
-            height: 58px;
-            background: rgba(221, 227, 236, 0.78);
-            backdrop-filter: saturate(180%) blur(24px);
-            -webkit-backdrop-filter: saturate(180%) blur(24px);
-            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-            box-shadow: 0 4px 20px -5px rgba(15, 23, 42, 0.05);
-            transition: all 0.3s ease;
+            top: 24px;
+            z-index: 100;
+            margin-bottom: -72px;
         }
 
-        .nav-content {
+        .nav-capsule {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 100%;
+            padding: 12px 24px;
+            background: rgba(10, 13, 22, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            border-radius: 9999px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
         }
 
-        .brand-lockup {
+        .brand-cluster {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
-            color: var(--text-primary);
+            color: #fff;
         }
 
-        .brand-logo-svg {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            filter: drop-shadow(0 2px 8px rgba(0, 210, 235, 0.45));
+        .brand-vector-mark {
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.7));
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .brand-text-group {
+        .brand-cluster:hover .brand-vector-mark {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .brand-title-wrap {
             display: flex;
-            align-items: baseline;
-            gap: 8px;
+            flex-direction: column;
         }
 
-        .brand-name {
-            font-size: 1.18rem;
+        .brand-primary {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
             font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            line-height: 1;
         }
 
-        .brand-tagline {
+        .brand-subtitle {
             font-family: var(--font-mono);
-            font-size: 0.58rem;
+            font-size: 0.52rem;
             font-weight: 700;
-            letter-spacing: 0.14em;
-            color: var(--text-tertiary);
+            letter-spacing: 0.16em;
+            color: var(--electric-cyan);
             text-transform: uppercase;
+            margin-top: 3px;
         }
 
-        .nav-links {
+        .nav-menu {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 32px;
         }
 
         .nav-link {
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
             color: var(--text-secondary);
             text-decoration: none;
-            letter-spacing: -0.01em;
-            transition: color 0.2s ease;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.25s, text-shadow 0.25s;
+            position: relative;
         }
 
         .nav-link:hover {
-            color: var(--text-primary);
+            color: var(--electric-cyan);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
-        .btn-apple-pill {
-            display: inline-flex;
+        .nav-actions {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 7px 16px;
-            border-radius: 980px;
-            background: #0a0d14;
-            color: #ffffff;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 12px rgba(10, 13, 20, 0.15);
+            gap: 14px;
         }
 
-        .btn-apple-pill:hover {
-            background: #1e2538;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(10, 13, 20, 0.22);
-        }
-
-        /* Apple Eyebrow Pill Badge */
-        .apple-kicker-pill {
+        .status-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 16px;
-            border-radius: 980px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.9);
             font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #0284c7;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+            font-size: 0.65rem;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--electric-cyan);
+            letter-spacing: 0.06em;
         }
 
-        .kicker-dot {
-            width: 7px;
-            height: 7px;
+        .status-pulse {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: #00d2eb;
-            box-shadow: 0 0 10px #00d2eb;
-            animation: pulseKicker 2.4s infinite ease-in-out;
+            background: var(--electric-cyan);
+            box-shadow: 0 0 8px var(--electric-cyan);
+            animation: pulseGlow 1.8s infinite ease-in-out;
         }
 
-        @keyframes pulseKicker {
-            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
             50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* Hero Apple Statement */
-        .hero {
-            padding: 80px 0 55px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-title {
-            font-size: clamp(2.8rem, 6.8vw, 5.4rem);
-            font-weight: 700;
-            line-height: 1.04;
-            letter-spacing: -0.04em;
-            max-width: 980px;
-            margin: 0 auto 24px;
-            color: var(--text-primary);
-        }
-
-        /* Iridescent Gradient Text tuned for concrete background */
-        .gradient-iridescent {
-            background: linear-gradient(135deg, #0284c7 0%, #0099b8 35%, #7c3aed 70%, #db2777 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-            font-weight: 400;
-            line-height: 1.5;
-            color: var(--text-secondary);
-            max-width: 740px;
-            margin: 0 auto 36px;
-            letter-spacing: -0.015em;
-        }
-
-        .hero-meta-strip {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 28px;
-            margin-bottom: 50px;
-        }
-
-        .hero-meta-item {
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            color: var(--text-tertiary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-meta-item strong {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .theatre-halo-container {
-            position: relative;
-            max-width: 1040px;
-            margin: 0 auto 90px;
-            border-radius: 28px;
-            padding: 2px;
-            background: linear-gradient(135deg, 
-                rgba(0, 210, 235, 0.9) 0%, 
-                rgba(2, 132, 199, 0.6) 25%, 
-                rgba(124, 58, 237, 0.7) 50%, 
-                rgba(219, 39, 119, 0.5) 75%, 
-                rgba(0, 210, 235, 0.9) 100%
-            );
-            background-size: 300% 300%;
-            animation: borderShimmer 10s ease infinite;
-            box-shadow: 
-                0 30px 80px -20px rgba(15, 23, 42, 0.35),
-                0 0 50px rgba(0, 210, 235, 0.25);
-        }
-
-        @keyframes borderShimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .theatre-screen {
-            position: relative;
-            background: #0d111b;
-            border-radius: 26px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theatre-screen video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 26px;
-        }
-
-        .theatre-replay-btn {
-            position: absolute;
-            top: 22px;
-            right: 22px;
+        .btn-lusion-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(18, 22, 34, 0.82);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            font-size: 0.74rem;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            background: #ffffff;
+            color: #05060a;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-lusion-pill:hover {
+            background: var(--electric-cyan);
+            color: #05060a;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+            transform: scale(1.04);
+        }
+
+        .hero-section {
+            padding: 160px 0 80px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-ticker-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-ticker-tag span.highlight {
+            color: var(--electric-cyan);
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 980px;
-            cursor: pointer;
+        }
+
+        .hero-monument-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7.8vw, 6.8rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+            color: #ffffff;
+            max-width: 1100px;
+            margin: 0 auto 28px;
+            text-transform: uppercase;
+        }
+
+        .hero-monument-title .glow-word {
+            background: linear-gradient(135deg, #ffffff 0%, var(--electric-cyan) 50%, var(--electric-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
+        }
+
+        .hero-monument-title .wireframe-word {
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
+            color: transparent;
+            transition: -webkit-text-stroke 0.3s;
+        }
+
+        .hero-monument-title .wireframe-word:hover {
+            -webkit-text-stroke: 1.5px var(--electric-cyan);
+        }
+
+        .hero-description {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 760px;
+            margin: 0 auto 44px;
+            line-height: 1.55;
+            letter-spacing: -0.01em;
+            font-weight: 300;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 70px;
+        }
+
+        .btn-kinetic-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            border-radius: 9999px;
+            background: var(--electric-cyan);
+            color: #05060a;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
+        }
+
+        .btn-kinetic-primary:hover {
+            background: #ffffff;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-kinetic-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 34px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
+        }
+
+        .btn-kinetic-secondary:hover {
+            border-color: var(--electric-cyan);
+            color: var(--electric-cyan);
+            background: rgba(0, 240, 255, 0.08);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+        }
+
+        .theatre-wrapper {
+            position: relative;
+            max-width: 1080px;
+            margin: 0 auto 120px;
+            border-radius: 28px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 240, 255, 0.8) 0%, 
+                rgba(255, 255, 255, 0.1) 40%, 
+                rgba(157, 78, 221, 0.7) 80%,
+                rgba(0, 240, 255, 0.4) 100%
+            );
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 240, 255, 0.2);
+            transition: box-shadow 0.5s ease;
+        }
+
+        .theatre-wrapper:hover {
+            box-shadow: 0 50px 120px -20px rgba(0, 0, 0, 0.95), 0 0 80px rgba(0, 240, 255, 0.35);
+        }
+
+        .theatre-container {
+            background: #080a12;
+            border-radius: 27px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .theatre-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 27px;
+        }
+
+        .theatre-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             z-index: 10;
-            transition: all 0.2s ease;
         }
 
-        .theatre-replay-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #00d2eb;
-            transform: scale(1.03);
+        .theatre-btn {
+            background: rgba(8, 10, 18, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
         }
 
-        /* Apple-Style Section Header */
+        .theatre-btn:hover {
+            background: rgba(0, 240, 255, 0.18);
+            border-color: var(--electric-cyan);
+            color: var(--electric-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .theatre-watermark {
+            position: absolute;
+            bottom: 20px;
+            left: 24px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .lusion-marquee-wrap {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 22px 0;
+            overflow: hidden;
+            background: rgba(5, 6, 10, 0.85);
+            backdrop-filter: blur(20px);
+            margin-bottom: 140px;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 60px;
+            animation: lusionScroll 35s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+
+        .marquee-item:hover {
+            color: var(--electric-cyan);
+        }
+
+        .marquee-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--electric-cyan);
+            box-shadow: 0 0 10px var(--electric-cyan);
+        }
+
+        @keyframes lusionScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         .section-header {
-            margin-bottom: 54px;
+            margin-bottom: 60px;
         }
 
         .section-eyebrow {
             font-family: var(--font-mono);
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: var(--glow-cyan);
-            letter-spacing: 0.15em;
+            font-size: 0.74rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-bottom: 12px;
-            display: block;
+            color: var(--electric-cyan);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .section-title {
-            font-size: clamp(2.2rem, 4.4vw, 3.8rem);
-            font-weight: 700;
-            line-height: 1.08;
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-weight: 800;
             letter-spacing: -0.035em;
-            color: var(--text-primary);
-            max-width: 820px;
+            line-height: 1.05;
+            color: #ffffff;
+            text-transform: uppercase;
         }
 
-        .section-description {
-            font-size: 1.12rem;
+        .section-desc {
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 620px;
-            line-height: 1.55;
-            margin-top: 14px;
+            max-width: 640px;
+            margin-top: 18px;
+            line-height: 1.6;
         }
 
-        .apple-bento-grid {
+        .spotlight-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 24px;
-            margin-bottom: 110px;
+            margin-bottom: 140px;
         }
 
-        /* Frosted Glass Bento Cards over Cast Concrete */
-        .bento-card {
-            background: var(--bg-glass-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 28px;
-            padding: 42px 38px;
+        /* Lusion Interactive Spotlight Card */
+        .spotlight-card {
             position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 44px 38px;
             overflow: hidden;
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
-            box-shadow: var(--card-shadow);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
         }
 
-        .bento-card:hover {
-            background: var(--bg-glass-card-hover);
-            transform: translateY(-3px);
-            box-shadow: var(--card-shadow-hover);
-            border-color: rgba(255, 255, 255, 1);
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 240, 255, 0.12),
+                transparent 40%
+            );
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .bento-card-8 { grid-column: span 8; }
-        .bento-card-4 { grid-column: span 4; }
-        .bento-card-6 { grid-column: span 6; }
-        .bento-card-12 { grid-column: span 12; }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
 
-        @media (max-width: 900px) {
-            .bento-card-8, .bento-card-4, .bento-card-6, .bento-card-12 {
+        .spotlight-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 240, 255, 0.35);
+            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.15);
+        }
+
+        .col-span-8 { grid-column: span 8; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-6 { grid-column: span 6; }
+        .col-span-12 { grid-column: span 12; }
+
+        @media (max-width: 960px) {
+            .col-span-8, .col-span-4, .col-span-6, .col-span-12 {
                 grid-column: span 12;
             }
         }
 
-        .bento-tag {
+        .card-num {
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.14em;
+            color: var(--electric-cyan);
             text-transform: uppercase;
-            color: var(--glow-cyan);
-            margin-bottom: 16px;
-            display: block;
+            margin-bottom: 20px;
         }
 
-        .bento-headline {
-            font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+        .card-heading {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
             font-weight: 700;
             line-height: 1.15;
             letter-spacing: -0.025em;
-            color: var(--text-primary);
-            margin-bottom: 14px;
+            color: #ffffff;
+            margin-bottom: 16px;
         }
 
-        .bento-body {
-            font-size: 1.02rem;
+        .card-text {
             color: var(--text-secondary);
-            line-height: 1.55;
-            margin-bottom: 30px;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
         }
 
-        .bento-visual-container {
-            background: rgba(255, 255, 255, 0.65);
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            border-radius: 18px;
-            padding: 24px;
-            margin-top: auto;
-        }
-
-        .comparison-strip {
+        .metric-comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px;
         }
 
-        @media (max-width: 640px) {
-            .comparison-strip {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .comparison-cell {
+        .metric-box {
             padding: 16px;
             border-radius: 12px;
-            background: #ffffff;
-            border: 1px solid rgba(15, 23, 42, 0.08);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        .cell-bad {
-            border-color: rgba(239, 68, 68, 0.35);
+        .metric-box.fault {
+            border: 1px solid rgba(255, 42, 109, 0.3);
         }
 
-        .cell-good {
-            border-color: rgba(2, 132, 199, 0.4);
-            background: rgba(2, 132, 199, 0.04);
+        .metric-box.success {
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            background: rgba(0, 240, 255, 0.04);
         }
 
-        .comparison-title {
+        .metric-label {
             font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 6px;
         }
 
-        .comparison-val {
-            font-size: 1.35rem;
+        .metric-val {
+            font-family: var(--font-display);
+            font-size: 2rem;
             font-weight: 800;
-            color: var(--text-primary);
+            line-height: 1;
             margin-bottom: 4px;
         }
 
-        .comparison-sub {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.35;
+        .metric-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
 
-        /* Apple Feature Telemetry Console */
-        .apple-console-shell {
-            background: var(--bg-glass-card);
-            border: 1px solid var(--border-glass);
+        .lab-console-shell {
+            background: rgba(10, 13, 22, 0.85);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 28px;
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
+            grid-template-columns: 1.25fr 1fr;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 240, 255, 0.15);
+            margin-bottom: 140px;
             backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            margin-bottom: 120px;
         }
 
-        @media (max-width: 960px) {
-            .apple-console-shell {
+        @media (max-width: 980px) {
+            .lab-console-shell {
                 grid-template-columns: 1fr;
             }
         }
 
-        .console-control-panel {
-            padding: 44px;
-            border-right: 1px solid rgba(15, 23, 42, 0.08);
+        .console-panel-left {
+            padding: 48px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .console-badge-row {
+        .console-hud-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .node-tag {
+        .hud-tag {
             font-family: var(--font-mono);
             font-size: 0.74rem;
-            font-weight: 700;
-            color: var(--glow-cyan);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
+            color: var(--electric-cyan);
             text-transform: uppercase;
         }
 
-        .math-tag {
+        .hud-meter {
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            color: #ef4444;
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: var(--electric-rose);
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.35);
             padding: 4px 12px;
-            border-radius: 980px;
-            font-weight: 600;
+            border-radius: 9999px;
         }
 
-        .scenario-text {
-            font-size: 1.25rem;
+        .scenario-headline {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
             font-weight: 600;
             line-height: 1.45;
-            color: var(--text-primary);
-            margin-bottom: 28px;
+            color: #ffffff;
+            margin-bottom: 30px;
         }
 
-        .option-button-stack {
+        .option-stack-lusion {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .console-option {
-            background: rgba(255, 255, 255, 0.65);
-            border: 1px solid rgba(15, 23, 42, 0.1);
-            border-radius: 14px;
-            padding: 16px 20px;
+        .option-trigger {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px 22px;
             text-align: left;
             color: var(--text-secondary);
-            font-family: var(--font-sans);
-            font-size: 0.92rem;
+            font-family: var(--font-body);
+            font-size: 0.94rem;
             line-height: 1.45;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -625,57 +777,64 @@
             gap: 16px;
         }
 
-        .console-option:hover {
-            background: #ffffff;
-            border-color: rgba(2, 132, 199, 0.5);
-            color: var(--text-primary);
-            transform: translateX(3px);
-            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+        .option-trigger:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 240, 255, 0.4);
+            color: #ffffff;
+            transform: translateX(4px);
         }
 
-        .console-option.active {
-            background: #ffffff;
-            border-color: var(--glow-cyan);
-            color: var(--text-primary);
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15), 0 0 0 1px var(--glow-cyan);
+        .option-trigger.active {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--electric-cyan);
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25), 0 0 1px 1px var(--electric-cyan) inset;
         }
 
-        .option-index {
+        .option-num-lusion {
             font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--text-tertiary);
-            min-width: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-width: 24px;
         }
 
-        .console-option.active .option-index {
-            color: var(--glow-cyan);
+        .option-trigger.active .option-num-lusion {
+            color: var(--electric-cyan);
             font-weight: 700;
         }
 
-        .console-telemetry-display {
-            background: #101422;
-            padding: 44px;
+        .console-panel-right {
+            background: #060810;
+            padding: 48px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            color: #ffffff;
         }
 
-        .telemetry-header {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
-            color: #94a3b8;
-            text-transform: uppercase;
-            margin-bottom: 22px;
+        .waveform-canvas-box {
+            position: relative;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .telemetry-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px;
-            padding: 28px;
+        #audio-wave-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .telemetry-output-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -683,7 +842,7 @@
             gap: 20px;
         }
 
-        .verdict-pill {
+        .verdict-tag-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -691,516 +850,672 @@
             font-size: 0.74rem;
             font-weight: 700;
             padding: 6px 14px;
-            border-radius: 980px;
+            border-radius: 9999px;
             width: fit-content;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        .pill-target {
-            background: rgba(5, 150, 105, 0.2);
-            color: #34d399;
-            border: 1px solid rgba(52, 211, 153, 0.45);
-            box-shadow: 0 0 20px rgba(52, 211, 153, 0.2);
+        .tag-defensible {
+            background: rgba(0, 255, 170, 0.15);
+            color: var(--electric-emerald);
+            border: 1px solid rgba(0, 255, 170, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.25);
         }
 
-        .pill-liability {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(248, 113, 113, 0.45);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+        .tag-liability {
+            background: rgba(255, 42, 109, 0.15);
+            color: var(--electric-rose);
+            border: 1px solid rgba(255, 42, 109, 0.4);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.25);
         }
 
-        .verdict-block {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 16px;
-        }
-
-        .verdict-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 6px;
-        }
-
-        .verdict-title {
-            font-size: 1.18rem;
+        .verdict-header-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
             font-weight: 700;
             color: #ffffff;
-            line-height: 1.35;
+            line-height: 1.3;
         }
 
-        .verdict-detail {
-            font-size: 0.92rem;
+        .verdict-legal-desc {
+            font-size: 0.94rem;
             color: #cbd5e1;
-            line-height: 1.55;
-            margin-top: 6px;
+            line-height: 1.6;
         }
 
-        .telemetry-footer {
+        .telemetry-footer-bar {
             display: flex;
             justify-content: space-between;
             font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: #64748b;
-            margin-top: 22px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 24px;
         }
 
-        .apple-banner-cta {
-            background: var(--bg-glass-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 28px;
-            padding: 64px 48px;
-            text-align: center;
+        .finale-hero-box {
             position: relative;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.15) 0%, rgba(10, 13, 22, 0.9) 65%);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            border-radius: 36px;
+            padding: 80px 48px;
+            text-align: center;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            margin-bottom: 100px;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 80px rgba(0, 240, 255, 0.2);
+            margin-bottom: 120px;
         }
 
-        .banner-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(0, 210, 235, 0.15) 0%, rgba(124, 58, 237, 0.08) 40%, transparent 70%);
-            filter: blur(60px);
-            pointer-events: none;
-        }
-
-        .banner-title {
-            font-size: clamp(2.2rem, 4vw, 3.6rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.035em;
-            color: var(--text-primary);
-            margin-bottom: 18px;
-        }
-
-        .banner-text {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 36px;
-            line-height: 1.55;
-        }
-
-        .banner-actions {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn-large-apple {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 30px;
-            border-radius: 980px;
-            background: #0a0d14;
+        .finale-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
             color: #ffffff;
-            font-weight: 600;
-            font-size: 0.94rem;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 18px rgba(10, 13, 20, 0.2);
+            margin-bottom: 20px;
         }
 
-        .btn-large-apple:hover {
-            background: #1f273d;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(10, 13, 20, 0.3);
-        }
-
-        .btn-secondary-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 30px;
-            border-radius: 980px;
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(15, 23, 42, 0.18);
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 0.94rem;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .btn-secondary-ghost:hover {
-            background: #ffffff;
-            border-color: var(--text-primary);
+        .finale-text {
+            font-size: 1.18rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
         }
 
         footer {
-            border-top: 1px solid rgba(15, 23, 42, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding: 40px 0 60px;
+            font-family: var(--font-mono);
             font-size: 0.74rem;
-            color: var(--text-tertiary);
+            color: var(--text-muted);
         }
 
-        .footer-grid {
+        .footer-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
         }
+
+        .footer-logo-text {
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Architectural Cast Concrete Texture Wall with Seams and Micro-Pores -->
-    <div class="concrete-wall-layer"></div>
-    <div class="concrete-grain-layer"></div>
+    <!-- Custom Kinetic Cursor (Lusion Style) -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
 
-    <header class="apple-nav">
-        <div class="container nav-content">
-            <a href="#" class="brand-lockup" title="decisivo — Logical Behavioural Simulations">
+    <!-- Interactive Three.js Neural Network Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+    <div class="ambient-grid-overlay"></div>
+
+    <!-- Floating Capsule Navbar -->
+    <header class="container lusion-nav">
+        <div class="nav-capsule">
+            <a href="#" class="brand-cluster hover-target">
                 <!-- Authentic Decisivo Branching Vector Mark -->
-                <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="brand-vector-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="appleCyanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <linearGradient id="lusionCyanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#0284c7" />
                             <stop offset="50%" stop-color="#00f0ff" />
                             <stop offset="100%" stop-color="#a855f7" />
                         </linearGradient>
                     </defs>
-                    <path d="M 40 86 C 40 68, 32 54, 18 52" stroke="url(#appleCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 46 86 C 46 64, 38 43, 23 39" stroke="url(#appleCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 52 86 C 52 58, 48 34, 30 28" stroke="url(#appleCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 58 86 C 58 56, 68 40, 84 38" stroke="url(#appleCyanGrad)" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 40 86 C 40 68, 32 54, 18 52" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M 46 86 C 46 64, 38 43, 23 39" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M 52 86 C 52 58, 48 34, 30 28" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M 58 86 C 58 56, 68 40, 84 38" stroke="url(#lusionCyanGrad)" stroke-width="8" stroke-linecap="round"/>
                     <path d="M 72 26 L 87 38 L 74 50" fill="none" stroke="#00f0ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <div class="brand-text-group">
-                    <span class="brand-name">decisivo</span>
-                    <span class="brand-tagline">LOGICAL • BEHAVIOURAL SIMULATIONS</span>
+                <div class="brand-title-wrap">
+                    <span class="brand-primary">decisivo</span>
+                    <span class="brand-subtitle">LOGICAL • BEHAVIOURAL SIMULATIONS</span>
                 </div>
             </a>
 
-            <nav class="nav-links">
-                <a href="#standard" class="nav-link">The Standard</a>
-                <a href="#pipeline" class="nav-link">Architecture</a>
-                <a href="#telemetry" class="nav-link">Telemetry Demo</a>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-apple-pill">Initiate Discovery ↗</a>
+            <nav class="nav-menu">
+                <a href="#standard" class="nav-link hover-target">The Standard</a>
+                <a href="#architecture" class="nav-link hover-target">Architecture</a>
+                <a href="#telemetry" class="nav-link hover-target">Laboratory</a>
             </nav>
+
+            <div class="nav-actions">
+                <div class="status-pill">
+                    <span class="status-pulse"></span>
+                    AIR-GAPPED SOVEREIGN
+                </div>
+                <a href="mailto:founder@decisivo.co.uk" class="btn-lusion-pill hover-target">Discovery ↗</a>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            
-            <div class="apple-kicker-pill">
-                <span class="kicker-dot"></span>
-                Frontline Behavioural Intelligence
+    <main>
+        <section class="hero-section container">
+            <div class="hero-ticker-tag">
+                <span>01 // SYSTEM RUNNING</span>
+                <span class="highlight">AIR-GAPPED NEURAL TELEMETRY</span>
+                <span>UK SOVEREIGN</span>
             </div>
 
-            <h1 class="hero-title">
-                Instinct under fire.<br>
-                Engineered to be <span class="gradient-iridescent">defensible</span>.
+            <h1 class="hero-monument-title">
+                INSTINCT UNDER FIRE.<br>
+                ENGINEERED TO BE <span class="glow-word">DEFENSIBLE</span>.
             </h1>
 
-            <p class="hero-subtitle">
-                Superficial multiple-choice e-learning crumbles under regulatory audits and tribunals. Decisivo introduces high-fidelity 5-tier neural branching simulations that build physiological composure when frontline conflicts escalate.
+            <p class="hero-description">
+                Multiple-choice compliance training fails under tribunal cross-examination. Decisivo builds high-fidelity 5-branch behavioural simulations that hard-wire frontline composure when hostile confrontations ignite.
             </p>
 
-            <div class="hero-meta-strip">
-                <div class="hero-meta-item">DELIVERY // <strong>SCORM &amp; xAPI Native</strong></div>
-                <div class="hero-meta-item">PRIVACY // <strong>Air-Gapped Neural Audio</strong></div>
-                <div class="hero-meta-item">COMMERCIALS // <strong>Build, Own, Transfer (£0 Recurring SaaS)</strong></div>
+            <div class="hero-cta-group">
+                <a href="#telemetry" class="btn-kinetic-primary hover-target">Launch Console ✦</a>
+                <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-secondary hover-target">Commission Pilot (£6.5k) ↗</a>
             </div>
 
-            <!-- Apple Intelligence Iridescent Bezel Theatre Display -->
-            <div class="theatre-halo-container">
-                <div class="theatre-screen">
-                    <button class="theatre-replay-btn" onclick="replayIdent()" aria-label="Replay animated ident">
-                        <span>↻</span> Replay Ident
-                    </button>
+            <!-- Cinematic Ident Video Showcase with Audio Reactive Border -->
+            <div class="theatre-wrapper">
+                <div class="theatre-container">
+                    <div class="theatre-controls">
+                        <button class="theatre-btn hover-target" onclick="replayIdentVideo()">
+                            <span>↻</span> REPLAY IDENT
+                        </button>
+                    </div>
+
                     <video id="ident-video" autoplay muted playsinline preload="auto">
                         <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
                     </video>
+
+                    <div class="theatre-watermark">
+                        DECISIVO TELEMETRY ARCHITECTURE // 02.8s COMPUTE
+                    </div>
                 </div>
             </div>
+        </section>
 
-        </div>
-    </section>
+        <section class="lusion-marquee-wrap">
+            <div class="marquee-track">
+                <div class="marquee-item"><span class="marquee-dot"></span> AVIATION &amp; PASSENGER HOSTILITY</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> FRONTLINE CLINICAL TRIAGE ESCALATION</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> SOCIAL HOUSING STATUTORY DISPUTE RECOVERY</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> REGULATED FINANCIAL CONDUCT DEFENSE</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> RAIL OPERATIONS &amp; CROWD DE-ESCALATION</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> SECURE ENVIRONMENT SAFEGUARDING</div>
+                <!-- Duplicate for seamless looping -->
+                <div class="marquee-item"><span class="marquee-dot"></span> AVIATION &amp; PASSENGER HOSTILITY</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> FRONTLINE CLINICAL TRIAGE ESCALATION</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> SOCIAL HOUSING STATUTORY DISPUTE RECOVERY</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> REGULATED FINANCIAL CONDUCT DEFENSE</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> RAIL OPERATIONS &amp; CROWD DE-ESCALATION</div>
+                <div class="marquee-item"><span class="marquee-dot"></span> SECURE ENVIRONMENT SAFEGUARDING</div>
+            </div>
+        </section>
 
-    <section class="container" id="standard">
-        <div class="section-header">
-            <span class="section-eyebrow">01 / The Paradigm Shift</span>
-            <h2 class="section-title">Two options is a guess.<br>Five options is competence.</h2>
-            <p class="section-description">
-                Standard compliance training trains employees to pass elimination quizzes. Decisivo builds instinctive verbal composure backed by audit-grade telemetry.
-            </p>
-        </div>
-
-        <div class="apple-bento-grid">
-            <!-- Bento Card 1: 50/50 Fallacy vs 5-Branch Telemetry (Span 8) -->
-            <div class="bento-card bento-card-8">
-                <div>
-                    <span class="bento-tag">Mathematical Defensibility</span>
-                    <h3 class="bento-headline">Eliminating the 50% Guessing Loophole</h3>
-                    <p class="bento-body">
-                        In typical training, users pick between an overly robotic corporate policy answer and a comically unprofessional caricature. In tribunal cross-examinations, this fails to establish 'All Reasonable Steps'. Decisivo compounds 5 nuanced human reflexes at every stage.
-                    </p>
+        <section class="container" id="standard">
+            <div class="section-header">
+                <div class="section-eyebrow">
+                    <span>✦</span> 01 / MATHEMATICAL INTEGRITY
                 </div>
+                <h2 class="section-title">Two options is a guess.<br>Five options is competence.</h2>
+                <p class="section-desc">
+                    Elimination quizzes teach frontline staff how to guess corporate intentions. Decisivo measures instinctive reflexes under pressure.
+                </p>
+            </div>
 
-                <div class="bento-visual-container">
-                    <div class="comparison-strip">
-                        <div class="comparison-cell cell-bad">
-                            <div class="comparison-title" style="color: #ff453a;">✕ Status Quo Compliance</div>
-                            <div class="comparison-val" style="color: #ff453a;">50.0%</div>
-                            <div class="comparison-sub">Blind guess pass rate. Zero cognitive friction or muscle memory.</div>
+            <div class="spotlight-grid">
+                <!-- Card 1: 50% Guess Loophole (Span 8) -->
+                <div class="spotlight-card col-span-8">
+                    <div>
+                        <div class="card-num">// 01.1 PROBABILITY COLLAPSE</div>
+                        <h3 class="card-heading">Eliminating The 50% Guessing Loophole</h3>
+                        <p class="card-text">
+                            In conventional e-learning, trainees toggle between a robotic corporate policy statement and an absurd caricature. When tribunals or regulatory ombudsmen examine incident logs, these pass rates fail to prove 'All Reasonable Steps'. Decisivo compounds 5 realistic reflexes across each node.
+                        </p>
+                    </div>
+
+                    <div class="metric-comparison">
+                        <div class="metric-box fault">
+                            <div class="metric-label" style="color: var(--electric-rose);">Status Quo Pass Rate</div>
+                            <div class="metric-val" style="color: var(--electric-rose);">50.0%</div>
+                            <div class="metric-sub">Pure elimination guess. Zero muscle memory under physical hostility.</div>
                         </div>
-                        <div class="comparison-cell cell-good">
-                            <div class="comparison-title" style="color: var(--glow-cyan);">✦ Decisivo 5-Tier Matrix</div>
-                            <div class="comparison-val" style="color: var(--glow-cyan);">&lt; 0.8%</div>
-                            <div class="comparison-sub">Compounding decision tree probability. Statistically defensible.</div>
+                        <div class="metric-box success">
+                            <div class="metric-label" style="color: var(--electric-cyan);">Decisivo Matrix Odds</div>
+                            <div class="metric-val" style="color: var(--electric-cyan);">&lt; 0.8%</div>
+                            <div class="metric-sub">Compounding 5-way decision tree. Statistically defensible in court.</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Bento Card 2: Air-Gapped Audio (Span 4) -->
-            <div class="bento-card bento-card-4">
-                <div>
-                    <span class="bento-tag">Private Frontline Compute</span>
-                    <h3 class="bento-headline">Air-Gapped Synthesis</h3>
-                    <p class="bento-body">
-                        Zero confidential incident reports, whistleblowing scripts, or internal policies ever touch public cloud LLMs. We synthesize neural audio locally on dedicated, air-gapped workstations in the UK.
-                    </p>
-                </div>
-                <div class="bento-visual-container">
-                    <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #34d399; display: flex; align-items: center; gap: 8px;">
-                        <span>●</span> 100% UK Sovereign Isolation
+                <!-- Card 2: Air-Gapped Neural Audio (Span 4) -->
+                <div class="spotlight-card col-span-4" id="architecture">
+                    <div>
+                        <div class="card-num">// 01.2 SOVEREIGN PRIVACY</div>
+                        <h3 class="card-heading">Air-Gapped Synthesis</h3>
+                        <p class="card-text">
+                            Zero incident transcripts, whistleblowing records, or sensitive patient disputes touch public cloud APIs. Voice models run locally on air-gapped workstations in the UK.
+                        </p>
                     </div>
-                    <div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px;">
-                        Strict data custody matching NHS &amp; defense guidelines.
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--electric-emerald); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
+                        ● NHS &amp; Defense Custody Compliant
                     </div>
                 </div>
-            </div>
 
-            <!-- Bento Card 3: Build Own Transfer (Span 6) -->
-            <div class="bento-card bento-card-6" id="pipeline">
-                <div>
-                    <span class="bento-tag">Commercial Integrity</span>
-                    <h3 class="bento-headline">Build, Own, Transfer. Zero SaaS Taxes.</h3>
-                    <p class="bento-body">
-                        Stop paying recurring per-seat fees for your own operational knowledge. We charge a one-time engineering fee, export standardized SCORM/xAPI packages, and hand over the raw assets outright forever.
-                    </p>
-                </div>
-                <div class="bento-visual-container">
-                    <div style="font-family: var(--font-mono); font-size: 0.84rem; color: #fff;">
-                        ENGINEERING PILOT // <strong>£6,500 – £9,500</strong>
+                <!-- Card 3: Build, Own, Transfer (Span 6) -->
+                <div class="spotlight-card col-span-6">
+                    <div>
+                        <div class="card-num">// 01.3 ZERO SAAS TAX</div>
+                        <h3 class="card-heading">Build, Own, Transfer</h3>
+                        <p class="card-text">
+                            Stop paying monthly recurring seat licenses for your own operational knowledge. Fixed engineering fee, full asset transfer, and direct SCORM/xAPI deployment into Workday, Cornerstone, or Totara.
+                        </p>
                     </div>
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
-                        Direct deployment into Workday, Cornerstone, Totara, or Moodle.
+                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #ffffff; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
+                        PILOT SCOPE // <span style="color: var(--electric-cyan);">£6,500 – £9,500 FIXED</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Bento Card 4: Enhanced DBS Founder Led (Span 6) -->
-            <div class="bento-card bento-card-6">
-                <div>
-                    <span class="bento-tag">Safeguarding Governance</span>
-                    <h3 class="bento-headline">Enhanced DBS Cleared Founder</h3>
-                    <p class="bento-body">
-                        Half-day on-site discovery workshops led directly by an enterprise-vetted founder with an active Enhanced DBS on the Update Service. Zero safeguarding procurement friction when working in healthcare, aviation, or custodial environments.
-                    </p>
-                </div>
-                <div class="bento-visual-container">
-                    <div style="font-family: var(--font-mono); font-size: 0.84rem; color: var(--glow-cyan);">
-                        STATUS // <strong>Active Update Service Verified</strong>
+                <!-- Card 4: Enhanced DBS Founder (Span 6) -->
+                <div class="spotlight-card col-span-6">
+                    <div>
+                        <div class="card-num">// 01.4 SAFEGUARDING PROTOCOL</div>
+                        <h3 class="card-heading">Enhanced DBS Cleared Founder</h3>
+                        <p class="card-text">
+                            Discovery sprints led directly by an enterprise-vetted founder with an active Enhanced DBS certificate on the Update Service. Zero safeguarding friction when accessing secure wards, airside zones, or youth facilities.
+                        </p>
                     </div>
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
-                        Seamless compliance sign-off for NHS Trusts &amp; Secure Housing.
+                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--electric-cyan); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
+                        STATUS // <span style="color: #ffffff;">Active Update Service Registered</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="container" id="telemetry">
-        <div class="section-header">
-            <span class="section-eyebrow">02 / Interactive Proof</span>
-            <h2 class="section-title">The Behavioural Telemetry Console</h2>
-            <p class="section-description">
-                Experience how Decisivo breaks down frontline verbal instincts into audit-ready legal telemetry. Select a response below to inspect the risk diagnosis.
-            </p>
-        </div>
+        <section class="container" id="telemetry">
+            <div class="section-header">
+                <div class="section-eyebrow">
+                    <span>✦</span> 02 / INTERACTIVE DIAGNOSTIC PROOF
+                </div>
+                <h2 class="section-title">The Behavioural Telemetry Console</h2>
+                <p class="section-desc">
+                    Interact with an authentic frontline conflict flashpoint. Select an instinctive reflex to inspect real-time legal liability, escalation vectors, and xAPI audit telemetry.
+                </p>
+            </div>
 
-        <div class="apple-console-shell">
-            <!-- Left: Options & Flashpoint -->
-            <div class="console-control-panel">
-                <div>
-                    <div class="console-badge-row">
-                        <span class="node-tag">Frontline De-escalation Node</span>
-                        <span class="math-tag">Guess Odds: 20.0%</span>
+            <div class="lab-console-shell">
+                <!-- Left Control Panel -->
+                <div class="console-panel-left">
+                    <div>
+                        <div class="console-hud-bar">
+                            <span class="hud-tag">Scenario Node // Flashpoint 04</span>
+                            <span class="hud-meter">Guess Odds: 20.0%</span>
+                        </div>
+
+                        <div class="scenario-headline">
+                            "A client aggressively slams the reception desk, shouting verbal obscenities and demanding an immediate, unverified boundary exception."
+                        </div>
+
+                        <div class="option-stack-lusion">
+                            <button class="option-trigger active hover-target" onclick="handleOptionSelect(1, this)">
+                                <span><span class="option-num-lusion">01</span> "I hear how urgent this feels, but regulatory protocol requires verification. Let's sit and review the record together."</span>
+                                <span>→</span>
+                            </button>
+                            <button class="option-trigger hover-target" onclick="handleOptionSelect(2, this)">
+                                <span><span class="option-num-lusion">02</span> "Company policy strictly forbids that. Step back into the waiting zone immediately or security will escort you out."</span>
+                                <span>→</span>
+                            </button>
+                            <button class="option-trigger hover-target" onclick="handleOptionSelect(3, this)">
+                                <span><span class="option-num-lusion">03</span> "Fine, I will authorise it just this once if you promise to calm down and leave without causing more trouble."</span>
+                                <span>→</span>
+                            </button>
+                            <button class="option-trigger hover-target" onclick="handleOptionSelect(4, this)">
+                                <span><span class="option-num-lusion">04</span> "Do not take that tone with me. You have zero right to speak to frontline staff like that."</span>
+                                <span>→</span>
+                            </button>
+                            <button class="option-trigger hover-target" onclick="handleOptionSelect(5, this)">
+                                <span><span class="option-num-lusion">05</span> (Silently hits the panic lockdown and calls emergency police dispatch without verbal de-escalation).</span>
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Telemetry Display with Audio Waveform -->
+                <div class="console-panel-right">
+                    <div>
+                        <div class="waveform-canvas-box">
+                            <canvas id="audio-wave-canvas"></canvas>
+                        </div>
+
+                        <div class="telemetry-output-card" id="telemetry-card">
+                            <!-- Populated dynamically via JS -->
+                        </div>
                     </div>
 
-                    <div class="scenario-text">
-                        "A client aggressively slams the front desk, shouting verbal obscenities and demanding an immediate, unverified boundary exception."
-                    </div>
-
-                    <div class="option-button-stack">
-                        <button class="console-option active" onclick="setConsoleVerdict(1, this)">
-                            <span class="option-index">01</span>
-                            <span>"I hear how urgent this feels, but regulatory protocol requires verification. Let's sit and review the record together."</span>
-                            <span>→</span>
-                        </button>
-                        <button class="console-option" onclick="setConsoleVerdict(2, this)">
-                            <span class="option-index">02</span>
-                            <span>"Company policy strictly forbids that. Step back into the waiting zone immediately or security will escort you out."</span>
-                            <span>→</span>
-                        </button>
-                        <button class="console-option" onclick="setConsoleVerdict(3, this)">
-                            <span class="option-index">03</span>
-                            <span>"Fine, I will authorise it just this once if you promise to calm down and leave without causing more trouble."</span>
-                            <span>→</span>
-                        </button>
-                        <button class="console-option" onclick="setConsoleVerdict(4, this)">
-                            <span class="option-index">04</span>
-                            <span>"Do not take that tone with me. You have zero right to speak to frontline staff like that."</span>
-                            <span>→</span>
-                        </button>
-                        <button class="console-option" onclick="setConsoleVerdict(5, this)">
-                            <span class="option-index">05</span>
-                            <span>(Silently hits the panic lockdown and calls emergency police dispatch without verbal de-escalation).</span>
-                            <span>→</span>
-                        </button>
+                    <div class="telemetry-footer-bar">
+                        <span>xAPI PROTOCOL: ACTIVE</span>
+                        <span>DECISIVO TELEMETRY KERNEL</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Right: Dynamic Telemetry Output -->
-            <div class="console-telemetry-display">
-                <div class="telemetry-header">Live Audit Telemetry // xAPI Stream</div>
-
-                <div class="telemetry-card" id="telemetry-output">
-                    <!-- Populated dynamically via JS -->
+        <section class="container">
+            <div class="finale-hero-box">
+                <div class="hero-ticker-tag" style="margin-bottom: 20px;">
+                    <span>COMMERCIAL PILOT</span>
+                    <span class="highlight">£6,500 – £9,500 FIXED</span>
                 </div>
-
-                <div class="telemetry-footer">
-                    <span>TELEMETRY: xAPI CERTIFIED</span>
-                    <span>DECISIVO ARCHITECTURE</span>
+                <h2 class="finale-title">Ready to engineer frontline composure?</h2>
+                <p class="finale-text">
+                    Replace elimination quizzes with mathematically defensible simulations. No per-user software subscriptions. Full asset handover. Direct LMS export.
+                </p>
+                <div class="hero-cta-group" style="margin-bottom: 0;">
+                    <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-primary hover-target">Commission a Pilot ↗</a>
+                    <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-secondary hover-target">Book On-Site Discovery ↗</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="container">
-        <div class="apple-banner-cta">
-            <div class="banner-glow"></div>
-            
-            <h2 class="banner-title">
-                Ready to replace tick-box compliance?
-            </h2>
-            <p class="banner-text">
-                Commission a bespoke 5-branch behavioural simulation. Fixed engineering fee. Zero recurring SaaS seat taxes. Complete enterprise asset handover.
-            </p>
-
-            <div class="banner-actions">
-                <a href="mailto:founder@decisivo.co.uk" class="btn-large-apple">
-                    Commission a Pilot ↗
-                </a>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-secondary-ghost">
-                    Book On-Site Discovery ↗
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <div class="container footer-grid">
+        <div class="container footer-flex">
             <div>
-                <strong>decisivo</strong> &copy; 2026. High-Fidelity Frontline Behavioural Intelligence.
+                <span class="footer-logo-text">DECISIVO</span> &copy; 2026. High-Liability Frontline Behavioural Intelligence.
             </div>
             <div>
-                Build, Own, Transfer // SCORM &amp; xAPI Native // Enhanced DBS Cleared
+                Build, Own, Transfer // Air-Gapped Neural Audio // Enhanced DBS Cleared
             </div>
         </div>
     </footer>
 
     <script>
-        const telemetryDatabase = {
+        /* -------------------------------------------------------------
+           1. THREE.JS INTERACTIVE NEURAL PARTICLES & BRANCHING LINES
+           ------------------------------------------------------------- */
+        let scene, camera, renderer, particles, linesMesh;
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+        const PARTICLE_COUNT = 90;
+        const particlePositions = new Float32Array(PARTICLE_COUNT * 3);
+        const particleVelocities = [];
+
+        function initWebGL() {
+            const canvas = document.getElementById('webgl-canvas');
+            if (!canvas) return;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 240;
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Generate particles
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particlePositions[i * 3] = (Math.random() - 0.5) * 450;
+                particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 350;
+                particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+
+                particleVelocities.push({
+                    x: (Math.random() - 0.5) * 0.35,
+                    y: (Math.random() - 0.5) * 0.35,
+                    z: (Math.random() - 0.5) * 0.2
+                });
+            }
+
+            const particleGeometry = new THREE.BufferGeometry();
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0x00f0ff,
+                size: 3.5,
+                transparent: true,
+                opacity: 0.75,
+                blending: THREE.AdditiveBlending
+            });
+
+            particles = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particles);
+
+            // Connective lines geometry
+            const lineGeometry = new THREE.BufferGeometry();
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x00d2eb,
+                transparent: true,
+                opacity: 0.18,
+                blending: THREE.AdditiveBlending
+            });
+            linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(linesMesh);
+
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('mousemove', onMouseMove);
+        }
+
+        function onWindowResize() {
+            if (!camera || !renderer) return;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseMove(event) {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.08;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.08;
+        }
+
+        function animateWebGL() {
+            requestAnimationFrame(animateWebGL);
+
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+
+            if (camera) {
+                camera.position.x = targetX;
+                camera.position.y = -targetY;
+                camera.lookAt(scene.position);
+            }
+
+            // Update particle positions
+            const positions = particles.geometry.attributes.position.array;
+            const linePositions = [];
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                positions[i * 3] += particleVelocities[i].x;
+                positions[i * 3 + 1] += particleVelocities[i].y;
+                positions[i * 3 + 2] += particleVelocities[i].z;
+
+                // Bounce boundaries
+                if (Math.abs(positions[i * 3]) > 250) particleVelocities[i].x *= -1;
+                if (Math.abs(positions[i * 3 + 1]) > 200) particleVelocities[i].y *= -1;
+                if (Math.abs(positions[i * 3 + 2]) > 120) particleVelocities[i].z *= -1;
+
+                // Check distance to connect lines
+                for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+                    const dx = positions[i * 3] - positions[j * 3];
+                    const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+                    const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                    if (dist < 75) {
+                        linePositions.push(
+                            positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
+                            positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
+                        );
+                    }
+                }
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+            renderer.render(scene, camera);
+        }
+
+        /* -------------------------------------------------------------
+           2. KINETIC LUSION CURSOR TRACKER
+           ------------------------------------------------------------- */
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorTrail = document.getElementById('cursor-trail');
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let trailX = cursorX;
+        let trailY = cursorY;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+
+            if (cursorDot) {
+                cursorDot.style.left = `${cursorX}px`;
+                cursorDot.style.top = `${cursorY}px`;
+            }
+
+            // Spotlight card coordinates
+            document.querySelectorAll('.spotlight-card').forEach((card) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        function animateCursorTrail() {
+            trailX += (cursorX - trailX) * 0.18;
+            trailY += (cursorY - trailY) * 0.18;
+
+            if (cursorTrail) {
+                cursorTrail.style.left = `${trailX}px`;
+                cursorTrail.style.top = `${trailY}px`;
+            }
+            requestAnimationFrame(animateCursorTrail);
+        }
+        animateCursorTrail();
+
+        // Hover expand cursor
+        document.querySelectorAll('.hover-target, button, a').forEach((el) => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        /* -------------------------------------------------------------
+           3. SIMULATED AUDIO WAVEFORM VISUALIZER
+           ------------------------------------------------------------- */
+        const waveCanvas = document.getElementById('audio-wave-canvas');
+        const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
+        let wavePhase = 0;
+
+        function drawWave() {
+            if (!waveCanvas || !waveCtx) return;
+            const w = waveCanvas.width = waveCanvas.offsetWidth;
+            const h = waveCanvas.height = waveCanvas.offsetHeight;
+
+            waveCtx.clearRect(0, 0, w, h);
+            waveCtx.lineWidth = 2;
+            waveCtx.strokeStyle = '#00f0ff';
+            waveCtx.shadowColor = '#00f0ff';
+            waveCtx.shadowBlur = 10;
+
+            waveCtx.beginPath();
+            for (let x = 0; x < w; x++) {
+                const angle = (x / w) * Math.PI * 4 + wavePhase;
+                const y = (h / 2) + Math.sin(angle) * (h * 0.28) * Math.sin(angle * 0.5);
+                if (x === 0) waveCtx.moveTo(x, y);
+                else waveCtx.lineTo(x, y);
+            }
+            waveCtx.stroke();
+            wavePhase += 0.05;
+            requestAnimationFrame(drawWave);
+        }
+        drawWave();
+
+        /* -------------------------------------------------------------
+           4. BEHAVIOURAL TELEMETRY KERNEL
+           ------------------------------------------------------------- */
+        const telemetryDb = {
             1: {
                 flag: "DEFENSIBLE TARGET",
-                flagClass: "pill-target",
+                flagClass: "tag-defensible",
                 headline: "De-escalates Agitation While Guarding Statutory Boundary",
-                body: "Establishes human empathy without yielding to unlawful procedural demands. In regulatory inspections or tribunal hearings, this satisfies 'All Reasonable Steps' requirements, fully shielding the enterprise."
+                body: "Establishes human rapport without yielding to unlawful procedural demands. In regulatory inspections or tribunal hearings, this satisfies 'All Reasonable Steps' requirements, fully shielding the enterprise."
             },
             2: {
                 flag: "LIABILITY TRAP",
-                flagClass: "pill-liability",
+                flagClass: "tag-liability",
                 headline: "The Bureaucratic Stone-Wall",
                 body: "100% technically correct on paper, but delivered with rigid confrontation. Operational reviews demonstrate this response pattern triggers frontline verbal and physical escalation in over 70% of recorded incidents."
             },
             3: {
                 flag: "STATUTORY BREACH",
-                flagClass: "pill-liability",
+                flagClass: "tag-liability",
                 headline: "Unlawful Appeasement Under Pressure",
                 body: "Sacrifices regulatory safety protocol to avoid an immediate argument. Exposes the organization and individual staff to immediate regulatory sanctions and gross negligence liability."
             },
             4: {
                 flag: "ESCALATION FAULT",
-                flagClass: "pill-liability",
+                flagClass: "tag-liability",
                 headline: "Defensive Confrontation Trap",
                 body: "An instinctive emotional reaction that exacerbates hostility. Directly fuels formal ombudsman complaints, disciplinary grievances, and staff distress."
             },
             5: {
                 flag: "OPERATIONAL DRAIN",
-                flagClass: "pill-liability",
+                flagClass: "tag-liability",
                 headline: "Premature Panic Dispatch",
                 body: "Triggering emergency lockdown or police dispatch without attempting mandatory verbal de-escalation protocols diverts critical frontline resources and inflames public tension."
             }
         };
 
-        function setConsoleVerdict(id, buttonEl) {
-            document.querySelectorAll('.console-option').forEach(btn => btn.classList.remove('active'));
+        function handleOptionSelect(id, buttonEl) {
+            document.querySelectorAll('.option-trigger').forEach(b => b.classList.remove('active'));
             if (buttonEl) buttonEl.classList.add('active');
 
-            const item = telemetryDatabase[id];
-            const card = document.getElementById('telemetry-output');
-
+            const item = telemetryDb[id];
+            const card = document.getElementById('telemetry-card');
             if (!card || !item) return;
 
             card.innerHTML = `
-                <div class="verdict-pill ${item.flagClass}">
+                <div class="verdict-tag-pill ${item.flagClass}">
                     ● ${item.flag}
                 </div>
-                <div class="verdict-block">
-                    <div class="verdict-label">Staff Behavioural Reflex</div>
-                    <div class="verdict-title">${item.headline}</div>
+                <div>
+                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                        Observed Staff Reflex
+                    </div>
+                    <div class="verdict-header-title">${item.headline}</div>
                 </div>
-                <div class="verdict-block">
-                    <div class="verdict-label">Regulatory Audit &amp; Legal Impact</div>
-                    <div class="verdict-detail">${item.body}</div>
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px;">
+                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                        Tribunal &amp; Audit Risk Diagnostic
+                    </div>
+                    <div class="verdict-legal-desc">${item.body}</div>
                 </div>
             `;
         }
 
-        // Initialize default option
-        window.addEventListener('DOMContentLoaded', () => {
-            const firstOpt = document.querySelector('.console-option');
-            if (firstOpt) setConsoleVerdict(1, firstOpt);
-        });
-
-        // Replay handler for the video ident
-        function replayIdent() {
+        function replayIdentVideo() {
             const vid = document.getElementById('ident-video');
             if (vid) {
                 vid.currentTime = 0;
                 vid.play();
             }
         }
+
+        window.onload = function() {
+            initWebGL();
+            animateWebGL();
+            const firstOpt = document.querySelector('.option-trigger');
+            if (firstOpt) handleOptionSelect(1, firstOpt);
+        };
     </script>
 </body>
 </html>
