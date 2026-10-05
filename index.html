@@ -3,38 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>decisivo — Logical Behavioural Intelligence</title>
-    <meta name="description" content="High-fidelity 5-tier behavioural simulations for high-liability frontline operations. Air-gapped neural audio, mathematical audit telemetry, zero SaaS seat taxes.">
+    <title>DECISIVO — High-Fidelity Behavioural Simulations</title>
+    <meta name="description" content="Audit-defensible 5-tier frontline behavioural simulations. Inspired by Lusion kinetic design on architectural concrete.">
 
-    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono for avant-garde editorial look -->
+    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
 
-    <!-- Three.js for interactive WebGL fluid-neural network background -->
+    <!-- Three.js for 3D Kinetic Ribbon and Particle Simulation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
-            --bg-void: #05060a;
-            --bg-card: rgba(14, 17, 26, 0.65);
-            --bg-card-hover: rgba(20, 25, 40, 0.85);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 229, 255, 0.4);
+            /* Concrete Palette matching image_c2cd27.png */
+            --concrete-light: #dde3eb;
+            --concrete-base: #cbd3dd;
+            --concrete-dark: #b8c1cd;
+            --concrete-shadow: #9ea8b5;
 
-            --text-lead: #f4f6fc;
-            --text-secondary: #9aa2ba;
-            --text-muted: #5e667f;
+            /* Lusion Signature Ink & Contrast */
+            --ink-black: #080a12;
+            --ink-secondary: #272d3d;
+            --ink-muted: #5e667c;
+            --ink-subtle: #8a94a6;
 
-            /* Lusion Signature Electric Accents */
+            /* Lusion Vibrant Kinetic Accents */
+            --lusion-blue: #2d48e8;
+            --lusion-blue-bright: #3d5bf5;
             --electric-cyan: #00f0ff;
-            --electric-cyan-dim: rgba(0, 240, 255, 0.15);
-            --electric-purple: #9d4edd;
-            --electric-rose: #ff2a6d;
-            --electric-emerald: #00ffaa;
+            --electric-rose: #f43f5e;
+            --electric-emerald: #10b981;
+
+            /* Glass and architectural borders */
+            --hairline: rgba(18, 24, 40, 0.15);
+            --card-glass: rgba(255, 255, 255, 0.72);
+            --card-border: rgba(255, 255, 255, 0.85);
 
             --font-display: 'Syne', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -46,57 +53,48 @@
         }
 
         body {
-            background-color: var(--bg-void);
-            color: var(--text-lead);
-            font-family: var(--font-body);
+            background-color: var(--concrete-base);
+            color: var(--ink-black);
+            font-family: var(--font-sans);
             overflow-x: hidden;
-            line-height: 1.5;
-            cursor: default;
+            line-height: 1.45;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* Custom Lusion Kinetic Follower Cursor */
-        .cursor-dot {
+        .concrete-wall-backdrop {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            background: var(--electric-cyan);
-            border-radius: 50%;
+            inset: 0;
             pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 12px var(--electric-cyan);
-            transition: width 0.2s, height 0.2s, opacity 0.2s;
+            z-index: 0;
+            background:
+                /* Soft light vignette */
+                radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.5) 0%, transparent 55%),
+                radial-gradient(circle at 85% 75%, rgba(45, 72, 232, 0.08) 0%, transparent 45%),
+                /* Vertical architectural formwork seams matching concrete wall */
+                linear-gradient(to right,
+                    transparent 0%,
+                    transparent calc(33.333% - 1px),
+                    rgba(40, 48, 64, 0.13) calc(33.333% - 1px),
+                    rgba(255, 255, 255, 0.45) 33.333%,
+                    transparent calc(33.333% + 1px),
+                    transparent calc(66.666% - 1px),
+                    rgba(40, 48, 64, 0.13) calc(66.666% - 1px),
+                    rgba(255, 255, 255, 0.45) 66.666%,
+                    transparent calc(66.666% + 1px)
+                ),
+                radial-gradient(circle at 50% 15%, #dde4ec 0%, #cbd3dd 52%, #b5beca 100%);
         }
 
-        .cursor-trail {
+        .concrete-grain-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 38px;
-            height: 38px;
-            border: 1px solid rgba(0, 240, 255, 0.45);
-            border-radius: 50%;
+            inset: 0;
             pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
-        }
-
-        body.cursor-hover .cursor-dot {
-            width: 14px;
-            height: 14px;
-            background: #ffffff;
-            box-shadow: 0 0 20px #ffffff;
-        }
-
-        body.cursor-hover .cursor-trail {
-            width: 64px;
-            height: 64px;
-            border-color: rgba(0, 240, 255, 0.9);
-            background: rgba(0, 240, 255, 0.06);
-            backdrop-filter: blur(2px);
+            z-index: 0;
+            opacity: 0.42;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='concreteNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.12 0 0 0 0 0.16 0 0 0 0 0.22 1 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23concreteNoise)'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
         }
 
         #webgl-canvas {
@@ -105,802 +103,552 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.85;
-        }
-
-        .ambient-grid-overlay {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
             z-index: 1;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 80px 80px;
-            mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
+            pointer-events: none;
         }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 32px;
+        /* Lusion Minimal Cursor Dot */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--ink-black);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.15s, height 0.15s, background-color 0.2s;
+        }
+
+        body.cursor-hover .cursor-dot {
+            width: 28px;
+            height: 28px;
+            background: rgba(45, 72, 232, 0.45);
+            backdrop-filter: blur(4px);
+        }
+
+        .content-layer {
             position: relative;
             z-index: 2;
         }
 
-        .lusion-nav {
-            position: sticky;
-            top: 24px;
-            z-index: 100;
-            margin-bottom: -72px;
+        .container {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
         }
 
-        .nav-capsule {
+        .crosshair-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 24px;
-            background: rgba(10, 13, 22, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(24px) saturate(160%);
-            -webkit-backdrop-filter: blur(24px) saturate(160%);
-            border-radius: 9999px;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(255, 255, 255, 0.05) inset;
-        }
-
-        .brand-cluster {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .brand-vector-mark {
-            width: 32px;
-            height: 32px;
-            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.7));
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .brand-cluster:hover .brand-vector-mark {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .brand-title-wrap {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-primary {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: #ffffff;
-            line-height: 1;
-        }
-
-        .brand-subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.52rem;
-            font-weight: 700;
-            letter-spacing: 0.16em;
-            color: var(--electric-cyan);
-            text-transform: uppercase;
-            margin-top: 3px;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-
-        .nav-link {
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: color 0.25s, text-shadow 0.25s;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--electric-cyan);
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            padding: 5px 12px;
-            border-radius: 9999px;
-            background: rgba(0, 240, 255, 0.08);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            color: var(--electric-cyan);
-            letter-spacing: 0.06em;
-        }
-
-        .status-pulse {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--electric-cyan);
-            box-shadow: 0 0 8px var(--electric-cyan);
-            animation: pulseGlow 1.8s infinite ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.3; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.3); }
-        }
-
-        .btn-lusion-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            border-radius: 9999px;
-            background: #ffffff;
-            color: #05060a;
-            font-family: var(--font-display);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-lusion-pill:hover {
-            background: var(--electric-cyan);
-            color: #05060a;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
-            transform: scale(1.04);
-        }
-
-        .hero-section {
-            padding: 160px 0 80px;
-            position: relative;
-            text-align: center;
-        }
-
-        .hero-ticker-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 16px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 10px 40px;
+            border-bottom: 1px solid var(--hairline);
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            backdrop-filter: blur(12px);
-        }
-
-        .hero-ticker-tag span.highlight {
-            color: var(--electric-cyan);
-            font-weight: 600;
-        }
-
-        .hero-monument-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7.8vw, 6.8rem);
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -0.045em;
-            color: #ffffff;
-            max-width: 1100px;
-            margin: 0 auto 28px;
+            color: var(--ink-muted);
+            letter-spacing: 0.14em;
             text-transform: uppercase;
         }
 
-        .hero-monument-title .glow-word {
-            background: linear-gradient(135deg, #ffffff 0%, var(--electric-cyan) 50%, var(--electric-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
-        }
-
-        .hero-description {
-            font-size: clamp(1.1rem, 2vw, 1.35rem);
-            color: var(--text-secondary);
-            max-width: 760px;
-            margin: 0 auto 44px;
-            line-height: 1.55;
-            letter-spacing: -0.01em;
+        .crosshair-symbol {
+            color: var(--ink-subtle);
+            font-size: 0.9rem;
             font-weight: 300;
         }
 
-        .hero-cta-group {
+        .lusion-navbar {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-bottom: 70px;
+            justify-content: space-between;
+            padding: 24px 0;
         }
 
-        .btn-kinetic-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 36px;
-            border-radius: 9999px;
-            background: var(--electric-cyan);
-            color: #05060a;
+        .brand-wordmark {
             font-family: var(--font-display);
+            font-size: 1.55rem;
             font-weight: 800;
-            font-size: 0.92rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: var(--ink-black);
             text-decoration: none;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.45);
-        }
-
-        .btn-kinetic-primary:hover {
-            background: #ffffff;
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
-        }
-
-        .btn-kinetic-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 34px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            text-decoration: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s;
-        }
-
-        .btn-kinetic-secondary:hover {
-            border-color: var(--electric-cyan);
-            color: var(--electric-cyan);
-            background: rgba(0, 240, 255, 0.08);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
-        }
-
-        .theatre-wrapper {
-            position: relative;
-            max-width: 1080px;
-            margin: 0 auto 120px;
-            border-radius: 28px;
-            padding: 1px;
-            background: linear-gradient(135deg, 
-                rgba(0, 240, 255, 0.8) 0%, 
-                rgba(255, 255, 255, 0.1) 40%, 
-                rgba(157, 78, 221, 0.7) 80%,
-                rgba(0, 240, 255, 0.4) 100%
-            );
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 240, 255, 0.2);
-            transition: box-shadow 0.5s ease;
-        }
-
-        .theatre-container {
-            background: #080a12;
-            border-radius: 27px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .theatre-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            z-index: 20;
+            gap: 12px;
         }
 
-        .theatre-mode-switch {
-            display: inline-flex;
-            background: rgba(8, 10, 18, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 9999px;
-            padding: 3px;
-            gap: 4px;
+        .brand-vector-symbol {
+            width: 28px;
+            height: 28px;
         }
 
-        .theatre-mode-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            padding: 6px 14px;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.25s;
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
-        .theatre-mode-btn.active {
-            background: var(--electric-cyan);
-            color: #05060a;
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-        }
-
-        .theatre-btn {
-            background: rgba(8, 10, 18, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            padding: 8px 16px;
-            border-radius: 9999px;
-            cursor: pointer;
+        .nav-pill-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.25s;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            background: var(--ink-black);
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s;
         }
 
-        .theatre-btn:hover {
-            background: rgba(0, 240, 255, 0.18);
-            border-color: var(--electric-cyan);
-            color: var(--electric-cyan);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        .nav-pill-btn:hover {
+            transform: translateY(-2px);
+            background: var(--lusion-blue);
         }
 
-        /* Interactive Canvas Reactor */
-        #interactive-logo-container {
-            width: 100%;
-            height: 520px;
-            position: relative;
-            background: radial-gradient(circle at 50% 45%, #0d1224 0%, #05070e 85%);
-            display: flex;
+        .nav-circle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(18, 24, 40, 0.14);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            cursor: crosshair;
-        }
-
-        #interactive-logo-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .reactor-hud-hint {
-            position: absolute;
-            bottom: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--electric-cyan);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            z-index: 10;
-            pointer-events: none;
-            background: rgba(5, 7, 14, 0.8);
-            padding: 6px 18px;
-            border-radius: 9999px;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 18px rgba(0, 240, 255, 0.25);
-            animation: pulseGlow 2.5s infinite ease-in-out;
-            white-space: nowrap;
-        }
-
-        /* Video Showcase Mode */
-        #video-ident-container {
-            width: 100%;
-            display: none;
-            position: relative;
-        }
-
-        #video-ident-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 27px;
-        }
-
-        .theatre-watermark {
-            position: absolute;
-            bottom: 20px;
-            left: 24px;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.5);
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .lusion-marquee-wrap {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 22px 0;
-            overflow: hidden;
-            background: rgba(5, 6, 10, 0.85);
-            backdrop-filter: blur(20px);
-            margin-bottom: 140px;
-        }
-
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 60px;
-            animation: lusionScroll 35s linear infinite;
-        }
-
-        .marquee-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 20px;
-            font-family: var(--font-display);
-            font-size: 1.15rem;
+            color: var(--ink-black);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
-            white-space: nowrap;
+            transition: all 0.2s;
         }
 
-        .marquee-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--electric-cyan);
-            box-shadow: 0 0 10px var(--electric-cyan);
+        .nav-circle-btn:hover {
+            background: #ffffff;
+            transform: scale(1.05);
         }
 
-        @keyframes lusionScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .hero-section {
+            padding: 80px 0 60px;
         }
 
-        .section-header {
-            margin-bottom: 60px;
-        }
-
-        .section-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.74rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--electric-cyan);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
+        .hero-monumental-title {
             font-family: var(--font-display);
-            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-size: clamp(3.2rem, 8.2vw, 7.8rem);
             font-weight: 800;
-            letter-spacing: -0.035em;
-            line-height: 1.05;
-            color: #ffffff;
-            text-transform: uppercase;
+            line-height: 0.94;
+            letter-spacing: -0.05em;
+            color: var(--ink-black);
+            margin-bottom: 50px;
+            max-width: 1280px;
         }
 
-        .section-desc {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 640px;
-            margin-top: 18px;
-            line-height: 1.6;
+        .hero-monumental-title .gradient-word {
+            color: var(--lusion-blue);
+            font-style: normal;
         }
 
-        .spotlight-grid {
+        .hero-editorial-row {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-            margin-bottom: 140px;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+            margin-bottom: 70px;
         }
 
-        .spotlight-card {
-            position: relative;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
-            padding: 44px 38px;
-            overflow: hidden;
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
-        }
-
-        .spotlight-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(0, 240, 255, 0.12),
-                transparent 40%
-            );
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .spotlight-card:hover::before {
-            opacity: 1;
-        }
-
-        .spotlight-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(0, 240, 255, 0.35);
-            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.15);
-        }
-
-        .col-span-8 { grid-column: span 8; }
-        .col-span-4 { grid-column: span 4; }
-        .col-span-6 { grid-column: span 6; }
-
-        @media (max-width: 960px) {
-            .col-span-8, .col-span-4, .col-span-6 {
-                grid-column: span 12;
+        @media (max-width: 900px) {
+            .hero-editorial-row {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
         }
 
-        .card-num {
+        .hero-description {
+            font-size: clamp(1.2rem, 2vw, 1.45rem);
+            line-height: 1.48;
+            color: var(--ink-secondary);
+            font-weight: 400;
+            letter-spacing: -0.015em;
+        }
+
+        .hero-side-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .lusion-badge-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(18, 24, 40, 0.12);
             font-family: var(--font-mono);
-            font-size: 0.72rem;
-            letter-spacing: 0.14em;
-            color: var(--electric-cyan);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .card-heading {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.025em;
-            color: #ffffff;
-            margin-bottom: 16px;
-        }
-
-        .card-text {
-            color: var(--text-secondary);
-            font-size: 1.02rem;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        .metric-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .metric-box {
-            padding: 16px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .metric-box.fault {
-            border: 1px solid rgba(255, 42, 109, 0.3);
-        }
-
-        .metric-box.success {
-            border: 1px solid rgba(0, 240, 255, 0.4);
-            background: rgba(0, 240, 255, 0.04);
-        }
-
-        .metric-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.74rem;
+            color: var(--ink-black);
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            width: fit-content;
         }
 
-        .metric-val {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 4px;
+        .chip-dot-blue {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lusion-blue);
+            box-shadow: 0 0 10px rgba(45, 72, 232, 0.7);
         }
 
-        .metric-sub {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.4;
+        .spec-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--ink-muted);
         }
 
-        .lab-console-shell {
-            background: rgba(10, 13, 22, 0.85);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+        .spec-checklist span strong {
+            color: var(--ink-black);
+        }
+
+        .showreel-theatre-card {
+            position: relative;
+            background: #090c14;
             border-radius: 28px;
-            display: grid;
-            grid-template-columns: 1.25fr 1fr;
             overflow: hidden;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 240, 255, 0.15);
-            margin-bottom: 140px;
-            backdrop-filter: blur(28px);
+            box-shadow: 0 30px 80px -20px rgba(18, 24, 40, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            margin-bottom: 120px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @media (max-width: 980px) {
-            .lab-console-shell {
+        .showreel-theatre-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .theatre-nav-controls {
+            position: absolute;
+            top: 22px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .theatre-mode-btn {
+            background: rgba(18, 24, 40, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theatre-mode-btn:hover, .theatre-mode-btn.active {
+            background: var(--lusion-blue);
+            border-color: var(--lusion-blue-bright);
+            box-shadow: 0 0 20px rgba(45, 72, 232, 0.5);
+        }
+
+        .theatre-media-box {
+            position: relative;
+            width: 100%;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 50%, #151c30 0%, #080a12 85%);
+        }
+
+        #ident-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Real-Time Interactive Canvas Plasma Reactor */
+        #interactive-logo-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .lusion-divider-band {
+            border-top: 1px solid var(--hairline);
+            border-bottom: 1px solid var(--hairline);
+            padding: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            color: var(--ink-muted);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 110px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(6px);
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--hairline);
+            padding-bottom: 24px;
+        }
+
+        .section-big-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--ink-black);
+            line-height: 1;
+        }
+
+        .section-side-kicker {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            letter-spacing: 0.14em;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            max-width: 320px;
+            text-align: right;
+        }
+
+        .work-bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 120px;
+        }
+
+        @media (max-width: 860px) {
+            .work-bento-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .console-panel-left {
-            padding: 48px;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        .work-card {
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            padding: 44px 38px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 420px;
+            box-shadow: 0 16px 40px -12px rgba(18, 24, 40, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .console-hud-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        .work-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 24px 50px -15px rgba(18, 24, 40, 0.16);
+            border-color: #ffffff;
         }
 
-        .hud-tag {
+        .work-card.featured {
+            border: 2px solid var(--lusion-blue);
+            background: radial-gradient(circle at 100% 0%, rgba(45, 72, 232, 0.08) 0%, rgba(255, 255, 255, 0.92) 75%);
+        }
+
+        .card-category-tag {
             font-family: var(--font-mono);
             font-size: 0.74rem;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--lusion-blue);
+            margin-bottom: 18px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .card-main-heading {
+            font-family: var(--font-display);
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--ink-black);
+            margin-bottom: 16px;
+        }
+
+        .card-copy-text {
+            color: var(--ink-secondary);
+            font-size: 1.02rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .card-bottom-bar {
+            border-top: 1px solid var(--hairline);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+        }
+
+        .metric-strong {
+            font-size: 1.3rem;
+            font-weight: 800;
+            font-family: var(--font-display);
+        }
+
+        .console-container-shell {
+            background: #080a14;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            overflow: hidden;
+            box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.7);
+            margin-bottom: 130px;
+        }
+
+        @media (max-width: 980px) {
+            .console-container-shell {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .console-stage-left {
+            padding: 48px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stage-hud-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hud-node-label {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
             color: var(--electric-cyan);
+            letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
-        .hud-meter {
+        .hud-odds-capsule {
             font-family: var(--font-mono);
             font-size: 0.72rem;
             color: var(--electric-rose);
-            background: rgba(255, 42, 109, 0.1);
-            border: 1px solid rgba(255, 42, 109, 0.35);
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.35);
             padding: 4px 12px;
             border-radius: 9999px;
         }
 
-        .scenario-headline {
+        .console-dilemma-title {
             font-family: var(--font-display);
             font-size: 1.35rem;
-            font-weight: 600;
-            line-height: 1.45;
+            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 30px;
+            line-height: 1.4;
+            margin-bottom: 28px;
         }
 
-        .option-stack-lusion {
+        .console-options-stack {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .option-trigger {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 16px 22px;
+        .option-button-row {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 15px 20px;
+            color: #cbd5e1;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
             text-align: left;
-            color: var(--text-secondary);
-            font-family: var(--font-body);
-            font-size: 0.94rem;
-            line-height: 1.45;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
+            line-height: 1.45;
         }
 
-        .option-trigger:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(0, 240, 255, 0.4);
+        .option-button-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--electric-cyan);
             color: #ffffff;
             transform: translateX(4px);
         }
 
-        .option-trigger.active {
-            background: rgba(0, 240, 255, 0.1);
-            border-color: var(--electric-cyan);
+        .option-button-row.active {
+            background: rgba(45, 72, 232, 0.3);
+            border-color: var(--lusion-blue-bright);
             color: #ffffff;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.25), 0 0 1px 1px var(--electric-cyan) inset;
+            box-shadow: 0 0 25px rgba(45, 72, 232, 0.35);
         }
 
-        .option-num-lusion {
+        .option-num-tag {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.78rem;
+            color: var(--ink-subtle);
             min-width: 24px;
         }
 
-        .option-trigger.active .option-num-lusion {
+        .option-button-row.active .option-num-tag {
             color: var(--electric-cyan);
             font-weight: 700;
         }
 
-        .console-panel-right {
-            background: #060810;
+        .console-stage-right {
+            background: #05070d;
             padding: 48px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
+            color: #ffffff;
         }
 
-        .waveform-canvas-box {
-            position: relative;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            margin-bottom: 24px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #audio-wave-canvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        .telemetry-output-card {
+        .diagnostic-card-inner {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 18px;
+            padding: 28px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 20px;
+            gap: 18px;
         }
 
-        .verdict-tag-pill {
+        .diagnostic-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -910,568 +658,564 @@
             padding: 6px 14px;
             border-radius: 9999px;
             width: fit-content;
-            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        .tag-defensible {
-            background: rgba(0, 255, 170, 0.15);
+        .pill-defensible {
+            background: rgba(16, 185, 129, 0.2);
             color: var(--electric-emerald);
-            border: 1px solid rgba(0, 255, 170, 0.4);
-            box-shadow: 0 0 20px rgba(0, 255, 170, 0.25);
+            border: 1px solid rgba(16, 185, 129, 0.4);
         }
 
-        .tag-liability {
-            background: rgba(255, 42, 109, 0.15);
+        .pill-liability {
+            background: rgba(244, 63, 94, 0.2);
             color: var(--electric-rose);
-            border: 1px solid rgba(255, 42, 109, 0.4);
-            box-shadow: 0 0 20px rgba(255, 42, 109, 0.25);
+            border: 1px solid rgba(244, 63, 94, 0.4);
         }
 
-        .verdict-header-title {
+        .diagnostic-headline {
             font-family: var(--font-display);
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #ffffff;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
-        .verdict-legal-desc {
+        .diagnostic-body-text {
             font-size: 0.94rem;
             color: #cbd5e1;
             line-height: 1.6;
         }
 
-        .telemetry-footer-bar {
+        .console-footer-row {
             display: flex;
             justify-content: space-between;
             font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
+            font-size: 0.72rem;
+            color: var(--ink-subtle);
             margin-top: 24px;
         }
 
-        .finale-hero-box {
-            position: relative;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.15) 0%, rgba(10, 13, 22, 0.9) 65%);
-            border: 1px solid rgba(0, 240, 255, 0.35);
-            border-radius: 36px;
-            padding: 80px 48px;
-            text-align: center;
-            overflow: hidden;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 0 80px rgba(0, 240, 255, 0.2);
+        .finale-bento {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 32px;
             margin-bottom: 120px;
         }
 
-        .finale-title {
+        @media (max-width: 900px) {
+            .finale-bento {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .finale-hero-card {
+            background: var(--ink-black);
+            color: #ffffff;
+            border-radius: 28px;
+            padding: 56px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            box-shadow: 0 30px 70px -15px rgba(18, 24, 40, 0.3);
+        }
+
+        .finale-side-card {
+            background: var(--card-glass);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 56px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            backdrop-filter: blur(16px);
+        }
+
+        .finale-headline {
             font-family: var(--font-display);
-            font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+            font-size: clamp(2.2rem, 3.8vw, 3.4rem);
             font-weight: 800;
             line-height: 1.05;
             letter-spacing: -0.04em;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .finale-text {
-            font-size: 1.18rem;
-            color: var(--text-secondary);
-            max-width: 680px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
+        .btn-lusion-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            border-radius: 9999px;
+            background: var(--lusion-blue);
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.94rem;
+            font-weight: 700;
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(45, 72, 232, 0.4);
+        }
+
+        .btn-lusion-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: var(--lusion-blue-bright);
+            box-shadow: 0 14px 40px rgba(45, 72, 232, 0.6);
+        }
+
+        .btn-lusion-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 34px;
+            border-radius: 9999px;
+            border: 1.5px solid var(--ink-black);
+            color: var(--ink-black);
+            font-family: var(--font-sans);
+            font-size: 0.94rem;
+            font-weight: 700;
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.25s;
+        }
+
+        .btn-lusion-outline:hover {
+            background: var(--ink-black);
+            color: #ffffff;
         }
 
         footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px 0 60px;
+            border-top: 1px solid var(--hairline);
+            padding: 32px 0 50px;
             font-family: var(--font-mono);
             font-size: 0.74rem;
-            color: var(--text-muted);
+            color: var(--ink-muted);
         }
 
-        .footer-flex {
+        .footer-flex-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
         }
-
-        .footer-logo-text {
-            color: #ffffff;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-        }
     </style>
 </head>
 <body>
 
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-trail" id="cursor-trail"></div>
+    <!-- Architectural Cast Concrete Background (from image_c2cd27.png) -->
+    <div class="concrete-wall-backdrop"></div>
+    <div class="concrete-grain-overlay"></div>
 
-    <!-- Interactive Three.js Neural Network Canvas -->
+    <!-- Three.js Kinetic 3D Ribbon & Spline Simulation Canvas -->
     <canvas id="webgl-canvas"></canvas>
-    <div class="ambient-grid-overlay"></div>
 
-    <!-- Floating Capsule Navbar -->
-    <header class="container lusion-nav">
-        <div class="nav-capsule">
-            <a href="#" class="brand-cluster hover-target">
-                <!-- Authentic Decisivo Branching Vector Mark -->
-                <svg class="brand-vector-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="lusionCyanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#0284c7" />
-                            <stop offset="50%" stop-color="#00f0ff" />
-                            <stop offset="100%" stop-color="#a855f7" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M 40 86 C 40 68, 32 54, 18 52" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 46 86 C 46 64, 38 43, 23 39" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 52 86 C 52 58, 48 34, 30 28" stroke="url(#lusionCyanGrad)" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M 58 86 C 58 56, 68 40, 84 38" stroke="url(#lusionCyanGrad)" stroke-width="8" stroke-linecap="round"/>
-                    <path d="M 72 26 L 87 38 L 74 50" fill="none" stroke="#00f0ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <div class="brand-title-wrap">
-                    <span class="brand-primary">decisivo</span>
-                    <span class="brand-subtitle">LOGICAL • BEHAVIOURAL SIMULATIONS</span>
-                </div>
-            </a>
+    <!-- Custom Kinetic Cursor Follower -->
+    <div class="cursor-dot" id="cursor-dot"></div>
 
-            <nav class="nav-menu">
-                <a href="#standard" class="nav-link hover-target">The Standard</a>
-                <a href="#architecture" class="nav-link hover-target">Architecture</a>
-                <a href="#telemetry" class="nav-link hover-target">Laboratory</a>
-            </nav>
-
-            <div class="nav-actions">
-                <div class="status-pill">
-                    <span class="status-pulse"></span>
-                    AIR-GAPPED SOVEREIGN
-                </div>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-lusion-pill hover-target">Discovery ↗</a>
-            </div>
+    <div class="content-layer">
+        <!-- Top Crosshair Bar (Lusion Signature) -->
+        <div class="crosshair-bar">
+            <span class="crosshair-symbol">+</span>
+            <span class="crosshair-symbol">+</span>
+            <span>AIR-GAPPED BEHAVIOURAL COMPUTATION</span>
+            <span class="crosshair-symbol">+</span>
+            <span class="crosshair-symbol">+</span>
         </div>
-    </header>
 
-    <main>
-        <section class="hero-section container">
-            <div class="hero-ticker-tag">
-                <span>01 // SYSTEM RUNNING</span>
-                <span class="highlight">AIR-GAPPED NEURAL TELEMETRY</span>
-                <span>UK SOVEREIGN</span>
-            </div>
+        <header class="container">
+            <nav class="lusion-navbar">
+                <a href="#" class="brand-wordmark hover-target">
+                    <!-- Authentic Decisivo Branching Vector Mark -->
+                    <svg class="brand-vector-symbol" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="lusionBlueGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#2d48e8" />
+                                <stop offset="60%" stop-color="#00d2eb" />
+                                <stop offset="100%" stop-color="#38bdf8" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 40 86 C 40 68, 32 54, 18 52" stroke="url(#lusionBlueGrad)" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M 46 86 C 46 64, 38 43, 23 39" stroke="url(#lusionBlueGrad)" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M 52 86 C 52 58, 48 34, 30 28" stroke="url(#lusionBlueGrad)" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M 58 86 C 58 56, 68 40, 84 38" stroke="url(#lusionBlueGrad)" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M 72 26 L 87 38 L 74 50" fill="none" stroke="#2d48e8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>decisivo</span>
+                </a>
 
-            <h1 class="hero-monument-title">
-                INSTINCT UNDER FIRE.<br>
-                ENGINEERED TO BE <span class="glow-word">DEFENSIBLE</span>.
-            </h1>
+                <div class="nav-right-cluster">
+                    <a href="mailto:founder@decisivo.co.uk" class="nav-pill-btn hover-target">LET'S TALK ↗</a>
+                    <a href="#simulator" class="nav-circle-btn hover-target" title="Menu">• •</a>
+                </div>
+            </nav>
+        </header>
 
-            <p class="hero-description">
-                Multiple-choice compliance training fails under tribunal cross-examination. Decisivo builds high-fidelity 5-branch behavioural simulations that hard-wire frontline composure when hostile confrontations ignite.
-            </p>
+        <main>
+            <section class="container hero-section">
+                <h1 class="hero-monumental-title">
+                    Instinct Under Fire,<br>
+                    Engineered to be <span class="gradient-word">Defensible</span>.
+                </h1>
 
-            <div class="hero-cta-group">
-                <a href="#telemetry" class="btn-kinetic-primary hover-target">Launch Console ✦</a>
-                <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-secondary hover-target">Commission Pilot (£6.5k) ↗</a>
-            </div>
+                <div class="hero-editorial-row">
+                    <p class="hero-description">
+                        Multiple-choice compliance training collapses under regulatory audits and tribunal cross-examinations. We engineer 5-tier branching behavioural simulations that build real physiological composure when hostile confrontations ignite.
+                    </p>
 
-            <!-- Kinetic Ident Theatre Showcase with Interactive Plasma Reactor -->
-            <div class="theatre-wrapper">
-                <div class="theatre-container">
-                    <div class="theatre-controls">
-                        <!-- Mode Switch: Live Plasma Simulation vs Video Ident -->
-                        <div class="theatre-mode-switch">
-                            <button id="btn-mode-interactive" class="theatre-mode-btn active hover-target" onclick="switchTheatreMode('interactive')">
-                                ⚡ REACTOR
-                            </button>
-                            <button id="btn-mode-video" class="theatre-mode-btn hover-target" onclick="switchTheatreMode('video')">
-                                🎬 VIDEO
-                            </button>
+                    <div class="hero-side-meta">
+                        <div class="lusion-badge-chip">
+                            <span class="chip-dot-blue"></span>
+                            <span>• OUR APPROACH</span>
                         </div>
+                        <div class="spec-checklist">
+                            <span>01 // ARCHITECTURE: <strong>Air-Gapped Neural Audio</strong></span>
+                            <span>02 // COMMERCIALS: <strong>Build, Own, Transfer (£0 SaaS)</strong></span>
+                            <span>03 // TELEMETRY: <strong>SCORM &amp; xAPI Native Integration</strong></span>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Audio Synthesizer Toggle -->
-                        <button id="sfx-toggle-btn" class="theatre-btn hover-target" onclick="toggleReactorAudio()">
+                <!-- Warped Kinetic Ident Theatre (Dual Mode: Live Plasma Reactor vs Video Ident) -->
+                <div class="showreel-theatre-card">
+                    <div class="theatre-nav-controls">
+                        <button id="btn-mode-interactive" class="theatre-mode-btn active hover-target" onclick="setTheatreMode('interactive')">
+                            ⚡ REACTOR
+                        </button>
+                        <button id="btn-mode-video" class="theatre-mode-btn hover-target" onclick="setTheatreMode('video')">
+                            🎬 VIDEO
+                        </button>
+                        <button id="btn-sfx-toggle" class="theatre-mode-btn hover-target" onclick="toggleAudioSFX()">
                             <span id="sfx-icon">🔇</span> SFX OFF
                         </button>
-
-                        <!-- Replay Ident Button -->
-                        <button id="video-replay-btn" class="theatre-btn hover-target" style="display: none;" onclick="replayIdentVideo()">
-                            <span>↻</span> REPLAY
-                        </button>
                     </div>
 
-                    <!-- Mode A: Real-Time Interactive Canvas Plasma Reactor -->
-                    <div id="interactive-logo-container">
-                        <canvas id="interactive-logo-canvas"></canvas>
-                    </div>
-
-                    <!-- Mode B: Video Ident Player -->
-                    <div id="video-ident-container">
-                        <video id="ident-video" muted playsinline preload="auto">
-                            <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="lusion-marquee-wrap">
-            <div class="marquee-track">
-                <div class="marquee-item"><span class="marquee-dot"></span> AVIATION &amp; PASSENGER HOSTILITY</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> FRONTLINE CLINICAL TRIAGE ESCALATION</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> SOCIAL HOUSING STATUTORY DISPUTE RECOVERY</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> REGULATED FINANCIAL CONDUCT DEFENSE</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> RAIL OPERATIONS &amp; CROWD DE-ESCALATION</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> SECURE ENVIRONMENT SAFEGUARDING</div>
-                <!-- Duplicate for continuous scroll loop -->
-                <div class="marquee-item"><span class="marquee-dot"></span> AVIATION &amp; PASSENGER HOSTILITY</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> FRONTLINE CLINICAL TRIAGE ESCALATION</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> SOCIAL HOUSING STATUTORY DISPUTE RECOVERY</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> REGULATED FINANCIAL CONDUCT DEFENSE</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> RAIL OPERATIONS &amp; CROWD DE-ESCALATION</div>
-                <div class="marquee-item"><span class="marquee-dot"></span> SECURE ENVIRONMENT SAFEGUARDING</div>
-            </div>
-        </section>
-
-        <section class="container" id="standard">
-            <div class="section-header">
-                <div class="section-eyebrow">
-                    <span>✦</span> 01 / MATHEMATICAL INTEGRITY
-                </div>
-                <h2 class="section-title">Two options is a guess.<br>Five options is competence.</h2>
-                <p class="section-desc">
-                    Elimination quizzes teach frontline staff how to guess corporate intentions. Decisivo measures instinctive reflexes under pressure.
-                </p>
-            </div>
-
-            <div class="spotlight-grid">
-                <!-- Card 1: 50% Guess Loophole (Span 8) -->
-                <div class="spotlight-card col-span-8">
-                    <div>
-                        <div class="card-num">// 01.1 PROBABILITY COLLAPSE</div>
-                        <h3 class="card-heading">Eliminating The 50% Guessing Loophole</h3>
-                        <p class="card-text">
-                            In conventional e-learning, trainees toggle between a robotic corporate policy statement and an absurd caricature. When tribunals or regulatory ombudsmen examine incident logs, these pass rates fail to prove 'All Reasonable Steps'. Decisivo compounds 5 realistic reflexes across each node.
-                        </p>
-                    </div>
-
-                    <div class="metric-comparison">
-                        <div class="metric-box fault">
-                            <div class="metric-label" style="color: var(--electric-rose);">Status Quo Pass Rate</div>
-                            <div class="metric-val" style="color: var(--electric-rose);">50.0%</div>
-                            <div class="metric-sub">Pure elimination guess. Zero muscle memory under physical hostility.</div>
+                    <div class="theatre-media-box">
+                        <!-- Mode A: Real-Time Interactive Canvas Plasma Reactor -->
+                        <div id="interactive-plasma-wrap" style="width: 100%; height: 540px; position: relative;">
+                            <canvas id="interactive-logo-canvas"></canvas>
                         </div>
-                        <div class="metric-box success">
-                            <div class="metric-label" style="color: var(--electric-cyan);">Decisivo Matrix Odds</div>
-                            <div class="metric-val" style="color: var(--electric-cyan);">&lt; 0.8%</div>
-                            <div class="metric-sub">Compounding 5-way decision tree. Statistically defensible in court.</div>
+
+                        <!-- Mode B: Video Ident Player -->
+                        <div id="video-player-wrap" style="width: 100%; display: none;">
+                            <video id="ident-video" muted playsinline preload="auto">
+                                <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
+                            </video>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Card 2: Air-Gapped Neural Audio (Span 4) -->
-                <div class="spotlight-card col-span-4" id="architecture">
-                    <div>
-                        <div class="card-num">// 01.2 SOVEREIGN PRIVACY</div>
-                        <h3 class="card-heading">Air-Gapped Synthesis</h3>
-                        <p class="card-text">
-                            Zero incident transcripts, whistleblowing records, or sensitive patient disputes touch public cloud APIs. Voice models run locally on air-gapped workstations in the UK.
-                        </p>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--electric-emerald); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
-                        ● NHS &amp; Defense Custody Compliant
-                    </div>
-                </div>
-
-                <!-- Card 3: Build, Own, Transfer (Span 6) -->
-                <div class="spotlight-card col-span-6">
-                    <div>
-                        <div class="card-num">// 01.3 ZERO SAAS TAX</div>
-                        <h3 class="card-heading">Build, Own, Transfer</h3>
-                        <p class="card-text">
-                            Stop paying monthly recurring seat licenses for your own operational knowledge. Fixed engineering fee, full asset transfer, and direct SCORM/xAPI deployment into Workday, Cornerstone, or Totara.
-                        </p>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #ffffff; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
-                        PILOT SCOPE // <span style="color: var(--electric-cyan);">£6,500 – £9,500 FIXED</span>
-                    </div>
-                </div>
-
-                <!-- Card 4: Enhanced DBS Founder (Span 6) -->
-                <div class="spotlight-card col-span-6">
-                    <div>
-                        <div class="card-num">// 01.4 SAFEGUARDING PROTOCOL</div>
-                        <h3 class="card-heading">Enhanced DBS Cleared Founder</h3>
-                        <p class="card-text">
-                            Discovery sprints led directly by an enterprise-vetted founder with an active Enhanced DBS certificate on the Update Service. Zero safeguarding friction when accessing secure wards, airside zones, or youth facilities.
-                        </p>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--electric-cyan); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
-                        STATUS // <span style="color: #ffffff;">Active Update Service Registered</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container" id="telemetry">
-            <div class="section-header">
-                <div class="section-eyebrow">
-                    <span>✦</span> 02 / INTERACTIVE DIAGNOSTIC PROOF
-                </div>
-                <h2 class="section-title">The Behavioural Telemetry Console</h2>
-                <p class="section-desc">
-                    Interact with an authentic frontline conflict flashpoint. Select an instinctive reflex to inspect real-time legal liability, escalation vectors, and xAPI audit telemetry.
-                </p>
+            <!-- Lusion Horizontal Divider Band -->
+            <div class="lusion-divider-band">
+                <span>+ AVIATION &amp; PASSENGER HOSTILITY</span>
+                <span>+ FRONTLINE CLINICAL TRIAGE</span>
+                <span>+ SOCIAL HOUSING BOUNDARY RECOVERY</span>
+                <span>+ REGULATED FINANCIAL CONDUCT</span>
+                <span>+</span>
             </div>
 
-            <div class="lab-console-shell">
-                <!-- Left Control Panel -->
-                <div class="console-panel-left">
-                    <div>
-                        <div class="console-hud-bar">
-                            <span class="hud-tag">Scenario Node // Flashpoint 04</span>
-                            <span class="hud-meter">Guess Odds: 20.0%</span>
+            <section class="container" id="standards">
+                <div class="section-header-row">
+                    <h2 class="section-big-title">The Standard</h2>
+                    <p class="section-side-kicker">
+                        A SELECTION OF MATHEMATICAL TELEMETRY ENGINES CREATED FOR HIGH-LIABILITY OPERATIONS.
+                    </p>
+                </div>
+
+                <div class="work-bento-grid">
+                    <!-- Bento Card 1: 50/50 Guess Fallacy -->
+                    <div class="work-card">
+                        <div>
+                            <span class="card-category-tag">STATISTICAL INTEGRITY // 01.1</span>
+                            <h3 class="card-main-heading">Eliminating The 50% Guessing Loophole</h3>
+                            <p class="card-copy-text">
+                                Conventional compliance e-learning pits an obvious corporate line against an absurd cartoon error. Staff guess correctly by elimination on mute, proving zero muscle memory when facing an aggressive public confrontation.
+                            </p>
+                        </div>
+                        <div class="card-bottom-bar">
+                            <span>Status Quo Pass Rate</span>
+                            <span class="metric-strong" style="color: var(--electric-rose);">50.0% (Guess)</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento Card 2: 5-Branch Decisivo Standard -->
+                    <div class="work-card featured">
+                        <div>
+                            <span class="card-category-tag" style="color: var(--lusion-blue);">MATHEMATICAL MATRIX // 01.2</span>
+                            <h3 class="card-main-heading">5-Way Compounding Reflexes</h3>
+                            <p class="card-copy-text">
+                                Decisivo branches every flashpoint across 5 realistic human reflexes (stone-walling, unlawful appeasement, retaliation, panic, or defensible de-escalation). Odds of guessing drop below 0.8%, generating indisputable audit proof in court.
+                            </p>
+                        </div>
+                        <div class="card-bottom-bar">
+                            <span>Decisivo Matrix Odds</span>
+                            <span class="metric-strong" style="color: var(--lusion-blue);">&lt; 0.8% Competence</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento Card 3: Air-Gapped Sovereign Audio -->
+                    <div class="work-card">
+                        <div>
+                            <span class="card-category-tag">DATA PRIVACY // 01.3</span>
+                            <h3 class="card-main-heading">Air-Gapped Synthesis</h3>
+                            <p class="card-copy-text">
+                                Zero confidential incident transcripts, whistleblowing records, or sensitive patient disputes leave the UK or touch public cloud APIs. Voice models execute locally on sovereign air-gapped workstations.
+                            </p>
+                        </div>
+                        <div class="card-bottom-bar">
+                            <span>NHS &amp; Defense Custody</span>
+                            <span class="metric-strong" style="color: var(--electric-emerald);">100% Air-Gapped</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento Card 4: Build, Own, Transfer -->
+                    <div class="work-card">
+                        <div>
+                            <span class="card-category-tag">COMMERCIALS // 01.4</span>
+                            <h3 class="card-main-heading">Build, Own, Transfer</h3>
+                            <p class="card-copy-text">
+                                Stop paying ongoing monthly seat taxes for your own internal operational knowledge. Fixed engineering fee (£6,500 – £9,500), complete asset handover, and direct native SCORM/xAPI deployment.
+                            </p>
+                        </div>
+                        <div class="card-bottom-bar">
+                            <span>Software License Tax</span>
+                            <span class="metric-strong" style="color: var(--ink-black);">£0 Recurring SaaS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container" id="simulator">
+                <div class="section-header-row">
+                    <h2 class="section-big-title">Proof in Action</h2>
+                    <p class="section-side-kicker">
+                        SELECT A STAFF RESPONSE TO INSPECT REAL-TIME AUDIT DIAGNOSTICS &amp; TRIBUNAL RISK.
+                    </p>
+                </div>
+
+                <div class="console-container-shell">
+                    <!-- Left: Dilemma & 5 Options -->
+                    <div class="console-stage-left">
+                        <div class="stage-hud-meta">
+                            <span class="hud-node-label">Frontline Node // Flashpoint 04</span>
+                            <span class="hud-odds-capsule">Guess Odds: 20.0%</span>
                         </div>
 
-                        <div class="scenario-headline">
+                        <div class="console-dilemma-title">
                             "A client aggressively slams the reception desk, shouting verbal obscenities and demanding an immediate, unverified boundary exception."
                         </div>
 
-                        <div class="option-stack-lusion">
-                            <button class="option-trigger active hover-target" onclick="handleOptionSelect(1, this)">
-                                <span><span class="option-num-lusion">01</span> "I hear how urgent this feels, but regulatory protocol requires verification. Let's sit and review the record together."</span>
+                        <div class="console-options-stack">
+                            <button class="option-button-row active hover-target" onclick="selectDiagnosticOption(1, this)">
+                                <span><span class="option-num-tag">01</span> "I hear how urgent this feels, but regulatory protocol requires verification. Let's sit and review the record together."</span>
                                 <span>→</span>
                             </button>
-                            <button class="option-trigger hover-target" onclick="handleOptionSelect(2, this)">
-                                <span><span class="option-num-lusion">02</span> "Company policy strictly forbids that. Step back into the waiting zone immediately or security will escort you out."</span>
+                            <button class="option-button-row hover-target" onclick="selectDiagnosticOption(2, this)">
+                                <span><span class="option-num-tag">02</span> "Company policy strictly forbids that. Step back into the waiting zone immediately or security will escort you out."</span>
                                 <span>→</span>
                             </button>
-                            <button class="option-trigger hover-target" onclick="handleOptionSelect(3, this)">
-                                <span><span class="option-num-lusion">03</span> "Fine, I will authorise it just this once if you promise to calm down and leave without causing more trouble."</span>
+                            <button class="option-button-row hover-target" onclick="selectDiagnosticOption(3, this)">
+                                <span><span class="option-num-tag">03</span> "Fine, I will authorise it just this once if you promise to calm down and leave without causing more trouble."</span>
                                 <span>→</span>
                             </button>
-                            <button class="option-trigger hover-target" onclick="handleOptionSelect(4, this)">
-                                <span><span class="option-num-lusion">04</span> "Do not take that tone with me. You have zero right to speak to frontline staff like that."</span>
+                            <button class="option-button-row hover-target" onclick="selectDiagnosticOption(4, this)">
+                                <span><span class="option-num-tag">04</span> "Do not take that tone with me. You have zero right to speak to frontline staff like that."</span>
                                 <span>→</span>
                             </button>
-                            <button class="option-trigger hover-target" onclick="handleOptionSelect(5, this)">
-                                <span><span class="option-num-lusion">05</span> (Silently hits the panic lockdown and calls emergency police dispatch without verbal de-escalation).</span>
+                            <button class="option-button-row hover-target" onclick="selectDiagnosticOption(5, this)">
+                                <span><span class="option-num-tag">05</span> (Silently hits the panic lockdown and calls emergency police dispatch without verbal de-escalation).</span>
                                 <span>→</span>
                             </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Right Telemetry Display with Audio Waveform -->
-                <div class="console-panel-right">
-                    <div>
-                        <div class="waveform-canvas-box">
-                            <canvas id="audio-wave-canvas"></canvas>
+                    <!-- Right: Diagnostic Output Card -->
+                    <div class="console-stage-right">
+                        <div>
+                            <div class="stage-hud-meta" style="border-color: rgba(255, 255, 255, 0.08);">
+                                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">
+                                    Audit Risk Diagnostic
+                                </span>
+                            </div>
+
+                            <div class="diagnostic-card-inner" id="telemetry-diagnostic-card">
+                                <!-- Populated dynamically by JS -->
+                            </div>
                         </div>
 
-                        <div class="telemetry-output-card" id="telemetry-card">
-                            <!-- Populated dynamically via JS -->
+                        <div class="console-footer-row">
+                            <span>xAPI KERNEL: ACTIVE</span>
+                            <span>DECISIVO SOVEREIGN ENGINE</span>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div class="telemetry-footer-bar">
-                        <span>xAPI PROTOCOL: ACTIVE</span>
-                        <span>DECISIVO TELEMETRY KERNEL</span>
+            <section class="container">
+                <div class="finale-bento">
+                    <div class="finale-hero-card">
+                        <div>
+                            <div class="lusion-badge-chip" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255, 255, 255, 0.2); margin-bottom: 24px;">
+                                <span class="chip-dot-blue"></span>
+                                <span>COMMERCIAL PILOT</span>
+                            </div>
+                            <h2 class="finale-headline">Ready to engineer frontline composure?</h2>
+                            <p style="color: #94a3b8; font-size: 1.15rem; line-height: 1.6; max-width: 580px; margin-bottom: 36px;">
+                                Replace elimination quizzes with mathematically defensible simulations. No per-user software subscriptions. Full asset handover. Direct LMS export.
+                            </p>
+                        </div>
+                        <a href="mailto:founder@decisivo.co.uk" class="btn-lusion-primary hover-target">Commission a Pilot ↗</a>
+                    </div>
+
+                    <div class="finale-side-card">
+                        <div>
+                            <div class="lusion-badge-chip" style="margin-bottom: 24px;">
+                                <span>ENHANCED DBS CERTIFIED</span>
+                            </div>
+                            <h3 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 16px; color: var(--ink-black);">
+                                Direct On-Site Discovery.
+                            </h3>
+                            <p style="color: var(--ink-secondary); font-size: 1.05rem; line-height: 1.6; margin-bottom: 36px;">
+                                Workshops led directly by an enterprise-vetted founder with an active Enhanced DBS certificate on the Update Service. Zero safeguarding procurement friction.
+                            </p>
+                        </div>
+                        <a href="mailto:founder@decisivo.co.uk" class="btn-lusion-outline hover-target">Book Discovery ↗</a>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <section class="container">
-            <div class="finale-hero-box">
-                <div class="hero-ticker-tag" style="margin-bottom: 20px;">
-                    <span>COMMERCIAL PILOT</span>
-                    <span class="highlight">£6,500 – £9,500 FIXED</span>
+        <footer class="container">
+            <div class="footer-flex-row">
+                <div>
+                    <strong style="color: var(--ink-black); letter-spacing: 0.08em;">DECISIVO</strong> &copy; 2026. High-Liability Frontline Behavioural Intelligence.
                 </div>
-                <h2 class="finale-title">Ready to engineer frontline composure?</h2>
-                <p class="finale-text">
-                    Replace elimination quizzes with mathematically defensible simulations. No per-user software subscriptions. Full asset handover. Direct LMS export.
-                </p>
-                <div class="hero-cta-group" style="margin-bottom: 0;">
-                    <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-primary hover-target">Commission a Pilot ↗</a>
-                    <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-secondary hover-target">Book On-Site Discovery ↗</a>
+                <div>
+                    Build, Own, Transfer // Air-Gapped Neural Audio // Enhanced DBS Cleared
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container footer-flex">
-            <div>
-                <span class="footer-logo-text">DECISIVO</span> &copy; 2026. High-Liability Frontline Behavioural Intelligence.
-            </div>
-            <div>
-                Build, Own, Transfer // Air-Gapped Neural Audio // Enhanced DBS Cleared
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
         /* -------------------------------------------------------------
-           1. THREE.JS INTERACTIVE NEURAL PARTICLES & BRANCHING LINES
+           1. THREE.JS 3D KINETIC BLUE RIBBON SIMULATION (LUSION STYLE)
            ------------------------------------------------------------- */
-        let scene, camera, renderer, particles, linesMesh;
-        let mouseX = 0, mouseY = 0;
-        let targetX = 0, targetY = 0;
-        const PARTICLE_COUNT = 90;
-        const particlePositions = new Float32Array(PARTICLE_COUNT * 3);
-        const particleVelocities = [];
+        let scene, camera, renderer, ribbonMesh;
+        let ribbonSplinePoints = [];
+        let mousePos = { x: 0, y: 0 };
+        let targetMouse = { x: 0, y: 0 };
+        let clock = new THREE.Clock();
 
-        function initWebGL() {
+        function initThreeRibbon() {
             const canvas = document.getElementById('webgl-canvas');
             if (!canvas) return;
 
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.z = 240;
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.set(0, 0, 160);
 
             renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Generate particles
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particlePositions[i * 3] = (Math.random() - 0.5) * 450;
-                particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 350;
-                particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 200;
-
-                particleVelocities.push({
-                    x: (Math.random() - 0.5) * 0.35,
-                    y: (Math.random() - 0.5) * 0.35,
-                    z: (Math.random() - 0.5) * 0.2
-                });
+            // Generate initial spline anchor nodes
+            const pointCount = 14;
+            for (let i = 0; i < pointCount; i++) {
+                const u = i / (pointCount - 1);
+                const x = (u - 0.5) * 260;
+                const y = Math.sin(u * Math.PI * 2.5) * 45;
+                const z = (Math.cos(u * Math.PI * 2) - 0.5) * 60;
+                ribbonSplinePoints.push(new THREE.Vector3(x, y, z));
             }
 
-            const particleGeometry = new THREE.BufferGeometry();
-            particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+            updateRibbonMesh(0);
 
-            const particleMaterial = new THREE.PointsMaterial({
-                color: 0x00f0ff,
-                size: 3.5,
-                transparent: true,
-                opacity: 0.75,
-                blending: THREE.AdditiveBlending
-            });
-
-            particles = new THREE.Points(particleGeometry, particleMaterial);
-            scene.add(particles);
-
-            const lineGeometry = new THREE.BufferGeometry();
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x00d2eb,
-                transparent: true,
-                opacity: 0.18,
-                blending: THREE.AdditiveBlending
-            });
-            linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-            scene.add(linesMesh);
-
-            window.addEventListener('resize', onWindowResize);
-            document.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('resize', onRibbonResize);
+            document.addEventListener('mousemove', onRibbonMouseMove);
         }
 
-        function onWindowResize() {
+        function updateRibbonMesh(time) {
+            // Remove previous tube
+            if (ribbonMesh) {
+                scene.remove(ribbonMesh);
+                ribbonMesh.geometry.dispose();
+            }
+
+            // Animate points dynamically with sinusoidal fluid motion
+            const dynamicPoints = ribbonSplinePoints.map((pt, i) => {
+                const waveOffset = i * 0.45;
+                const animY = pt.y + Math.sin(time * 1.8 + waveOffset) * 16 + targetMouse.y * (i * 1.8);
+                const animZ = pt.z + Math.cos(time * 1.4 + waveOffset) * 18;
+                const animX = pt.x + Math.sin(time * 0.8 + waveOffset) * 8 + targetMouse.x * (i * 1.2);
+                return new THREE.Vector3(animX, animY, animZ);
+            });
+
+            const curve = new THREE.CatmullRomCurve3(dynamicPoints);
+            const tubeGeom = new THREE.TubeGeometry(curve, 100, 3.8, 12, false);
+
+            const ribbonMat = new THREE.MeshBasicMaterial({
+                color: 0x2d48e8, // Lusion Electric Cobalt Blue
+                wireframe: false,
+                transparent: true,
+                opacity: 0.88
+            });
+
+            ribbonMesh = new THREE.Mesh(tubeGeom, ribbonMat);
+            scene.add(ribbonMesh);
+        }
+
+        function onRibbonResize() {
             if (!camera || !renderer) return;
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
-        function onMouseMove(event) {
-            mouseX = (event.clientX - window.innerWidth / 2) * 0.08;
-            mouseY = (event.clientY - window.innerHeight / 2) * 0.08;
+        function onRibbonMouseMove(e) {
+            mousePos.x = (e.clientX / window.innerWidth - 0.5) * 15;
+            mousePos.y = -(e.clientY / window.innerHeight - 0.5) * 15;
         }
 
-        function animateWebGL() {
-            requestAnimationFrame(animateWebGL);
+        function animateRibbon() {
+            requestAnimationFrame(animateRibbon);
 
-            targetX += (mouseX - targetX) * 0.05;
-            targetY += (mouseY - targetY) * 0.05;
+            const delta = clock.getElapsedTime();
+            targetMouse.x += (mousePos.x - targetMouse.x) * 0.05;
+            targetMouse.y += (mousePos.y - targetMouse.y) * 0.05;
 
-            if (camera) {
-                camera.position.x = targetX;
-                camera.position.y = -targetY;
-                camera.lookAt(scene.position);
+            updateRibbonMesh(delta);
+
+            if (renderer && scene && camera) {
+                renderer.render(scene, camera);
             }
-
-            const positions = particles.geometry.attributes.position.array;
-            const linePositions = [];
-
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                positions[i * 3] += particleVelocities[i].x;
-                positions[i * 3 + 1] += particleVelocities[i].y;
-                positions[i * 3 + 2] += particleVelocities[i].z;
-
-                if (Math.abs(positions[i * 3]) > 250) particleVelocities[i].x *= -1;
-                if (Math.abs(positions[i * 3 + 1]) > 200) particleVelocities[i].y *= -1;
-                if (Math.abs(positions[i * 3 + 2]) > 120) particleVelocities[i].z *= -1;
-
-                for (let j = i + 1; j < PARTICLE_COUNT; j++) {
-                    const dx = positions[i * 3] - positions[j * 3];
-                    const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
-                    const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (dist < 75) {
-                        linePositions.push(
-                            positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
-                            positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
-                        );
-                    }
-                }
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-            linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-            renderer.render(scene, camera);
         }
 
         /* -------------------------------------------------------------
-           2. KINETIC LUSION CURSOR TRACKER
+           2. KINETIC CURSOR TRACKER
            ------------------------------------------------------------- */
         const cursorDot = document.getElementById('cursor-dot');
-        const cursorTrail = document.getElementById('cursor-trail');
-        let cursorX = window.innerWidth / 2;
-        let cursorY = window.innerHeight / 2;
-        let trailX = cursorX;
-        let trailY = cursorY;
+        let curX = window.innerWidth / 2, curY = window.innerHeight / 2;
+        let smoothX = curX, smoothY = curY;
 
         document.addEventListener('mousemove', (e) => {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-
-            if (cursorDot) {
-                cursorDot.style.left = `${cursorX}px`;
-                cursorDot.style.top = `${cursorY}px`;
-            }
-
-            document.querySelectorAll('.spotlight-card').forEach((card) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
+            curX = e.clientX;
+            curY = e.clientY;
         });
 
-        function animateCursorTrail() {
-            trailX += (cursorX - trailX) * 0.18;
-            trailY += (cursorY - trailY) * 0.18;
-
-            if (cursorTrail) {
-                cursorTrail.style.left = `${trailX}px`;
-                cursorTrail.style.top = `${trailY}px`;
+        function renderCursor() {
+            smoothX += (curX - smoothX) * 0.25;
+            smoothY += (curY - smoothY) * 0.25;
+            if (cursorDot) {
+                cursorDot.style.left = `${smoothX}px`;
+                cursorDot.style.top = `${smoothY}px`;
             }
-            requestAnimationFrame(animateCursorTrail);
+            requestAnimationFrame(renderCursor);
         }
-        animateCursorTrail();
+        renderCursor();
 
         document.querySelectorAll('.hover-target, button, a').forEach((el) => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
@@ -1479,38 +1223,7 @@
         });
 
         /* -------------------------------------------------------------
-           3. SIMULATED AUDIO WAVEFORM VISUALIZER
-           ------------------------------------------------------------- */
-        const waveCanvas = document.getElementById('audio-wave-canvas');
-        const waveCtx = waveCanvas ? waveCanvas.getContext('2d') : null;
-        let wavePhase = 0;
-
-        function drawWave() {
-            if (!waveCanvas || !waveCtx) return;
-            const w = waveCanvas.width = waveCanvas.offsetWidth;
-            const h = waveCanvas.height = waveCanvas.offsetHeight;
-
-            waveCtx.clearRect(0, 0, w, h);
-            waveCtx.lineWidth = 2;
-            waveCtx.strokeStyle = '#00f0ff';
-            waveCtx.shadowColor = '#00f0ff';
-            waveCtx.shadowBlur = 10;
-
-            waveCtx.beginPath();
-            for (let x = 0; x < w; x++) {
-                const angle = (x / w) * Math.PI * 4 + wavePhase;
-                const y = (h / 2) + Math.sin(angle) * (h * 0.28) * Math.sin(angle * 0.5);
-                if (x === 0) waveCtx.moveTo(x, y);
-                else waveCtx.lineTo(x, y);
-            }
-            waveCtx.stroke();
-            wavePhase += 0.05;
-            requestAnimationFrame(drawWave);
-        }
-        drawWave();
-
-        /* -------------------------------------------------------------
-           4. REAL-TIME INTERACTIVE PLASMA REACTOR CANVAS & SOUND SYNTH
+           3. REAL-TIME INTERACTIVE PLASMA REACTOR CANVAS (NO WATERMARKS)
            ------------------------------------------------------------- */
         const reactorCanvas = document.getElementById('interactive-logo-canvas');
         const reactorCtx = reactorCanvas ? reactorCanvas.getContext('2d') : null;
@@ -1532,39 +1245,37 @@
             }
         }
 
-        function toggleReactorAudio() {
+        function toggleAudioSFX() {
             audioEnabled = !audioEnabled;
             if (audioEnabled) {
                 initReactorAudio();
-                playElectricDischargeSound(520, 0.15);
+                playElectricSound(540, 0.15);
             }
-            const btn = document.getElementById('sfx-toggle-btn');
+            const btn = document.getElementById('btn-sfx-toggle');
             const icon = document.getElementById('sfx-icon');
             if (btn && icon) {
-                icon.textContent = audioEnabled ? '🔊' : '🔇';
                 btn.innerHTML = `<span id="sfx-icon">${audioEnabled ? '🔊' : '🔇'}</span> ${audioEnabled ? 'SFX ON' : 'SFX OFF'}`;
             }
         }
 
-        function playElectricDischargeSound(freq = 440, duration = 0.2) {
+        function playElectricSound(freq = 480, duration = 0.2) {
             if (!audioEnabled || !audioCtx) return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + duration);
+                osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + duration);
 
                 gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-
                 osc.start();
                 osc.stop(audioCtx.currentTime + duration);
             } catch (e) {
-                // Audio safely muted
+                // Silently fallback if muted
             }
         }
 
@@ -1588,10 +1299,9 @@
                 const clickY = (e.clientY - rect.top) * (reactorCanvas.height / rect.height);
 
                 dischargeWave = 1.0;
-                playElectricDischargeSound(680, 0.35);
+                playElectricSound(720, 0.35);
 
-                // Spawn kinetic electric sparks
-                for (let i = 0; i < 45; i++) {
+                for (let i = 0; i < 40; i++) {
                     const angle = Math.random() * Math.PI * 2;
                     const speed = 2 + Math.random() * 8;
                     sparkParticles.push({
@@ -1623,29 +1333,28 @@
             reactorCtx.stroke();
         }
 
-        let reactorTime = 0;
-        function renderReactor() {
+        let reactorTimer = 0;
+        function renderPlasmaReactor() {
             if (!reactorCanvas || !reactorCtx) return;
 
             const w = reactorCanvas.width = reactorCanvas.parentElement.offsetWidth || 1080;
-            const h = reactorCanvas.height = reactorCanvas.parentElement.offsetHeight || 520;
-            reactorTime += 0.04;
+            const h = reactorCanvas.height = reactorCanvas.parentElement.offsetHeight || 540;
+            reactorTimer += 0.04;
 
             reactorCtx.clearRect(0, 0, w, h);
 
-            // Center geometry anchor
             const cx = w / 2;
-            const cy = h / 2 - 15;
-            const scale = Math.min(w / 750, 1.15);
+            const cy = h / 2 - 18;
+            const scale = Math.min(w / 780, 1.15);
 
             // Ambient background glow
             const radGrad = reactorCtx.createRadialGradient(cx, cy, 10, cx, cy, 280 * scale);
-            radGrad.addColorStop(0, `rgba(0, 240, 255, ${0.12 + Math.sin(reactorTime * 3) * 0.04 + dischargeWave * 0.2})`);
+            radGrad.addColorStop(0, `rgba(45, 72, 232, ${0.14 + Math.sin(reactorTimer * 3) * 0.04 + dischargeWave * 0.25})`);
             radGrad.addColorStop(1, 'rgba(0,0,0,0)');
             reactorCtx.fillStyle = radGrad;
             reactorCtx.fillRect(0, 0, w, h);
 
-            // Branch arcs coordinates
+            // Branch arcs
             const branches = [
                 { start: { x: cx - 24 * scale, y: cy + 90 * scale }, ctrl1: { x: cx - 24 * scale, y: cy + 45 * scale }, ctrl2: { x: cx - 45 * scale, y: cy + 10 * scale }, end: { x: cx - 78 * scale, y: cy + 5 * scale } },
                 { start: { x: cx - 10 * scale, y: cy + 90 * scale }, ctrl1: { x: cx - 10 * scale, y: cy + 35 * scale }, ctrl2: { x: cx - 30 * scale, y: cy - 18 * scale }, end: { x: cx - 68 * scale, y: cy - 25 * scale } },
@@ -1655,7 +1364,6 @@
 
             const arrowTip = { x: cx + 82 * scale, y: cy - 26 * scale };
 
-            // Render base glowing branches
             branches.forEach((b, idx) => {
                 reactorCtx.beginPath();
                 reactorCtx.moveTo(b.start.x, b.start.y);
@@ -1681,20 +1389,19 @@
             reactorCtx.lineJoin = 'round';
             reactorCtx.stroke();
 
-            // Continuous procedural lightning arcing across branches
-            const crawlT = (Math.sin(reactorTime * 4) + 1) / 2;
+            // Continuous lightning bolt along branches
+            const crawlT = (Math.sin(reactorTimer * 4) + 1) / 2;
             const b = branches[3];
             const pX = (1 - crawlT) * b.start.x + crawlT * arrowTip.x;
             const pY = (1 - crawlT) * b.start.y + crawlT * arrowTip.y;
-
             drawLightningBolt(pX - 10, pY + 5, pX + 15, pY - 8, 12, '#ffffff', 1.8);
 
-            // Cursor magnetic attraction lightning
+            // Cursor magnetic attraction
             if (isHoveringReactor && reactorMouseX > 0) {
                 const distToArrow = Math.hypot(reactorMouseX - arrowTip.x, reactorMouseY - arrowTip.y);
                 if (distToArrow < 350) {
-                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 28, '#00f0ff', 2.5);
-                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 15, '#ffffff', 1.2);
+                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 26, '#00f0ff', 2.4);
+                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 14, '#ffffff', 1.2);
 
                     reactorCtx.beginPath();
                     reactorCtx.arc(reactorMouseX, reactorMouseY, 6, 0, Math.PI * 2);
@@ -1705,7 +1412,7 @@
                 }
             }
 
-            // Wordmark Typography inside Reactor Canvas
+            // Wordmark Typography inside canvas
             reactorCtx.font = `800 ${44 * scale}px 'Syne', sans-serif`;
             reactorCtx.fillStyle = '#ffffff';
             reactorCtx.textAlign = 'center';
@@ -1720,7 +1427,7 @@
             reactorCtx.shadowBlur = 8;
             reactorCtx.fillText('LOGICAL • BEHAVIOURAL SIMULATIONS', cx, cy + 176 * scale);
 
-            // Update & render kinetic spark particles
+            // Spark particles
             for (let i = sparkParticles.length - 1; i >= 0; i--) {
                 const p = sparkParticles[i];
                 p.x += p.vx;
@@ -1746,37 +1453,30 @@
                 dischargeWave = Math.max(0, dischargeWave - 0.03);
             }
 
-            requestAnimationFrame(renderReactor);
+            requestAnimationFrame(renderPlasmaReactor);
         }
-        renderReactor();
 
         /* -------------------------------------------------------------
-           5. THEATRE MODE SWITCHING (REACTOR VS IDENT VIDEO)
+           4. THEATRE MODE CONTROLLER
            ------------------------------------------------------------- */
-        function switchTheatreMode(mode) {
+        function setTheatreMode(mode) {
             const btnInteractive = document.getElementById('btn-mode-interactive');
             const btnVideo = document.getElementById('btn-mode-video');
-            const interactiveContainer = document.getElementById('interactive-logo-container');
-            const videoContainer = document.getElementById('video-ident-container');
-            const replayBtn = document.getElementById('video-replay-btn');
-            const sfxBtn = document.getElementById('sfx-toggle-btn');
+            const plasmaWrap = document.getElementById('interactive-plasma-wrap');
+            const videoWrap = document.getElementById('video-player-wrap');
             const videoEl = document.getElementById('ident-video');
 
             if (mode === 'interactive') {
                 btnInteractive.classList.add('active');
                 btnVideo.classList.remove('active');
-                interactiveContainer.style.display = 'flex';
-                videoContainer.style.display = 'none';
-                replayBtn.style.display = 'none';
-                sfxBtn.style.display = 'inline-flex';
+                plasmaWrap.style.display = 'block';
+                videoWrap.style.display = 'none';
                 if (videoEl) videoEl.pause();
             } else {
                 btnInteractive.classList.remove('active');
                 btnVideo.classList.add('active');
-                interactiveContainer.style.display = 'none';
-                videoContainer.style.display = 'block';
-                replayBtn.style.display = 'inline-flex';
-                sfxBtn.style.display = 'none';
+                plasmaWrap.style.display = 'none';
+                videoWrap.style.display = 'block';
                 if (videoEl) {
                     videoEl.currentTime = 0;
                     videoEl.play();
@@ -1784,82 +1484,76 @@
             }
         }
 
-        function replayIdentVideo() {
-            const vid = document.getElementById('ident-video');
-            if (vid) {
-                vid.currentTime = 0;
-                vid.play();
-            }
-        }
-
         /* -------------------------------------------------------------
-           6. BEHAVIOURAL TELEMETRY KERNEL
+           5. BEHAVIOURAL TELEMETRY DATABASE & LOGIC
            ------------------------------------------------------------- */
-        const telemetryDb = {
+        const telemetryData = {
             1: {
                 flag: "DEFENSIBLE TARGET",
-                flagClass: "tag-defensible",
+                flagClass: "pill-defensible",
                 headline: "De-escalates Agitation While Guarding Statutory Boundary",
                 body: "Establishes human rapport without yielding to unlawful procedural demands. In regulatory inspections or tribunal hearings, this satisfies 'All Reasonable Steps' requirements, fully shielding the enterprise."
             },
             2: {
                 flag: "LIABILITY TRAP",
-                flagClass: "tag-liability",
+                flagClass: "pill-liability",
                 headline: "The Bureaucratic Stone-Wall",
                 body: "100% technically correct on paper, but delivered with rigid confrontation. Operational reviews demonstrate this response pattern triggers frontline verbal and physical escalation in over 70% of recorded incidents."
             },
             3: {
                 flag: "STATUTORY BREACH",
-                flagClass: "tag-liability",
+                flagClass: "pill-liability",
                 headline: "Unlawful Appeasement Under Pressure",
                 body: "Sacrifices regulatory safety protocol to avoid an immediate argument. Exposes the organization and individual staff to immediate regulatory sanctions and gross negligence liability."
             },
             4: {
                 flag: "ESCALATION FAULT",
-                flagClass: "tag-liability",
+                flagClass: "pill-liability",
                 headline: "Defensive Confrontation Trap",
                 body: "An instinctive emotional reaction that exacerbates hostility. Directly fuels formal ombudsman complaints, disciplinary grievances, and staff distress."
             },
             5: {
                 flag: "OPERATIONAL DRAIN",
-                flagClass: "tag-liability",
+                flagClass: "pill-liability",
                 headline: "Premature Panic Dispatch",
                 body: "Triggering emergency lockdown or police dispatch without attempting mandatory verbal de-escalation protocols diverts critical frontline resources and inflames public tension."
             }
         };
 
-        function handleOptionSelect(id, buttonEl) {
-            document.querySelectorAll('.option-trigger').forEach(b => b.classList.remove('active'));
-            if (buttonEl) buttonEl.classList.add('active');
+        function selectDiagnosticOption(id, btn) {
+            document.querySelectorAll('.option-button-row').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
 
-            const item = telemetryDb[id];
-            const card = document.getElementById('telemetry-card');
+            const item = telemetryData[id];
+            const card = document.getElementById('telemetry-diagnostic-card');
             if (!card || !item) return;
 
             card.innerHTML = `
-                <div class="verdict-tag-pill ${item.flagClass}">
+                <div class="diagnostic-pill ${item.flagClass}">
                     ● ${item.flag}
                 </div>
                 <div>
-                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px;">
                         Observed Staff Reflex
                     </div>
-                    <div class="verdict-header-title">${item.headline}</div>
+                    <div class="diagnostic-headline">${item.headline}</div>
                 </div>
                 <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 16px;">
-                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                    <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px;">
                         Tribunal &amp; Audit Risk Diagnostic
                     </div>
-                    <div class="verdict-legal-desc">${item.body}</div>
+                    <div class="diagnostic-body-text">${item.body}</div>
                 </div>
             `;
         }
 
         window.onload = function() {
-            initWebGL();
-            animateWebGL();
-            const firstOpt = document.querySelector('.option-trigger');
-            if (firstOpt) handleOptionSelect(1, firstOpt);
+            initThreeRibbon();
+            animateRibbon();
+            renderPlasmaReactor();
+
+            const firstOpt = document.querySelector('.option-button-row');
+            if (firstOpt) selectDiagnosticOption(1, firstOpt);
         };
     </script>
 </body>
