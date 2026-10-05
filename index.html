@@ -6,10 +6,10 @@
     <title>DECISIVO — High-Fidelity Behavioural Simulations</title>
     <meta name="description" content="Audit-defensible 5-tier frontline behavioural simulations. Inspired by Lusion kinetic design on architectural concrete.">
 
-    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono -->
+    <!-- Fonts: Inter & Plus Jakarta Sans & JetBrains Mono (matching Lusion's clean Swiss grotesque) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Three.js for 3D Kinetic Ribbon and Particle Simulation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -40,8 +40,9 @@
             --card-glass: rgba(255, 255, 255, 0.72);
             --card-border: rgba(255, 255, 255, 0.85);
 
-            --font-display: 'Syne', sans-serif;
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            /* Clean Swiss Neo-Grotesque matching "Bold Ideas," */
+            --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+            --font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -239,16 +240,18 @@
 
         .hero-monumental-title {
             font-family: var(--font-display);
-            font-size: clamp(3.2rem, 8.2vw, 7.8rem);
-            font-weight: 800;
-            line-height: 0.94;
-            letter-spacing: -0.05em;
+            font-size: clamp(3rem, 7.8vw, 7.2rem);
+            font-weight: 500;
+            line-height: 1.02;
+            letter-spacing: -0.035em;
             color: var(--ink-black);
             margin-bottom: 50px;
             max-width: 1280px;
         }
 
+        .hero-monumental-title strong,
         .hero-monumental-title .gradient-word {
+            font-weight: 600;
             color: var(--lusion-blue);
             font-style: normal;
         }
@@ -419,10 +422,10 @@
         .section-big-title {
             font-family: var(--font-display);
             font-size: clamp(2.4rem, 4.8vw, 4.4rem);
-            font-weight: 800;
-            letter-spacing: -0.04em;
+            font-weight: 600;
+            letter-spacing: -0.03em;
             color: var(--ink-black);
-            line-height: 1;
+            line-height: 1.05;
         }
 
         .section-side-kicker {
@@ -488,9 +491,9 @@
         .card-main-heading {
             font-family: var(--font-display);
             font-size: 2.1rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.03em;
+            font-weight: 600;
+            line-height: 1.18;
+            letter-spacing: -0.025em;
             color: var(--ink-black);
             margin-bottom: 16px;
         }
@@ -736,9 +739,9 @@
         .finale-headline {
             font-family: var(--font-display);
             font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.04em;
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
             margin-bottom: 16px;
         }
 
@@ -1413,7 +1416,7 @@
             }
 
             // Wordmark Typography inside canvas
-            reactorCtx.font = `800 ${44 * scale}px 'Syne', sans-serif`;
+            reactorCtx.font = `700 ${44 * scale}px 'Plus Jakarta Sans', sans-serif`;
             reactorCtx.fillStyle = '#ffffff';
             reactorCtx.textAlign = 'center';
             reactorCtx.shadowColor = 'rgba(0, 240, 255, 0.4)';
