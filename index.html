@@ -1105,9 +1105,6 @@
                     <!-- Mode A: Real-Time Interactive Canvas Plasma Reactor -->
                     <div id="interactive-logo-container">
                         <canvas id="interactive-logo-canvas"></canvas>
-                        <div class="reactor-hud-hint">
-                            ⚡ HOVER TO PULL PLASMA ARCS • CLICK TO DISCHARGE
-                        </div>
                     </div>
 
                     <!-- Mode B: Video Ident Player -->
@@ -1115,10 +1112,6 @@
                         <video id="ident-video" muted playsinline preload="auto">
                             <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
                         </video>
-                    </div>
-
-                    <div class="theatre-watermark" id="theatre-watermark">
-                        DECISIVO DYNAMIC REACTOR // LIVE GLOW COMPUTE
                     </div>
                 </div>
             </div>
@@ -1767,7 +1760,6 @@
             const videoContainer = document.getElementById('video-ident-container');
             const replayBtn = document.getElementById('video-replay-btn');
             const sfxBtn = document.getElementById('sfx-toggle-btn');
-            const watermark = document.getElementById('theatre-watermark');
             const videoEl = document.getElementById('ident-video');
 
             if (mode === 'interactive') {
@@ -1777,7 +1769,6 @@
                 videoContainer.style.display = 'none';
                 replayBtn.style.display = 'none';
                 sfxBtn.style.display = 'inline-flex';
-                if (watermark) watermark.textContent = 'DECISIVO DYNAMIC REACTOR // LIVE GLOW COMPUTE';
                 if (videoEl) videoEl.pause();
             } else {
                 btnInteractive.classList.remove('active');
@@ -1786,7 +1777,6 @@
                 videoContainer.style.display = 'block';
                 replayBtn.style.display = 'inline-flex';
                 sfxBtn.style.display = 'none';
-                if (watermark) watermark.textContent = 'DECISIVO TELEMETRY ARCHITECTURE // 02.8s IDENT';
                 if (videoEl) {
                     videoEl.currentTime = 0;
                     videoEl.play();
