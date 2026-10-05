@@ -13,29 +13,34 @@
 
     <style>
         :root {
-            /* Apple Intelligence Obsidian Deep Space */
-            --bg-base: #000000;
-            --bg-surface: #0a0b10;
-            --bg-card: rgba(18, 20, 29, 0.72);
-            --bg-card-hover: rgba(26, 29, 44, 0.85);
+            /* Architectural Cast Concrete Palette matching reference */
+            --bg-concrete: #cbd2dc;
+            --bg-concrete-deep: #b8c1cd;
+            --bg-concrete-light: #dde3ec;
 
-            /* Typography */
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-            --text-tertiary: #515158;
+            /* Apple-Grade Frosted Glass on Concrete */
+            --bg-glass-card: rgba(255, 255, 255, 0.72);
+            --bg-glass-card-hover: rgba(255, 255, 255, 0.88);
+            --border-glass: rgba(255, 255, 255, 0.85);
+            --border-glass-subtle: rgba(15, 23, 42, 0.08);
+
+            /* Typography Tokens */
+            --text-primary: #0a0d14;
+            --text-secondary: #475467;
+            --text-tertiary: #667085;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
             --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
 
-            /* Apple Intelligence Iridescent Neon Halos */
-            --glow-cyan: #00f0ff;
-            --glow-sky: #0284c7;
-            --glow-purple: #a855f7;
-            --glow-coral: #ff3b30;
-            --glow-emerald: #34d399;
+            /* Electric Neon Accents from Decisivo Ident */
+            --glow-cyan: #0284c7;
+            --glow-cyan-bright: #00d2eb;
+            --glow-electric: rgba(0, 210, 235, 0.4);
+            --glow-purple: #7c3aed;
+            --glow-coral: #ef4444;
+            --glow-emerald: #059669;
 
-            /* Specular Card Edges */
-            --border-glass: rgba(255, 255, 255, 0.12);
-            --border-highlight: rgba(0, 240, 255, 0.45);
+            --card-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset;
+            --card-shadow-hover: 0 30px 60px -15px rgba(15, 23, 42, 0.18), 0 0 1px 1px rgba(255, 255, 255, 1) inset;
         }
 
         * {
@@ -47,55 +52,58 @@
         }
 
         body {
-            background-color: var(--bg-base);
+            background-color: var(--bg-concrete);
             color: var(--text-primary);
             font-family: var(--font-sans);
             overflow-x: hidden;
             line-height: 1.47;
             letter-spacing: -0.011em;
             position: relative;
+            min-height: 100vh;
         }
 
         ::selection {
-            background: rgba(0, 240, 255, 0.35);
-            color: #ffffff;
+            background: rgba(0, 210, 235, 0.35);
+            color: #0a0d14;
         }
 
-        /* Ambient Apple Intelligence Iridescent Atmosphere */
-        .ambient-aurora {
+        /* Architectural Cast Concrete Wall Texture matching reference image */
+        .concrete-wall-layer {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            overflow: hidden;
+            background:
+                /* Ambient directional light gradient across the concrete slab */
+                radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
+                radial-gradient(circle at 10% 25%, rgba(0, 210, 235, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+                /* Vertical shuttering / formwork board seams matching the image */
+                linear-gradient(to right,
+                    transparent 0%,
+                    transparent calc(25% - 1.5px),
+                    rgba(60, 72, 88, 0.22) calc(25% - 1.5px),
+                    rgba(255, 255, 255, 0.55) calc(25%),
+                    transparent calc(25% + 1.5px),
+                    transparent calc(75% - 1.5px),
+                    rgba(60, 72, 88, 0.22) calc(75% - 1.5px),
+                    rgba(255, 255, 255, 0.55) calc(75%),
+                    transparent calc(75% + 1.5px)
+                ),
+                /* Base cool concrete tonal depth */
+                linear-gradient(180deg, #dce2eb 0%, #cbd2dc 50%, #b9c2ce 100%);
         }
 
-        .aurora-orb-1 {
-            position: absolute;
-            top: -10vw;
-            left: 15vw;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.14) 0%, rgba(14, 165, 233, 0.08) 35%, transparent 70%);
-            filter: blur(80px);
-            animation: floatGlow 18s ease-in-out infinite alternate;
-        }
-
-        .aurora-orb-2 {
-            position: absolute;
-            top: 35vh;
-            right: -10vw;
-            width: 55vw;
-            height: 55vw;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(2, 132, 199, 0.06) 40%, transparent 70%);
-            filter: blur(90px);
-            animation: floatGlow 24s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes floatGlow {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(50px) scale(1.08); }
-            100% { transform: translateY(-30px) scale(0.95); }
+        /* Concrete aggregate pores, micro-pits, and stone grain */
+        .concrete-grain-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.42;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='concretePores'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.12 0 0 0 0 0.15 0 0 0 0 0.20 1 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23concretePores)'/%3E%3C/svg%3E");
+            background-size: 190px 190px;
         }
 
         .container {
@@ -106,16 +114,17 @@
             z-index: 2;
         }
 
-        /* Apple-Grade Global Navigation */
+        /* Apple-Grade Global Navigation with Frosted Glass */
         .apple-nav {
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 54px;
-            background: rgba(0, 0, 0, 0.78);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            height: 58px;
+            background: rgba(221, 227, 236, 0.78);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 20px -5px rgba(15, 23, 42, 0.05);
             transition: all 0.3s ease;
         }
 
@@ -131,14 +140,14 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: #fff;
+            color: var(--text-primary);
         }
 
         .brand-logo-svg {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             flex-shrink: 0;
-            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.6));
+            filter: drop-shadow(0 2px 8px rgba(0, 210, 235, 0.45));
         }
 
         .brand-text-group {
@@ -148,18 +157,18 @@
         }
 
         .brand-name {
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             font-weight: 700;
             letter-spacing: -0.03em;
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
         .brand-tagline {
             font-family: var(--font-mono);
             font-size: 0.58rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.14em;
-            color: rgba(255, 255, 255, 0.45);
+            color: var(--text-tertiary);
             text-transform: uppercase;
         }
 
@@ -170,8 +179,8 @@
         }
 
         .nav-link {
-            font-size: 0.78rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
             color: var(--text-secondary);
             text-decoration: none;
             letter-spacing: -0.01em;
@@ -179,28 +188,29 @@
         }
 
         .nav-link:hover {
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
         .btn-apple-pill {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 6px 14px;
+            padding: 7px 16px;
             border-radius: 980px;
-            background: #ffffff;
-            color: #000000;
-            font-size: 0.75rem;
+            background: #0a0d14;
+            color: #ffffff;
+            font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: -0.01em;
             text-decoration: none;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(10, 13, 20, 0.15);
         }
 
         .btn-apple-pill:hover {
-            background: rgba(255, 255, 255, 0.88);
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background: #1e2538;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(10, 13, 20, 0.22);
         }
 
         /* Apple Eyebrow Pill Badge */
@@ -210,58 +220,58 @@
             gap: 8px;
             padding: 6px 16px;
             border-radius: 980px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--glow-cyan);
+            color: #0284c7;
             margin-bottom: 24px;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
         }
 
         .kicker-dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            background: var(--glow-cyan);
-            box-shadow: 0 0 10px var(--glow-cyan);
+            background: #00d2eb;
+            box-shadow: 0 0 10px #00d2eb;
             animation: pulseKicker 2.4s infinite ease-in-out;
         }
 
         @keyframes pulseKicker {
-            0%, 100% { opacity: 0.4; transform: scale(0.9); }
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
             50% { opacity: 1; transform: scale(1.3); }
         }
 
         /* Hero Apple Statement */
         .hero {
-            padding: 85px 0 60px;
+            padding: 80px 0 55px;
             text-align: center;
             position: relative;
         }
 
         .hero-title {
-            font-size: clamp(2.8rem, 6.8vw, 5.6rem);
+            font-size: clamp(2.8rem, 6.8vw, 5.4rem);
             font-weight: 700;
             line-height: 1.04;
             letter-spacing: -0.04em;
             max-width: 980px;
             margin: 0 auto 24px;
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
-        /* Apple Intelligence Multi-Color Iridescent Gradient Text */
+        /* Iridescent Gradient Text tuned for concrete background */
         .gradient-iridescent {
-            background: linear-gradient(135deg, #00f0ff 0%, #38bdf8 30%, #a855f7 70%, #ec4899 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #0099b8 35%, #7c3aed 70%, #db2777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
             font-weight: 400;
             line-height: 1.5;
             color: var(--text-secondary);
@@ -282,7 +292,7 @@
         .hero-meta-item {
             font-family: var(--font-mono);
             font-size: 0.76rem;
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -290,7 +300,7 @@
 
         .hero-meta-item strong {
             color: var(--text-primary);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .theatre-halo-container {
@@ -299,19 +309,18 @@
             margin: 0 auto 90px;
             border-radius: 28px;
             padding: 2px;
-            /* Glowing Iridescent Apple Intelligence perimeter border */
             background: linear-gradient(135deg, 
-                rgba(0, 240, 255, 0.8) 0%, 
-                rgba(14, 165, 233, 0.4) 25%, 
-                rgba(168, 85, 247, 0.7) 50%, 
-                rgba(236, 72, 153, 0.4) 75%, 
-                rgba(0, 240, 255, 0.8) 100%
+                rgba(0, 210, 235, 0.9) 0%, 
+                rgba(2, 132, 199, 0.6) 25%, 
+                rgba(124, 58, 237, 0.7) 50%, 
+                rgba(219, 39, 119, 0.5) 75%, 
+                rgba(0, 210, 235, 0.9) 100%
             );
             background-size: 300% 300%;
             animation: borderShimmer 10s ease infinite;
             box-shadow: 
-                0 30px 100px -20px rgba(0, 240, 255, 0.25),
-                0 0 60px -10px rgba(168, 85, 247, 0.25);
+                0 30px 80px -20px rgba(15, 23, 42, 0.35),
+                0 0 50px rgba(0, 210, 235, 0.25);
         }
 
         @keyframes borderShimmer {
@@ -322,7 +331,7 @@
 
         .theatre-screen {
             position: relative;
-            background: #05070e;
+            background: #0d111b;
             border-radius: 26px;
             overflow: hidden;
             display: flex;
@@ -344,12 +353,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(18, 20, 32, 0.75);
+            background: rgba(18, 22, 34, 0.82);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
             font-size: 0.74rem;
-            font-weight: 500;
+            font-weight: 600;
             padding: 8px 16px;
             border-radius: 980px;
             cursor: pointer;
@@ -358,8 +367,8 @@
         }
 
         .theatre-replay-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--glow-cyan);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d2eb;
             transform: scale(1.03);
         }
 
@@ -370,9 +379,9 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(10, 12, 20, 0.85);
+            background: rgba(13, 17, 27, 0.85);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             color: #ffffff;
             font-family: var(--font-mono);
             font-size: 0.72rem;
@@ -389,7 +398,7 @@
         .section-eyebrow {
             font-family: var(--font-mono);
             font-size: 0.76rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--glow-cyan);
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -402,7 +411,7 @@
             font-weight: 700;
             line-height: 1.08;
             letter-spacing: -0.035em;
-            color: #ffffff;
+            color: var(--text-primary);
             max-width: 820px;
         }
 
@@ -421,14 +430,17 @@
             margin-bottom: 110px;
         }
 
+        /* Frosted Glass Bento Cards over Cast Concrete */
         .bento-card {
-            background: var(--bg-card);
+            background: var(--bg-glass-card);
             border: 1px solid var(--border-glass);
             border-radius: 28px;
             padding: 42px 38px;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(30px);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            box-shadow: var(--card-shadow);
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
@@ -436,26 +448,16 @@
         }
 
         .bento-card:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
+            background: var(--bg-glass-card-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(255, 255, 255, 1);
         }
 
-        .bento-card-8 {
-            grid-column: span 8;
-        }
-
-        .bento-card-4 {
-            grid-column: span 4;
-        }
-
-        .bento-card-6 {
-            grid-column: span 6;
-        }
-
-        .bento-card-12 {
-            grid-column: span 12;
-        }
+        .bento-card-8 { grid-column: span 8; }
+        .bento-card-4 { grid-column: span 4; }
+        .bento-card-6 { grid-column: span 6; }
+        .bento-card-12 { grid-column: span 12; }
 
         @media (max-width: 900px) {
             .bento-card-8, .bento-card-4, .bento-card-6, .bento-card-12 {
@@ -466,7 +468,7 @@
         .bento-tag {
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--glow-cyan);
@@ -479,7 +481,7 @@
             font-weight: 700;
             line-height: 1.15;
             letter-spacing: -0.025em;
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 14px;
         }
 
@@ -490,10 +492,9 @@
             margin-bottom: 30px;
         }
 
-        /* Apple Visual Feature Demonstration Inside Bento */
         .bento-visual-container {
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(15, 23, 42, 0.08);
             border-radius: 18px;
             padding: 24px;
             margin-top: auto;
@@ -514,17 +515,18 @@
         .comparison-cell {
             padding: 16px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #ffffff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
         }
 
         .cell-bad {
-            border-color: rgba(255, 59, 48, 0.25);
+            border-color: rgba(239, 68, 68, 0.35);
         }
 
         .cell-good {
-            border-color: rgba(0, 240, 255, 0.3);
-            background: rgba(0, 240, 255, 0.04);
+            border-color: rgba(2, 132, 199, 0.4);
+            background: rgba(2, 132, 199, 0.04);
         }
 
         .comparison-title {
@@ -540,9 +542,9 @@
         }
 
         .comparison-val {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
             margin-bottom: 4px;
         }
 
@@ -552,14 +554,17 @@
             line-height: 1.35;
         }
 
+        /* Apple Feature Telemetry Console */
         .apple-console-shell {
-            background: rgba(14, 16, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: var(--bg-glass-card);
+            border: 1px solid var(--border-glass);
             border-radius: 28px;
             display: grid;
             grid-template-columns: 1.3fr 1fr;
             overflow: hidden;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8), 0 0 50px -10px rgba(0, 240, 255, 0.15);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             margin-bottom: 120px;
         }
 
@@ -571,7 +576,7 @@
 
         .console-control-panel {
             padding: 44px;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(15, 23, 42, 0.08);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -583,7 +588,7 @@
             justify-content: space-between;
             margin-bottom: 22px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .node-tag {
@@ -598,18 +603,19 @@
         .math-tag {
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            color: #ff3b30;
-            background: rgba(255, 59, 48, 0.1);
-            border: 1px solid rgba(255, 59, 48, 0.25);
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.25);
             padding: 4px 12px;
             border-radius: 980px;
+            font-weight: 600;
         }
 
         .scenario-text {
             font-size: 1.25rem;
             font-weight: 600;
             line-height: 1.45;
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 28px;
         }
 
@@ -620,8 +626,8 @@
         }
 
         .console-option {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(15, 23, 42, 0.1);
             border-radius: 14px;
             padding: 16px 20px;
             text-align: left;
@@ -638,23 +644,24 @@
         }
 
         .console-option:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.25);
-            color: #ffffff;
-            transform: translateX(4px);
+            background: #ffffff;
+            border-color: rgba(2, 132, 199, 0.5);
+            color: var(--text-primary);
+            transform: translateX(3px);
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
         }
 
         .console-option.active {
-            background: rgba(0, 240, 255, 0.08);
+            background: #ffffff;
             border-color: var(--glow-cyan);
-            color: #ffffff;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+            color: var(--text-primary);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15), 0 0 0 1px var(--glow-cyan);
         }
 
         .option-index {
             font-family: var(--font-mono);
             font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.35);
+            color: var(--text-tertiary);
             min-width: 22px;
         }
 
@@ -664,26 +671,27 @@
         }
 
         .console-telemetry-display {
-            background: #070911;
+            background: #101422;
             padding: 44px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
+            color: #ffffff;
         }
 
         .telemetry-header {
             font-family: var(--font-mono);
             font-size: 0.72rem;
             letter-spacing: 0.12em;
-            color: var(--text-tertiary);
+            color: #94a3b8;
             text-transform: uppercase;
             margin-bottom: 22px;
         }
 
         .telemetry-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 18px;
             padding: 28px;
             flex-grow: 1;
@@ -708,17 +716,17 @@
         }
 
         .pill-target {
-            background: rgba(52, 211, 153, 0.15);
+            background: rgba(5, 150, 105, 0.2);
             color: #34d399;
-            border: 1px solid rgba(52, 211, 153, 0.4);
+            border: 1px solid rgba(52, 211, 153, 0.45);
             box-shadow: 0 0 20px rgba(52, 211, 153, 0.2);
         }
 
         .pill-liability {
-            background: rgba(255, 59, 48, 0.15);
-            color: #ff453a;
-            border: 1px solid rgba(255, 59, 48, 0.4);
-            box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.45);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
         }
 
         .verdict-block {
@@ -729,7 +737,7 @@
         .verdict-label {
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            color: var(--text-secondary);
+            color: #94a3b8;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             margin-bottom: 6px;
@@ -744,7 +752,7 @@
 
         .verdict-detail {
             font-size: 0.92rem;
-            color: var(--text-secondary);
+            color: #cbd5e1;
             line-height: 1.55;
             margin-top: 6px;
         }
@@ -754,18 +762,21 @@
             justify-content: space-between;
             font-family: var(--font-mono);
             font-size: 0.72rem;
-            color: var(--text-tertiary);
+            color: #64748b;
             margin-top: 22px;
         }
 
         .apple-banner-cta {
-            background: linear-gradient(180deg, rgba(20, 24, 38, 0.6) 0%, rgba(10, 12, 18, 0.8) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: var(--bg-glass-card);
+            border: 1px solid var(--border-glass);
             border-radius: 28px;
             padding: 64px 48px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             margin-bottom: 100px;
         }
 
@@ -776,7 +787,7 @@
             transform: translate(-50%, -50%);
             width: 70%;
             height: 120%;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(168, 85, 247, 0.08) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 210, 235, 0.15) 0%, rgba(124, 58, 237, 0.08) 40%, transparent 70%);
             filter: blur(60px);
             pointer-events: none;
         }
@@ -786,7 +797,7 @@
             font-weight: 700;
             line-height: 1.1;
             letter-spacing: -0.035em;
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 18px;
         }
 
@@ -812,18 +823,19 @@
             gap: 10px;
             padding: 14px 30px;
             border-radius: 980px;
-            background: #ffffff;
-            color: #000000;
+            background: #0a0d14;
+            color: #ffffff;
             font-weight: 600;
             font-size: 0.94rem;
             text-decoration: none;
             transition: all 0.25s ease;
+            box-shadow: 0 4px 18px rgba(10, 13, 20, 0.2);
         }
 
         .btn-large-apple:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
+            background: #1f273d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(10, 13, 20, 0.3);
         }
 
         .btn-secondary-ghost {
@@ -832,9 +844,9 @@
             gap: 10px;
             padding: 14px 30px;
             border-radius: 980px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(15, 23, 42, 0.18);
+            color: var(--text-primary);
             font-weight: 600;
             font-size: 0.94rem;
             text-decoration: none;
@@ -842,13 +854,12 @@
         }
 
         .btn-secondary-ghost:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #ffffff;
+            background: #ffffff;
+            border-color: var(--text-primary);
         }
 
-        /* Apple-Grade Minimalist Footer */
         footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(15, 23, 42, 0.1);
             padding: 40px 0 60px;
             font-size: 0.74rem;
             color: var(--text-tertiary);
@@ -865,11 +876,9 @@
 </head>
 <body>
 
-    <!-- Ambient Iridescent Multi-Color Backing Atmosphere -->
-    <div class="ambient-aurora">
-        <div class="aurora-orb-1"></div>
-        <div class="aurora-orb-2"></div>
-    </div>
+    <!-- Architectural Cast Concrete Texture Wall with Seams and Micro-Pores -->
+    <div class="concrete-wall-layer"></div>
+    <div class="concrete-grain-layer"></div>
 
     <header class="apple-nav">
         <div class="container nav-content">
