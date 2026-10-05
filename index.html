@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>decisivo — Logical Behavioural Intelligence (Lusion Style)</title>
+    <title>decisivo — Logical Behavioural Intelligence</title>
     <meta name="description" content="High-fidelity 5-tier behavioural simulations for high-liability frontline operations. Air-gapped neural audio, mathematical audit telemetry, zero SaaS seat taxes.">
 
-    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono for Lusion's signature avant-garde editorial look -->
+    <!-- Fonts: Syne & Plus Jakarta Sans & JetBrains Mono for avant-garde editorial look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -110,7 +110,6 @@
             opacity: 0.85;
         }
 
-        /* Ambient dark vignette & grid lines */
         .ambient-grid-overlay {
             position: fixed;
             inset: 0;
@@ -321,16 +320,6 @@
             text-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
         }
 
-        .hero-monument-title .wireframe-word {
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
-            color: transparent;
-            transition: -webkit-text-stroke 0.3s;
-        }
-
-        .hero-monument-title .wireframe-word:hover {
-            -webkit-text-stroke: 1.5px var(--electric-cyan);
-        }
-
         .hero-description {
             font-size: clamp(1.1rem, 2vw, 1.35rem);
             color: var(--text-secondary);
@@ -415,22 +404,11 @@
             transition: box-shadow 0.5s ease;
         }
 
-        .theatre-wrapper:hover {
-            box-shadow: 0 50px 120px -20px rgba(0, 0, 0, 0.95), 0 0 80px rgba(0, 240, 255, 0.35);
-        }
-
         .theatre-container {
             background: #080a12;
             border-radius: 27px;
             overflow: hidden;
             position: relative;
-        }
-
-        .theatre-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 27px;
         }
 
         .theatre-controls {
@@ -440,11 +418,40 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            z-index: 10;
+            z-index: 20;
+        }
+
+        .theatre-mode-switch {
+            display: inline-flex;
+            background: rgba(8, 10, 18, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+            padding: 3px;
+            gap: 4px;
+        }
+
+        .theatre-mode-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .theatre-mode-btn.active {
+            background: var(--electric-cyan);
+            color: #05060a;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
         }
 
         .theatre-btn {
-            background: rgba(8, 10, 18, 0.75);
+            background: rgba(8, 10, 18, 0.8);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #ffffff;
@@ -466,6 +473,63 @@
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
+        /* Interactive Canvas Reactor */
+        #interactive-logo-container {
+            width: 100%;
+            height: 520px;
+            position: relative;
+            background: radial-gradient(circle at 50% 45%, #0d1224 0%, #05070e 85%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        #interactive-logo-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .reactor-hud-hint {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--electric-cyan);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            z-index: 10;
+            pointer-events: none;
+            background: rgba(5, 7, 14, 0.8);
+            padding: 6px 18px;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 18px rgba(0, 240, 255, 0.25);
+            animation: pulseGlow 2.5s infinite ease-in-out;
+            white-space: nowrap;
+        }
+
+        /* Video Showcase Mode */
+        #video-ident-container {
+            width: 100%;
+            display: none;
+            position: relative;
+        }
+
+        #video-ident-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 27px;
+        }
+
         .theatre-watermark {
             position: absolute;
             bottom: 20px;
@@ -476,6 +540,7 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.5);
             pointer-events: none;
+            z-index: 10;
         }
 
         .lusion-marquee-wrap {
@@ -506,11 +571,6 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.4);
             white-space: nowrap;
-            transition: color 0.3s;
-        }
-
-        .marquee-item:hover {
-            color: var(--electric-cyan);
         }
 
         .marquee-dot {
@@ -567,7 +627,6 @@
             margin-bottom: 140px;
         }
 
-        /* Lusion Interactive Spotlight Card */
         .spotlight-card {
             position: relative;
             background: var(--bg-card);
@@ -610,10 +669,9 @@
         .col-span-8 { grid-column: span 8; }
         .col-span-4 { grid-column: span 4; }
         .col-span-6 { grid-column: span 6; }
-        .col-span-12 { grid-column: span 12; }
 
         @media (max-width: 960px) {
-            .col-span-8, .col-span-4, .col-span-6, .col-span-12 {
+            .col-span-8, .col-span-4, .col-span-6 {
                 grid-column: span 12;
             }
         }
@@ -949,7 +1007,6 @@
 </head>
 <body>
 
-    <!-- Custom Kinetic Cursor (Lusion Style) -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-trail" id="cursor-trail"></div>
 
@@ -1020,21 +1077,48 @@
                 <a href="mailto:founder@decisivo.co.uk" class="btn-kinetic-secondary hover-target">Commission Pilot (£6.5k) ↗</a>
             </div>
 
-            <!-- Cinematic Ident Video Showcase with Audio Reactive Border -->
+            <!-- Kinetic Ident Theatre Showcase with Interactive Plasma Reactor -->
             <div class="theatre-wrapper">
                 <div class="theatre-container">
                     <div class="theatre-controls">
-                        <button class="theatre-btn hover-target" onclick="replayIdentVideo()">
-                            <span>↻</span> REPLAY IDENT
+                        <!-- Mode Switch: Live Plasma Simulation vs Video Ident -->
+                        <div class="theatre-mode-switch">
+                            <button id="btn-mode-interactive" class="theatre-mode-btn active hover-target" onclick="switchTheatreMode('interactive')">
+                                ⚡ REACTOR
+                            </button>
+                            <button id="btn-mode-video" class="theatre-mode-btn hover-target" onclick="switchTheatreMode('video')">
+                                🎬 VIDEO
+                            </button>
+                        </div>
+
+                        <!-- Audio Synthesizer Toggle -->
+                        <button id="sfx-toggle-btn" class="theatre-btn hover-target" onclick="toggleReactorAudio()">
+                            <span id="sfx-icon">🔇</span> SFX OFF
+                        </button>
+
+                        <!-- Replay Ident Button -->
+                        <button id="video-replay-btn" class="theatre-btn hover-target" style="display: none;" onclick="replayIdentVideo()">
+                            <span>↻</span> REPLAY
                         </button>
                     </div>
 
-                    <video id="ident-video" autoplay muted playsinline preload="auto">
-                        <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
-                    </video>
+                    <!-- Mode A: Real-Time Interactive Canvas Plasma Reactor -->
+                    <div id="interactive-logo-container">
+                        <canvas id="interactive-logo-canvas"></canvas>
+                        <div class="reactor-hud-hint">
+                            ⚡ HOVER TO PULL PLASMA ARCS • CLICK TO DISCHARGE
+                        </div>
+                    </div>
 
-                    <div class="theatre-watermark">
-                        DECISIVO TELEMETRY ARCHITECTURE // 02.8s COMPUTE
+                    <!-- Mode B: Video Ident Player -->
+                    <div id="video-ident-container">
+                        <video id="ident-video" muted playsinline preload="auto">
+                            <source src="animate_the_logo_20260929194844.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="theatre-watermark" id="theatre-watermark">
+                        DECISIVO DYNAMIC REACTOR // LIVE GLOW COMPUTE
                     </div>
                 </div>
             </div>
@@ -1048,7 +1132,7 @@
                 <div class="marquee-item"><span class="marquee-dot"></span> REGULATED FINANCIAL CONDUCT DEFENSE</div>
                 <div class="marquee-item"><span class="marquee-dot"></span> RAIL OPERATIONS &amp; CROWD DE-ESCALATION</div>
                 <div class="marquee-item"><span class="marquee-dot"></span> SECURE ENVIRONMENT SAFEGUARDING</div>
-                <!-- Duplicate for seamless looping -->
+                <!-- Duplicate for continuous scroll loop -->
                 <div class="marquee-item"><span class="marquee-dot"></span> AVIATION &amp; PASSENGER HOSTILITY</div>
                 <div class="marquee-item"><span class="marquee-dot"></span> FRONTLINE CLINICAL TRIAGE ESCALATION</div>
                 <div class="marquee-item"><span class="marquee-dot"></span> SOCIAL HOUSING STATUTORY DISPUTE RECOVERY</div>
@@ -1286,7 +1370,6 @@
             particles = new THREE.Points(particleGeometry, particleMaterial);
             scene.add(particles);
 
-            // Connective lines geometry
             const lineGeometry = new THREE.BufferGeometry();
             const lineMaterial = new THREE.LineBasicMaterial({
                 color: 0x00d2eb,
@@ -1325,7 +1408,6 @@
                 camera.lookAt(scene.position);
             }
 
-            // Update particle positions
             const positions = particles.geometry.attributes.position.array;
             const linePositions = [];
 
@@ -1334,12 +1416,10 @@
                 positions[i * 3 + 1] += particleVelocities[i].y;
                 positions[i * 3 + 2] += particleVelocities[i].z;
 
-                // Bounce boundaries
                 if (Math.abs(positions[i * 3]) > 250) particleVelocities[i].x *= -1;
                 if (Math.abs(positions[i * 3 + 1]) > 200) particleVelocities[i].y *= -1;
                 if (Math.abs(positions[i * 3 + 2]) > 120) particleVelocities[i].z *= -1;
 
-                // Check distance to connect lines
                 for (let j = i + 1; j < PARTICLE_COUNT; j++) {
                     const dx = positions[i * 3] - positions[j * 3];
                     const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
@@ -1356,7 +1436,6 @@
             }
 
             particles.geometry.attributes.position.needsUpdate = true;
-
             linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
             renderer.render(scene, camera);
         }
@@ -1380,7 +1459,6 @@
                 cursorDot.style.top = `${cursorY}px`;
             }
 
-            // Spotlight card coordinates
             document.querySelectorAll('.spotlight-card').forEach((card) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -1402,7 +1480,6 @@
         }
         animateCursorTrail();
 
-        // Hover expand cursor
         document.querySelectorAll('.hover-target, button, a').forEach((el) => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -1440,7 +1517,293 @@
         drawWave();
 
         /* -------------------------------------------------------------
-           4. BEHAVIOURAL TELEMETRY KERNEL
+           4. REAL-TIME INTERACTIVE PLASMA REACTOR CANVAS & SOUND SYNTH
+           ------------------------------------------------------------- */
+        const reactorCanvas = document.getElementById('interactive-logo-canvas');
+        const reactorCtx = reactorCanvas ? reactorCanvas.getContext('2d') : null;
+        let reactorMouseX = -1000;
+        let reactorMouseY = -1000;
+        let isHoveringReactor = false;
+        let sparkParticles = [];
+        let dischargeWave = 0;
+        let audioCtx = null;
+        let audioEnabled = false;
+
+        function initReactorAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) audioCtx = new AudioContextClass();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleReactorAudio() {
+            audioEnabled = !audioEnabled;
+            if (audioEnabled) {
+                initReactorAudio();
+                playElectricDischargeSound(520, 0.15);
+            }
+            const btn = document.getElementById('sfx-toggle-btn');
+            const icon = document.getElementById('sfx-icon');
+            if (btn && icon) {
+                icon.textContent = audioEnabled ? '🔊' : '🔇';
+                btn.innerHTML = `<span id="sfx-icon">${audioEnabled ? '🔊' : '🔇'}</span> ${audioEnabled ? 'SFX ON' : 'SFX OFF'}`;
+            }
+        }
+
+        function playElectricDischargeSound(freq = 440, duration = 0.2) {
+            if (!audioEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + duration);
+
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                // Audio safely muted
+            }
+        }
+
+        if (reactorCanvas) {
+            reactorCanvas.addEventListener('mousemove', (e) => {
+                const rect = reactorCanvas.getBoundingClientRect();
+                reactorMouseX = (e.clientX - rect.left) * (reactorCanvas.width / rect.width);
+                reactorMouseY = (e.clientY - rect.top) * (reactorCanvas.height / rect.height);
+                isHoveringReactor = true;
+            });
+
+            reactorCanvas.addEventListener('mouseleave', () => {
+                isHoveringReactor = false;
+                reactorMouseX = -1000;
+                reactorMouseY = -1000;
+            });
+
+            reactorCanvas.addEventListener('click', (e) => {
+                const rect = reactorCanvas.getBoundingClientRect();
+                const clickX = (e.clientX - rect.left) * (reactorCanvas.width / rect.width);
+                const clickY = (e.clientY - rect.top) * (reactorCanvas.height / rect.height);
+
+                dischargeWave = 1.0;
+                playElectricDischargeSound(680, 0.35);
+
+                // Spawn kinetic electric sparks
+                for (let i = 0; i < 45; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 2 + Math.random() * 8;
+                    sparkParticles.push({
+                        x: clickX,
+                        y: clickY,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        life: 1.0,
+                        decay: 0.02 + Math.random() * 0.03,
+                        color: Math.random() > 0.4 ? '#00f0ff' : '#ffffff'
+                    });
+                }
+            });
+        }
+
+        function drawLightningBolt(x1, y1, x2, y2, displace = 18, color = '#00f0ff', width = 2) {
+            if (!reactorCtx) return;
+            const midX = (x1 + x2) / 2 + (Math.random() - 0.5) * displace;
+            const midY = (y1 + y2) / 2 + (Math.random() - 0.5) * displace;
+
+            reactorCtx.beginPath();
+            reactorCtx.moveTo(x1, y1);
+            reactorCtx.lineTo(midX, midY);
+            reactorCtx.lineTo(x2, y2);
+            reactorCtx.strokeStyle = color;
+            reactorCtx.lineWidth = width;
+            reactorCtx.shadowColor = color;
+            reactorCtx.shadowBlur = 12;
+            reactorCtx.stroke();
+        }
+
+        let reactorTime = 0;
+        function renderReactor() {
+            if (!reactorCanvas || !reactorCtx) return;
+
+            const w = reactorCanvas.width = reactorCanvas.parentElement.offsetWidth || 1080;
+            const h = reactorCanvas.height = reactorCanvas.parentElement.offsetHeight || 520;
+            reactorTime += 0.04;
+
+            reactorCtx.clearRect(0, 0, w, h);
+
+            // Center geometry anchor
+            const cx = w / 2;
+            const cy = h / 2 - 15;
+            const scale = Math.min(w / 750, 1.15);
+
+            // Ambient background glow
+            const radGrad = reactorCtx.createRadialGradient(cx, cy, 10, cx, cy, 280 * scale);
+            radGrad.addColorStop(0, `rgba(0, 240, 255, ${0.12 + Math.sin(reactorTime * 3) * 0.04 + dischargeWave * 0.2})`);
+            radGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            reactorCtx.fillStyle = radGrad;
+            reactorCtx.fillRect(0, 0, w, h);
+
+            // Branch arcs coordinates
+            const branches = [
+                { start: { x: cx - 24 * scale, y: cy + 90 * scale }, ctrl1: { x: cx - 24 * scale, y: cy + 45 * scale }, ctrl2: { x: cx - 45 * scale, y: cy + 10 * scale }, end: { x: cx - 78 * scale, y: cy + 5 * scale } },
+                { start: { x: cx - 10 * scale, y: cy + 90 * scale }, ctrl1: { x: cx - 10 * scale, y: cy + 35 * scale }, ctrl2: { x: cx - 30 * scale, y: cy - 18 * scale }, end: { x: cx - 68 * scale, y: cy - 25 * scale } },
+                { start: { x: cx + 4 * scale, y: cy + 90 * scale }, ctrl1: { x: cx + 4 * scale, y: cy + 22 * scale }, ctrl2: { x: cx - 6 * scale, y: cy - 38 * scale }, end: { x: cx - 52 * scale, y: cy - 50 * scale } },
+                { start: { x: cx + 18 * scale, y: cy + 90 * scale }, ctrl1: { x: cx + 18 * scale, y: cy + 18 * scale }, ctrl2: { x: cx + 40 * scale, y: cy - 20 * scale }, end: { x: cx + 75 * scale, y: cy - 26 * scale } }
+            ];
+
+            const arrowTip = { x: cx + 82 * scale, y: cy - 26 * scale };
+
+            // Render base glowing branches
+            branches.forEach((b, idx) => {
+                reactorCtx.beginPath();
+                reactorCtx.moveTo(b.start.x, b.start.y);
+                reactorCtx.bezierCurveTo(b.ctrl1.x, b.ctrl1.y, b.ctrl2.x, b.ctrl2.y, b.end.x, b.end.y);
+                reactorCtx.lineWidth = (7 + (idx === 3 ? 2 : 0)) * scale;
+                reactorCtx.strokeStyle = idx === 3 ? '#00f0ff' : '#234475';
+                reactorCtx.shadowColor = '#00f0ff';
+                reactorCtx.shadowBlur = (idx === 3 ? 20 : 8) + dischargeWave * 20;
+                reactorCtx.lineCap = 'round';
+                reactorCtx.stroke();
+            });
+
+            // Arrow head
+            reactorCtx.beginPath();
+            reactorCtx.moveTo(arrowTip.x - 28 * scale, arrowTip.y - 24 * scale);
+            reactorCtx.lineTo(arrowTip.x + 8 * scale, arrowTip.y);
+            reactorCtx.lineTo(arrowTip.x - 24 * scale, arrowTip.y + 24 * scale);
+            reactorCtx.lineWidth = 8 * scale;
+            reactorCtx.strokeStyle = '#00f0ff';
+            reactorCtx.shadowColor = '#00f0ff';
+            reactorCtx.shadowBlur = 24 + dischargeWave * 30;
+            reactorCtx.lineCap = 'round';
+            reactorCtx.lineJoin = 'round';
+            reactorCtx.stroke();
+
+            // Continuous procedural lightning arcing across branches
+            const crawlT = (Math.sin(reactorTime * 4) + 1) / 2;
+            const b = branches[3];
+            const pX = (1 - crawlT) * b.start.x + crawlT * arrowTip.x;
+            const pY = (1 - crawlT) * b.start.y + crawlT * arrowTip.y;
+
+            drawLightningBolt(pX - 10, pY + 5, pX + 15, pY - 8, 12, '#ffffff', 1.8);
+
+            // Cursor magnetic attraction lightning
+            if (isHoveringReactor && reactorMouseX > 0) {
+                const distToArrow = Math.hypot(reactorMouseX - arrowTip.x, reactorMouseY - arrowTip.y);
+                if (distToArrow < 350) {
+                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 28, '#00f0ff', 2.5);
+                    drawLightningBolt(arrowTip.x, arrowTip.y, reactorMouseX, reactorMouseY, 15, '#ffffff', 1.2);
+
+                    reactorCtx.beginPath();
+                    reactorCtx.arc(reactorMouseX, reactorMouseY, 6, 0, Math.PI * 2);
+                    reactorCtx.fillStyle = '#00f0ff';
+                    reactorCtx.shadowColor = '#00f0ff';
+                    reactorCtx.shadowBlur = 15;
+                    reactorCtx.fill();
+                }
+            }
+
+            // Wordmark Typography inside Reactor Canvas
+            reactorCtx.font = `800 ${44 * scale}px 'Syne', sans-serif`;
+            reactorCtx.fillStyle = '#ffffff';
+            reactorCtx.textAlign = 'center';
+            reactorCtx.shadowColor = 'rgba(0, 240, 255, 0.4)';
+            reactorCtx.shadowBlur = 12 + dischargeWave * 20;
+            reactorCtx.fillText('decisivo', cx, cy + 150 * scale);
+
+            reactorCtx.font = `700 ${10.5 * scale}px 'JetBrains Mono', monospace`;
+            reactorCtx.fillStyle = '#00f0ff';
+            reactorCtx.letterSpacing = '0.18em';
+            reactorCtx.shadowColor = '#00f0ff';
+            reactorCtx.shadowBlur = 8;
+            reactorCtx.fillText('LOGICAL • BEHAVIOURAL SIMULATIONS', cx, cy + 176 * scale);
+
+            // Update & render kinetic spark particles
+            for (let i = sparkParticles.length - 1; i >= 0; i--) {
+                const p = sparkParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vx *= 0.94;
+                p.vy *= 0.94;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    sparkParticles.splice(i, 1);
+                    continue;
+                }
+
+                reactorCtx.beginPath();
+                reactorCtx.arc(p.x, p.y, 2.5 * p.life, 0, Math.PI * 2);
+                reactorCtx.fillStyle = p.color;
+                reactorCtx.shadowColor = p.color;
+                reactorCtx.shadowBlur = 10;
+                reactorCtx.fill();
+            }
+
+            if (dischargeWave > 0) {
+                dischargeWave = Math.max(0, dischargeWave - 0.03);
+            }
+
+            requestAnimationFrame(renderReactor);
+        }
+        renderReactor();
+
+        /* -------------------------------------------------------------
+           5. THEATRE MODE SWITCHING (REACTOR VS IDENT VIDEO)
+           ------------------------------------------------------------- */
+        function switchTheatreMode(mode) {
+            const btnInteractive = document.getElementById('btn-mode-interactive');
+            const btnVideo = document.getElementById('btn-mode-video');
+            const interactiveContainer = document.getElementById('interactive-logo-container');
+            const videoContainer = document.getElementById('video-ident-container');
+            const replayBtn = document.getElementById('video-replay-btn');
+            const sfxBtn = document.getElementById('sfx-toggle-btn');
+            const watermark = document.getElementById('theatre-watermark');
+            const videoEl = document.getElementById('ident-video');
+
+            if (mode === 'interactive') {
+                btnInteractive.classList.add('active');
+                btnVideo.classList.remove('active');
+                interactiveContainer.style.display = 'flex';
+                videoContainer.style.display = 'none';
+                replayBtn.style.display = 'none';
+                sfxBtn.style.display = 'inline-flex';
+                if (watermark) watermark.textContent = 'DECISIVO DYNAMIC REACTOR // LIVE GLOW COMPUTE';
+                if (videoEl) videoEl.pause();
+            } else {
+                btnInteractive.classList.remove('active');
+                btnVideo.classList.add('active');
+                interactiveContainer.style.display = 'none';
+                videoContainer.style.display = 'block';
+                replayBtn.style.display = 'inline-flex';
+                sfxBtn.style.display = 'none';
+                if (watermark) watermark.textContent = 'DECISIVO TELEMETRY ARCHITECTURE // 02.8s IDENT';
+                if (videoEl) {
+                    videoEl.currentTime = 0;
+                    videoEl.play();
+                }
+            }
+        }
+
+        function replayIdentVideo() {
+            const vid = document.getElementById('ident-video');
+            if (vid) {
+                vid.currentTime = 0;
+                vid.play();
+            }
+        }
+
+        /* -------------------------------------------------------------
+           6. BEHAVIOURAL TELEMETRY KERNEL
            ------------------------------------------------------------- */
         const telemetryDb = {
             1: {
@@ -1500,14 +1863,6 @@
                     <div class="verdict-legal-desc">${item.body}</div>
                 </div>
             `;
-        }
-
-        function replayIdentVideo() {
-            const vid = document.getElementById('ident-video');
-            if (vid) {
-                vid.currentTime = 0;
-                vid.play();
-            }
         }
 
         window.onload = function() {
